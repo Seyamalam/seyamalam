@@ -7,10 +7,9 @@ export const projects: Project[] = [
     description: "Full-stack e-commerce solution with modern UI",
     longDescription: "A comprehensive e-commerce platform built with Next.js and Node.js, featuring real-time inventory tracking, payment processing, and an admin dashboard for order management. Implemented advanced features like product recommendations, cart persistence, and email notifications.",
     technologies: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Stripe", "Tailwind CSS", "Prisma"],
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
+    image: "/projects/ecom.png",
     liveUrl: "https://ecom-five-rho.vercel.app/",
-    githubUrl: "https://github.com/Seyamalam/ecommerce-platform",
-    featured: true
+    featured: false
   },
   {
     id: "parishad-barta",
@@ -20,17 +19,16 @@ export const projects: Project[] = [
     technologies: ["React", "Next.js", "TypeScript", "Node.js", "MongoDB", "Tailwind CSS"],
     image: "https://c70mvq7b7i.ufs.sh/f/rwSqviM7ZDM9nGrGHJRqMy5rCYpxPW2Ez4RZuQ6tSmFkNO9L",
     liveUrl: "https://parishadbarta.com/",
-    featured: true
-  },
-  {
+    featured: false
+  },  {
     id: "professor-sazzad",
     title: "Professor Sazzad Portfolio",
     description: "Professional academic portfolio website",
     longDescription: "A modern academic portfolio website showcasing research, publications, and achievements. Built with responsive design, smooth animations, and optimized for performance and SEO.",
     technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    image: "public/projects/professor-sazzad.png",
+    image: "/projects/sazzad.png",
     liveUrl: "https://www.professorsazzad.com/",
-    featured: true
+    featured: false
   },
   {
     id: "luxe-retreats",
@@ -38,69 +36,67 @@ export const projects: Project[] = [
     description: "Luxury accommodation booking platform",
     longDescription: "A sophisticated booking platform for luxury accommodations, featuring interactive maps, real-time availability, payment integration, and a beautiful user interface with smooth animations and modern design patterns.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "Stripe", "MapBox"],
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop",
+    image: "/projects/hotel.png",
     liveUrl: "https://luxe-retreats.vercel.app/",
     githubUrl: "https://github.com/Seyamalam/luxe-retreats",
-    featured: true
-  },
-  {
-    id: "task-management-app",
-    title: "Collaborative Task Manager", 
-    description: "Real-time team collaboration tool with drag-and-drop interface",
-    longDescription: "A modern task management application inspired by Trello and Asana. Features include real-time collaboration using WebSockets, drag-and-drop task management, team workspace creation, and progress tracking with detailed analytics dashboard.",
-    technologies: ["React", "TypeScript", "Express.js", "Socket.io", "MongoDB", "React DnD"],
-    image: "/projects/taskmanager.jpg",
-    liveUrl: "https://tasks.seyamalam.dev",
-    githubUrl: "https://github.com/seyamalam/task-manager",
-    featured: true
-  },
-  {
-    id: "weather-dashboard",
-    title: "Weather Analytics Dashboard",
-    description: "Interactive weather dashboard with data visualization",
-    longDescription: "A comprehensive weather dashboard that provides current conditions, forecasts, and historical weather data with beautiful visualizations. Features include location-based weather, interactive charts, weather alerts, and a responsive design that works across all devices.",
-    technologies: ["React", "D3.js", "Weather API", "Chart.js", "CSS Grid"],
-    image: "/projects/weather.jpg",
-    liveUrl: "https://weather.seyamalam.dev", 
-    githubUrl: "https://github.com/seyamalam/weather-dashboard",
+    featured: false
+  },  {
+    id: "gravity-gym",
+    title: "Modern Gym Landing Page",
+    description: "Responsive landing page with innovative and cool design for a modern gym",
+    longDescription: "A sleek and modern landing page for a gym, featuring a responsive design, smooth animations, and a user-friendly interface. The page includes sections for services, testimonials, and a contact form, all styled with Tailwind CSS.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    image: "/projects/gym.png",
+    liveUrl: "https://gravitygym.vercel.app/",
     featured: false
   },
   {
-    id: "ai-content-generator",
-    title: "AI Content Generator",
-    description: "OpenAI-powered content creation tool for marketers",
-    longDescription: "An AI-powered content generation platform that helps marketers and content creators generate high-quality blog posts, social media content, and marketing copy. Built with modern React patterns and integrated with OpenAI's GPT models for intelligent content creation.",
-    technologies: ["Next.js", "OpenAI API", "TypeScript", "Tailwind CSS", "Supabase"],
-    image: "/projects/ai-content.jpg",
-    githubUrl: "https://github.com/seyamalam/ai-content-generator",
-    featured: true
-  }
+    id: "bgctub-it-club",
+    title: "BGCTUB IT Club Website",
+    description: "Official website for BGCTUB IT Club with modern design and comprehensive features",
+    longDescription: "A sophisticated website for BGCTUB IT Club featuring member management, event organization, hall of fame, news section, and partnership management. Built with modern web technologies and includes administrative features for club management, responsive design, and optimized user experience.",
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Bun", "Sqlite3", "Framer Motion"],
+    image: "/projects/bgcit.png",
+    liveUrl: "https://bgctub-it-club.vercel.app/",
+    featured: false
+  },
+  {
+    id: "techfest-2024",
+    title: "TechFest 2024 Event Platform",
+    description: "Comprehensive event management platform for tech festival with registration and scheduling",
+    longDescription: "A complete event management platform for TechFest 2024, featuring event registration, speaker profiles, schedule management, sponsor showcase, and gallery. Includes real-time updates, responsive design, and seamless user experience for attendees and organizers.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL", "Framer Motion"],
+    image: "/projects/bgctech.png",
+    liveUrl: "https://bgctechfest.vercel.app/",
+    featured: false
+  },
+  
 ];
 
 export const experiences: Experience[] = [
   {
-    id: "senior-fullstack-dev",
-    company: "TechCorp Solutions",
-    position: "Senior Full Stack Developer",
-    period: "2023 - Present",
-    description: "Lead development of customer-facing web applications serving 100K+ users. Architected microservices infrastructure and mentored junior developers. Improved application performance by 40% through optimization strategies.",
-    technologies: ["React", "Next.js", "Node.js", "AWS", "Docker", "PostgreSQL"],
+    id: "software-engineer",
+    company: "Hello World Communications Ltd",
+    position: "Software Engineer & Application Engineer",
+    period: "2024 - Present",
+    description: "Leading software development and application engineering initiatives, developing scalable applications and systems. Working on cutting-edge projects involving AI integration, backend development, and system architecture design.",
+    technologies: ["React", "Next.js", "Node.js", "Python", "PostgreSQL", "AI/ML", "System Design"],
   },
   {
-    id: "fullstack-dev",
-    company: "StartupXYZ",
-    position: "Full Stack Developer",
-    period: "2021 - 2023", 
-    description: "Developed and maintained multiple client projects from conception to deployment. Collaborated with design teams to implement responsive user interfaces and built RESTful APIs for mobile and web applications.",
-    technologies: ["React", "Express.js", "MongoDB", "JavaScript", "CSS3", "Git"],
+    id: "freelance-data-ai",
+    company: "Freelance",
+    position: "Data Analytics & AI Developer",
+    period: "2020 - Present", 
+    description: "Providing remote data analytics, AI development, and backend solutions for various clients worldwide. Specialized in machine learning model development, data processing pipelines, and backend API development for data-driven applications.",
+    technologies: ["Python", "TensorFlow", "Pandas", "NumPy", "Django", "FastAPI", "PostgreSQL", "MongoDB"],
   },
   {
-    id: "frontend-dev",
-    company: "Digital Agency Pro",
-    position: "Frontend Developer",
-    period: "2020 - 2021",
-    description: "Created responsive websites and web applications for various clients. Worked closely with designers to translate mockups into pixel-perfect, interactive user experiences. Optimized websites for performance and SEO.",
-    technologies: ["HTML5", "CSS3", "JavaScript", "React", "SASS", "Webpack"],
+    id: "freelance-backend",
+    company: "Remote Projects",
+    position: "Backend Developer",
+    period: "2020 - Present",
+    description: "Developing robust backend systems and APIs for various clients. Focus on scalable architecture, database design, and integration of AI/ML models into production systems. Delivered solutions for e-commerce, healthcare, and agricultural domains.",
+    technologies: ["Node.js", "Python", "Django", "Express.js", "PostgreSQL", "MongoDB", "Redis", "AWS"],
   }
 ];
 
@@ -130,13 +126,19 @@ export const skills: Skill[] = [
   { name: "Redis", category: "database", level: "intermediate" },
   { name: "Prisma", category: "database", level: "advanced" },
   { name: "SQLite", category: "database", level: "advanced" },
-  
-  // AI & Data
-  { name: "Machine Learning", category: "ai", level: "intermediate" },
-  { name: "Data Analysis", category: "ai", level: "intermediate" },
-  { name: "TensorFlow", category: "ai", level: "beginner" },
-  { name: "Pandas", category: "ai", level: "intermediate" },
-  { name: "NumPy", category: "ai", level: "intermediate" },
+    // AI & Data
+  { name: "Machine Learning", category: "ai", level: "advanced" },
+  { name: "Data Analysis", category: "ai", level: "advanced" },
+  { name: "Computer Vision", category: "ai", level: "advanced" },
+  { name: "Deep Learning", category: "ai", level: "intermediate" },
+  { name: "TensorFlow", category: "ai", level: "intermediate" },
+  { name: "Pandas", category: "ai", level: "advanced" },
+  { name: "NumPy", category: "ai", level: "advanced" },
+  { name: "Scikit-learn", category: "ai", level: "intermediate" },
+  { name: "Data Scraping", category: "ai", level: "advanced" },
+  { name: "Statistical Analysis", category: "ai", level: "intermediate" },
+  { name: "Natural Language Processing", category: "ai", level: "intermediate" },
+  { name: "Research & Development", category: "ai", level: "expert" },
   
   // Tools
   { name: "Git", category: "tools", level: "expert" },

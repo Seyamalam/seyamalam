@@ -80,17 +80,22 @@ export function HomePage() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl mx-auto text-center space-y-8"
+          className="max-w-4xl mx-auto text-center space-y-8 pb-20"
         >
           <motion.div variants={itemVariants} className="space-y-4">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring", bounce: 0.5 }}
-              className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-primary to-blue-600 p-1"
+              className="w-32 h-32 mx-auto mt-12 rounded-full bg-gradient-to-r from-primary to-blue-600 p-1"
             >
-              <div className="w-full h-full rounded-full bg-background flex items-center justify-center text-4xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-                SA
+              <div className="relative h-full w-full overflow-hidden rounded-full">
+                <Image
+                  src="/hero.jpg"
+                  alt="Touhidul Alam Seyam"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </motion.div>
 
@@ -194,14 +199,13 @@ export function HomePage() {
               </Button>
             </div>
           </motion.div>
-        </motion.div>
-
+        </motion.div>        
         {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2 }}
-          className="absolute bottom-2 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
@@ -247,12 +251,12 @@ export function HomePage() {
                 variants={itemVariants}
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="group"
-              >                <Card className="border-2 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20">
+              >                <Card className="border-2 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20 bg-white dark:bg-white">
                   <CardContent className="p-6 text-center">
                     <div className="mb-2 group-hover:scale-110 transition-transform flex justify-center">
                       {getSkillIcon(skill.name)}
                     </div>
-                    <h3 className="font-semibold text-sm">{skill.name}</h3>
+                    <h3 className="font-semibold text-sm text-gray-800 dark:text-gray-800">{skill.name}</h3>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -292,10 +296,22 @@ export function HomePage() {
                 variants={itemVariants}
                 whileHover={{ y: -10 }}
                 className="group"
-              >
-                <Card className="overflow-hidden border-2 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/20">
-                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-blue-600/20 flex items-center justify-center">
-                    <div className="text-4xl opacity-50">🚀</div>
+              >                <Card className="overflow-hidden border-2 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/20">
+                  <div className="aspect-video relative overflow-hidden">
+                    {project.image ? (
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-primary/20 to-blue-600/20 flex items-center justify-center">
+                        <div className="text-4xl opacity-50">🚀</div>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                   </div>
                   <CardContent className="p-6">
                     <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">

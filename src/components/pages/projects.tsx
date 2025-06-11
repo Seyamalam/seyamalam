@@ -137,19 +137,28 @@ export function ProjectsPage() {
                 whileHover={{ y: -10 }}
                 className="group"
               >
-                <Card className="overflow-hidden border-2 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/20 h-full flex flex-col">
-                  {/* Project Image/Preview */}
-                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-blue-600/20 relative overflow-hidden">
+                <Card className="overflow-hidden border-2 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/20 h-full flex flex-col">                  {/* Project Image/Preview */}
+                  <div className="aspect-video relative overflow-hidden">
                     {project.featured && (
-                      <Badge className="absolute top-3 left-3 bg-gradient-to-r from-primary to-blue-600">
+                      <Badge className="absolute top-3 left-3 bg-gradient-to-r from-primary to-blue-600 z-10">
                         Featured
                       </Badge>
                     )}
-                    <div className="absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <div className="text-6xl opacity-50">
-                        {getProjectIcon(project.title)}
+                    {project.image ? (
+                      <>
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                      </>
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-primary/20 to-blue-600/20 flex items-center justify-center">
+                        <div className="text-6xl opacity-50">
+                          {getProjectIcon(project.title)}
+                        </div>
                       </div>
-                    </div>
+                    )}
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                       <div className="flex gap-2">
                         {project.liveUrl && (

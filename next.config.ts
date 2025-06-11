@@ -33,6 +33,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'c70mvq7b7i.ufs.sh',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   rewrites: async () => {

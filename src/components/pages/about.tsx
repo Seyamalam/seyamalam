@@ -31,14 +31,15 @@ const itemVariants = {
 
 const stats = [
   { icon: Code, label: "Projects Completed", value: "20+" },
-  { icon: Coffee, label: "Cups of Coffee", value: "∞" },
+  { icon: Trophy, label: "Research Papers", value: "8+" },
   { icon: Calendar, label: "Years Experience", value: "3+" },
-  { icon: Heart, label: "Happy Clients", value: "15+" },
+  { icon: Heart, label: "Research Collaborations", value: "10+" },
 ]
 
 const skillCategories = [
   { name: "Frontend", skills: skills.filter(s => s.category === "frontend") },
   { name: "Backend", skills: skills.filter(s => s.category === "backend") },
+  { name: "AI & Machine Learning", skills: skills.filter(s => s.category === "ai") },
   { name: "Database", skills: skills.filter(s => s.category === "database") },
   { name: "Tools & Cloud", skills: skills.filter(s => s.category === "tools" || s.category === "cloud") },
 ]
@@ -69,9 +70,8 @@ export function AboutPage() {
             <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
               Me
             </span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Passionate developer with a love for creating digital experiences that make a difference
+          </h1>          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Full Stack Developer & Research Scientist passionate about AI/ML research, data analysis, and innovative solutions
           </p>
         </motion.div>
 
@@ -85,35 +85,44 @@ export function AboutPage() {
                   <Heart className="h-5 w-5 text-primary" />
                   My Journey
                 </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4 text-muted-foreground">
+              </CardHeader>              <CardContent className="space-y-4 text-muted-foreground">
                 <p>
                   Hi! I'm <strong className="text-foreground">Touhidul Alam Seyam</strong>, 
-                  a passionate Full Stack Developer with over 3 years of experience creating 
-                  innovative web applications. My journey began with curiosity about how 
-                  websites work, and it has evolved into a deep passion for crafting 
-                  digital experiences that solve real-world problems.
+                  a passionate <strong className="text-primary">Full Stack Developer & Research Scientist</strong> with extensive experience in 
+                  AI/ML research, data analysis, and web development. My journey spans from building scalable web applications 
+                  to conducting cutting-edge research in artificial intelligence and machine learning.
                 </p>
                 <p>
-                  I specialize in modern JavaScript technologies, particularly React and 
-                  Next.js for frontend development, and Node.js for backend solutions. 
-                  I believe in writing clean, maintainable code and following best 
-                  practices to deliver high-quality software.
+                  As a <strong className="text-primary">published researcher</strong> with <strong className="text-primary">8+ publications</strong> in 
+                  prestigious venues like <strong className="text-foreground">IEEE conferences</strong>, <strong className="text-foreground">Springer journals</strong>, and 
+                  <strong className="text-foreground">arXiv</strong>, I bridge the gap between academic research and practical applications. 
+                  My research focuses on <strong className="text-primary">Computer Vision</strong>, <strong className="text-primary">Healthcare AI</strong>, 
+                  <strong className="text-primary">Agricultural Technology</strong>, and <strong className="text-primary">Big Data Analytics</strong>.
                 </p>
                 <p>
-                  When I'm not coding, you'll find me exploring new technologies, 
-                  contributing to open-source projects, or sharing knowledge with the 
-                  developer community. I'm always excited to take on new challenges 
-                  and collaborate with like-minded individuals.
+                  My technical expertise includes <strong className="text-primary">data scraping and automation</strong>, 
+                  <strong className="text-primary">machine learning model development</strong>, and <strong className="text-primary">statistical analysis</strong>. 
+                  I've worked on diverse projects from plant disease detection using CNNs to tuberculosis risk prediction 
+                  and LLM optimization techniques. I'm proficient in Python libraries like TensorFlow, Pandas, NumPy, 
+                  and web scraping tools.
                 </p>
-                <div className="flex flex-wrap gap-2 pt-4">
+                <p>
+                  When I'm not researching or coding, you'll find me exploring new AI technologies, 
+                  contributing to open-source projects, or collaborating with fellow researchers. 
+                  I'm passionate about applying AI/ML solutions to solve real-world problems in healthcare, 
+                  agriculture, and technology.
+                </p>                <div className="flex flex-wrap gap-2 pt-4">
                   <Badge variant="secondary" className="flex items-center gap-1">
                     <MapPin className="h-3 w-3" />
                     Based in Bangladesh
                   </Badge>
                   <Badge variant="secondary" className="flex items-center gap-1">
                     <Calendar className="h-3 w-3" />
-                    Available for Projects
+                    Available for Research Collaborations
+                  </Badge>
+                  <Badge variant="outline" className="flex items-center gap-1">
+                    <Trophy className="h-3 w-3" />
+                    8+ Published Papers
                   </Badge>
                 </div>
               </CardContent>
