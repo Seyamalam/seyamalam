@@ -91,7 +91,7 @@ export function HomePage() {
             >
               <div className="relative h-full w-full overflow-hidden rounded-full">
                 <Image
-                  src="/hero.jpg"
+                  src="/hero.png"
                   alt="Touhidul Alam Seyam"
                   fill
                   className="object-cover"
