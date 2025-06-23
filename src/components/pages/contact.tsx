@@ -53,7 +53,7 @@ const contactMethods = [
     icon: Twitter,
     title: "Twitter/X",
     subtitle: "Let's connect",
-    value: "@seyamalam",
+    value: "@seyamalam1",
     href: siteConfig.socials.x,
     color: "text-sky-500",
     bgColor: "bg-sky-500/10"
@@ -63,7 +63,7 @@ const contactMethods = [
     title: "LinkedIn",
     subtitle: "Professional network",
     value: "Touhidul Alam Seyam",
-    href: "https://linkedin.com/in/seyamalam",
+    href: "https://www.linkedin.com/in/touhidulalamseyam",
     color: "text-blue-600",
     bgColor: "bg-blue-600/10"
   }
