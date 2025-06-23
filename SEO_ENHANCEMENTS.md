@@ -70,7 +70,7 @@ rules: [
     disallow: ['/api/', '/_next/', '/admin/']
   }
 ],
-sitemap: 'https://seyamalam.xyz/sitemap.xml'
+sitemap: 'https://www.seyamalam.xyz/sitemap.xml'
 ```
 
 #### **Sitemap.xml (`src/app/sitemap.ts`)**

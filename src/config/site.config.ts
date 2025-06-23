@@ -4,7 +4,7 @@ export const siteConfig: SiteConfig = {
   name: "Touhidul Alam Seyam",
   title: "Touhidul Alam Seyam - Full Stack Developer & Research Scientist | AI/ML Expert | IEEE Author",
   description: "Touhidul Alam Seyam (seyamalam) - Passionate Full Stack Developer & Research Scientist from Bangladesh with 8+ publications in IEEE conferences and Springer journals. Expert in AI/ML, Computer Vision, Healthcare AI, React, Next.js, TypeScript, and Node.js. Available for remote work and research collaborations.",
-  origin: "https://seyamalam.xyz",
+  origin: "https://www.seyamalam.xyz",
   keywords: [
     // Primary identity keywords
     "Touhidul Alam Seyam",
@@ -94,10 +94,10 @@ export const siteConfig: SiteConfig = {
     "Remote Work",
     "Project Collaboration"
   ],
-  og: "https://seyamalam.xyz/og.png",
+  og: "https://www.seyamalam.xyz/og.png",
   creator: {
     name: "Touhidul Alam Seyam",
-    url: "https://seyamalam.xyz",
+    url: "https://www.seyamalam.xyz",
   },
   socials: {
     github: "https://github.com/Seyamalam",
