@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
+        allow: ['/', '/_next/static/'],
         disallow: [
           '/api/',
           '/_next/',
@@ -17,7 +17,7 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: 'Googlebot',
-        allow: '/',
+        allow: ['/', '/_next/static/'],
         disallow: [
           '/api/',
           '/_next/',
@@ -26,7 +26,7 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: 'Bingbot',
-        allow: '/',
+        allow: ['/', '/_next/static/'],
         disallow: [
           '/api/',
           '/_next/',
@@ -37,4 +37,4 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: `${siteConfig.origin}/sitemap.xml`,
     host: siteConfig.origin,
   }
-} 
+}
