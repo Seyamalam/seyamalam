@@ -9,6 +9,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { siteConfig } from "@/config/site.config"
 import { projects, skills } from "@/data/portfolio"
 import Image from "next/image"
+import { OptimizedImage } from "@/components/optimized-image"
+import { LazyImage } from "@/components/lazy-image"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -89,14 +91,17 @@ export function HomePage() {
               transition={{ delay: 0.2, type: "spring", bounce: 0.5 }}
               className="w-32 h-32 mx-auto mt-12 rounded-full bg-gradient-to-r from-primary to-blue-600 p-1"
             >
-              <div className="relative h-full w-full overflow-hidden rounded-full">
-                <Image
-                  src="/hero.png"
-                  alt="Touhidul Alam Seyam"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              <OptimizedImage
+                src="/hero.JPG"
+                alt="Touhidul Alam Seyam"
+                width={128}
+                height={128}
+                className="h-full w-full rounded-full object-cover"
+                priority={true}
+                quality={85}
+                sizes="128px"
+                placeholder="blur"
+              />
             </motion.div>
 
             <motion.h1
@@ -299,11 +304,13 @@ export function HomePage() {
               >                <Card className="overflow-hidden border-2 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/20">
                   <div className="aspect-video relative overflow-hidden">
                     {project.image ? (
-                      <Image
+                      <LazyImage
                         src={project.image}
                         alt={project.title}
-                        fill
+                        width={400}
+                        height={225}
                         className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        quality={80}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     ) : (

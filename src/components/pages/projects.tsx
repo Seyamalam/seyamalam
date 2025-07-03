@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { projects } from "@/data/portfolio"
+import { LazyImage } from "@/components/lazy-image"
+import Image from "next/image"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -145,13 +147,15 @@ export function ProjectsPage() {
                       </Badge>
                     )}
                     {project.image ? (
-                      <>
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        />
-                      </>
+                      <LazyImage
+                        src={project.image}
+                        alt={project.title}
+                        width={400}
+                        height={225}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        quality={80}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-primary/20 to-blue-600/20 flex items-center justify-center">
                         <div className="text-6xl opacity-50">
