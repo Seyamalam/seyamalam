@@ -1,244 +1,121 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
-import "@/styles/globals.css";
+import { Archivo, Geist } from "next/font/google";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { siteConfig } from "@/config/site.config";
-import { cn } from "@/lib/utils";
-import RootProviders from "@/components/providers";
+import { profile } from "@/data/site";
+import "@/styles/globals.css";
 
-const fontSans = Geist({
-  variable: "--font-geist-sans",
+const bodyFont = Geist({
   subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
 });
 
-const fontMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const displayFont = Archivo({
   subsets: ["latin"],
-});
-
-const fontHeading = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
 });
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#000000' }
-  ],
-  colorScheme: 'light dark',
-}
+  themeColor: "#f4f7fa",
+  colorScheme: "light",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.origin),
   title: {
     default: siteConfig.title,
-    template: `%s | ${siteConfig.name}`,
+    template: `%s — ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: [
-    ...siteConfig.keywords,
-    // Personal name variations for better discoverability
-    "Seyam",
-    "Touhidul",
-    "Alam",
-    "seyamalam",
-    "touhidul alam seyam",
-    "seyam portfolio",
-    "bangladesh developer",
-    "chattogram developer",
-    // Academic keywords
-    "research scientist",
-    "ieee publications",
-    "springer journal author",
-    "computer vision researcher",
-    "machine learning researcher",
-    "agricultural ai",
-    "healthcare ai",
-    "plant disease detection",
-    "medical ai research",
-    // Technical keywords
-    "full stack engineer",
-    "react expert",
-    "nextjs developer",
-    "typescript specialist",
-    "node.js backend",
-    "python data scientist",
-    "tensorflow developer",
-    "web application developer",
-    // Location and availability
-    "remote developer",
-    "freelance developer",
-    "software consultant",
-    "research collaborator",
-  ],
-  authors: [
-    {
-      name: siteConfig.name,
-      url: siteConfig.origin,
-    }
-  ],
+  keywords: [...siteConfig.keywords],
+  authors: [{ name: siteConfig.name, url: siteConfig.origin }],
   creator: siteConfig.name,
-  publisher: siteConfig.name,
+  alternates: { canonical: "/" },
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
-  alternates: {
-    canonical: siteConfig.origin,
-  },
-  verification: {
-    google: 'google63894ecf69747bfd', // Google Search Console verification
-  },
-  category: 'Portfolio',
-  classification: 'Business',
-  icons: {
-    icon: [
-      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon/favicon.ico", sizes: "any" }
-    ],
-    shortcut: "/favicon/favicon.ico",
-    apple: "/favicon/apple-touch-icon.png",
-    other: [
-      {
-        rel: "android-chrome",
-        url: "/favicon/android-chrome-192x192.png",
-        sizes: "192x192",
-      },
-      {
-        rel: "android-chrome",
-        url: "/favicon/android-chrome-512x512.png", 
-        sizes: "512x512",
-      },
-    ],
-  },
-  manifest: "/favicon/site.webmanifest",
+  verification: { google: "google63894ecf69747bfd" },
   openGraph: {
-    type: "website",
+    type: "profile",
     locale: "en_US",
     url: siteConfig.origin,
     siteName: siteConfig.name,
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [
-      {
-        url: siteConfig.og,
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.name} - Full Stack Developer & Research Scientist`,
-        type: "image/png",
-      },
-    ],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: siteConfig.title }],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@seyamalam",
-    creator: "@seyamalam",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: {
-      url: siteConfig.og,
-      width: 1200,
-      height: 630,
-      alt: `${siteConfig.name} - Full Stack Developer & Research Scientist`,
-    },
+    images: ["/opengraph-image"],
   },
+  icons: {
+    icon: "/favicon/favicon.ico",
+    apple: "/favicon/apple-touch-icon.png",
+  },
+  manifest: "/favicon/site.webmanifest",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": siteConfig.name,
-    "alternateName": ["Seyam", "Touhidul Alam Seyam", "seyamalam"],
-    "url": siteConfig.origin,
-    "image": `${siteConfig.origin}/hero.png`,
-    "description": siteConfig.description,
-    "jobTitle": "Full Stack Developer & Research Scientist",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Hello World Communications Ltd"
-    },
-    "alumniOf": {
-      "@type": "EducationalOrganization", 
-      "name": "BGC Trust University Bangladesh"
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Chattogram",
-      "addressCountry": "Bangladesh"
-    },
-    "email": siteConfig.contact?.email,
-    "telephone": siteConfig.contact?.phone,
-    "sameAs": [
-      siteConfig.socials.github,
-      siteConfig.socials.x,
-      siteConfig.socials.linkedin || "",
-    ],
-    "knowsAbout": [
-      "Full Stack Development",
-      "Machine Learning",
-      "Computer Vision", 
-      "Artificial Intelligence",
-      "Research",
-      "React.js",
-      "Next.js",
-      "Python",
-      "TypeScript",
-      "Node.js"
-    ],
-    "hasOccupation": {
-      "@type": "Occupation",
-      "name": "Software Engineer",
-      "occupationLocation": {
-        "@type": "Country",
-        "name": "Bangladesh"
-      },
-      "skills": "JavaScript, TypeScript, React, Next.js, Node.js, Python, Machine Learning, AI Research"
-    }
-  };
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  url: siteConfig.origin,
+  image: `${siteConfig.origin}/profile.jpg`,
+  jobTitle: "Software Engineer",
+  description: siteConfig.description,
+  email: `mailto:${profile.email}`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Chattogram",
+    addressCountry: "BD",
+  },
+  worksFor: {
+    "@type": "Organization",
+    name: "Hello World Communications Ltd",
+  },
+  affiliation: {
+    "@type": "CollegeOrUniversity",
+    name: "BGC Trust University Bangladesh",
+  },
+  sameAs: [profile.github, profile.orcid, profile.scholar, profile.x],
+  knowsAbout: [
+    "Software engineering",
+    "Next.js",
+    "TypeScript",
+    "Python",
+    "Machine learning",
+    "Computer vision",
+    "Reproducible evaluation",
+  ],
+};
 
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-chrome-192x192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/favicon/android-chrome-512x512.png" />
-        <link rel="manifest" href="/favicon/site.webmanifest" />
+    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable}`}>
+      <body>
+        <a className="skip-link" href="#main-content">Skip to content</a>
+        <SiteHeader />
+        <main id="main-content">{children}</main>
+        <SiteFooter />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema).replace(/</g, "\\u003c") }}
         />
-      </head>
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
-          fontHeading.variable,
-          fontMono.variable
-        )}
-      >
-        <RootProviders>
-          {children}
-        </RootProviders>
       </body>
     </html>
   );
