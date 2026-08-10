@@ -14,8 +14,8 @@ export default function ProjectsPage() {
     <>
       <PageIntro
         eyebrow="Selected work · 2025—2026"
-        title="Systems with receipts."
-        description="A focused set of open, inspectable builds. Each one is chosen for its engineering decisions—not for a screenshot count."
+        title="Open the systems."
+        description="Six dedicated case studies combining real interfaces, working code, architecture decisions, benchmarks, and reproducible evidence."
       />
       <section className="shell page-section">
         <div className="project-list project-list-full">

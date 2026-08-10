@@ -1,4 +1,5 @@
 export type Project = {
+  slug: string;
   title: string;
   summary: string;
   contribution: string;
@@ -30,6 +31,7 @@ export const profile = {
 
 export const projects: Project[] = [
   {
+    slug: "bun-scikit",
     title: "bun-scikit",
     summary: "Machine-learning primitives for Bun and TypeScript, shaped after scikit-learn.",
     contribution:
@@ -39,15 +41,17 @@ export const projects: Project[] = [
     status: "Open source · 2026",
   },
   {
+    slug: "robofusion",
     title: "RoboFusion",
     summary: "A multi-hazard smart-campus safety and response grid.",
     contribution:
       "Designed authenticated FastAPI services, SQLite/WAL persistence, WebSocket dashboards, role-based access, incident lifecycles, automated tests, and load tooling around ESP32 reference firmware and simulation.",
     stack: ["Python", "FastAPI", "WebSockets", "ESP32"],
     href: "https://github.com/Seyamalam/Robofusion",
-    status: "Systems project · 2026",
+    status: "Techathon winner · 2026",
   },
   {
+    slug: "asrro-portal",
     title: "ASRRO Portal",
     summary: "Public site and operations workspace for a robotics research organization.",
     contribution:
@@ -57,6 +61,7 @@ export const projects: Project[] = [
     status: "Product platform · 2026",
   },
   {
+    slug: "kaggriculture-agent",
     title: "Kaggriculture Agent",
     summary: "A reproducible autonomous policy for a two-player farming simulation.",
     contribution:
@@ -66,6 +71,7 @@ export const projects: Project[] = [
     status: "Agent research · 2026",
   },
   {
+    slug: "fold-safe-ml-pipelines",
     title: "Fold-safe ML Pipelines",
     summary: "Reproducible tabular classification for Kaggle Playground Series S6E8.",
     contribution:
@@ -75,6 +81,7 @@ export const projects: Project[] = [
     status: "ML pipeline · 2026",
   },
   {
+    slug: "zodic",
     title: "Zodic",
     summary: "A Zod-inspired, zero-dependency data validation library for Python.",
     contribution:
