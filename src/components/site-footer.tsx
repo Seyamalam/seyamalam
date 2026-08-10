@@ -13,6 +13,7 @@ export function SiteFooter() {
         </div>
         <div className="footer-links" aria-label="External profiles">
           <a href={profile.github}>GitHub <span aria-hidden="true">↗</span></a>
+          <a href={profile.linkedin}>LinkedIn <span aria-hidden="true">↗</span></a>
           <a href={profile.orcid}>ORCID <span aria-hidden="true">↗</span></a>
           <a href={profile.scholar}>Scholar <span aria-hidden="true">↗</span></a>
           <Link href="/contact#resumes">Resumes <span aria-hidden="true">↓</span></Link>

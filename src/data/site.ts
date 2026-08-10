@@ -19,13 +19,14 @@ export type Publication = {
 export const profile = {
   name: "Touhidul Alam Seyam",
   shortName: "Seyam",
-  role: "Software Engineer & Applied AI Researcher",
+  role: "Software Engineer · Web, App, Backend & Agentic AI",
   location: "Chattogram, Bangladesh",
   email: "seyamalam41@gmail.com",
   phone: "+880 1311-104804",
   github: "https://github.com/Seyamalam",
   orcid: "https://orcid.org/0009-0007-7512-1893",
   scholar: "https://scholar.google.com/citations?user=gRkTVYEAAAAJ&hl=en",
+  linkedin: "https://www.linkedin.com/in/touhidulalamseyam",
   x: "https://x.com/seyamalam1",
 };
 
@@ -184,6 +185,16 @@ export const publications: Publication[] = [
 
 export const experience = [
   {
+    period: "Dec 2025 — Present",
+    role: "Software Engineer",
+    organization: "Agentic Institute",
+    location: "Remote",
+    points: [
+      "Contribute to application development and AI-enabled, agentic software systems.",
+      "Work across implementation, integration, testing, and delivery using modern web and backend technologies.",
+    ],
+  },
+  {
     period: "Aug 2024 — Present",
     role: "Software Engineer",
     organization: "Hello World Communications Ltd",
@@ -192,17 +203,6 @@ export const experience = [
       "Build, review, deploy, and maintain full-stack applications across frontend, backend, and database layers.",
       "Work with TypeScript, React, Next.js, Node.js, Python, PostgreSQL, and applied AI integrations.",
       "Collaborate on requirements, implementation, releases, and production support.",
-    ],
-  },
-  {
-    period: "Jul 2023 — 2025",
-    role: "Research Assistant",
-    organization: "BGC Trust University Bangladesh",
-    location: "Chattogram, Bangladesh",
-    points: [
-      "Supported machine-learning experiments, data analysis, implementation, technical figures, and manuscript preparation.",
-      "Worked across agricultural diagnostics, healthcare risk prediction, malware classification, LLM inference, and clustering.",
-      "Contributed to student mentoring, technical workshops, and academic project execution.",
     ],
   },
   {
@@ -219,12 +219,12 @@ export const experience = [
 
 export const skillGroups = [
   {
-    label: "Product engineering",
-    skills: ["TypeScript", "React", "Next.js", "Node.js", "REST APIs", "System design"],
+    label: "Web, app and backend",
+    skills: ["TypeScript", "React", "Next.js", "React Native", "Node.js", "REST APIs"],
   },
   {
-    label: "Applied machine learning",
-    skills: ["Python", "scikit-learn", "TensorFlow", "PyTorch", "XGBoost", "Computer vision"],
+    label: "ML, AI and agents",
+    skills: ["Python", "scikit-learn", "TensorFlow", "PyTorch", "Agent evaluation", "Computer vision"],
   },
   {
     label: "Data and infrastructure",

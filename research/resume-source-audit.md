@@ -2,6 +2,17 @@
 
 Audit date: 2026-08-10 (Asia/Dhaka)
 
+## User-confirmed updates (2026-08-10)
+
+- Target roles: web development, app development, backend engineering, machine learning, AI, and agentic systems.
+- Software Engineer at Agentic Institute since December 2025; current.
+- Software Engineer at Hello World Communications Ltd remains current.
+- Remove the Research Assistant role from current portfolio and resume materials.
+- B.Sc. (Hons.) in Computer Science and Engineering at BGC Trust University Bangladesh, 2023-2026; currently in the 8th semester.
+- Preferred opportunities: remote, Chattogram, or Dhaka.
+- Canonical LinkedIn: https://www.linkedin.com/in/touhidulalamseyam
+- Certificate evidence: https://github.com/Seyamalam/Certificates and https://github.com/Seyamalam/Certificates_PDF
+
 This note reconciles the existing portfolio data and PDF resume with first-party public sources. It is evidence for drafting a resume, not a finished resume. Facts marked **confirm with Seyam** should not be presented as current or exact until confirmed.
 
 ## Identity and contact

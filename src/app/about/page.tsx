@@ -42,10 +42,10 @@ export default function AboutPage() {
             My work moves between full-stack application engineering and applied machine learning. The same habit matters in both: define what success means, expose assumptions, and make the result easy to verify.
           </p>
           <p>
-            At Hello World Communications, I work across application layers and production delivery. In research, I have contributed to ten source-backed works covering agricultural diagnostics, health-risk prediction, malware classification, model implementation, and AI-assisted software systems.
+            At Agentic Institute and Hello World Communications, I work across agentic systems, application layers, backend services, and production delivery. My publication record covers agricultural diagnostics, health-risk prediction, malware classification, model implementation, and AI-assisted software systems.
           </p>
           <p>
-            I am completing a B.Sc. (Hons.) in Computer Science and Engineering at BGC Trust University Bangladesh, expected December 2026.
+            I am currently in the 8th semester of a B.Sc. (Hons.) in Computer Science and Engineering at BGC Trust University Bangladesh, expected December 2026.
           </p>
         </div>
       </section>

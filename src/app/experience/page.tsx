@@ -14,7 +14,7 @@ export default function ExperiencePage() {
       <PageIntro
         eyebrow="Experience · 2021—Present"
         title="From research bench to production release."
-        description="A concise record of roles that shaped how I build, test, document, and ship software."
+        description="Current software engineering work across agentic systems, web applications, backend services, and production delivery."
       />
       <section className="shell page-section timeline" aria-label="Professional experience">
         {experience.map((item, index) => (
@@ -37,7 +37,7 @@ export default function ExperiencePage() {
           </div>
           <div>
             <h2>B.Sc. (Hons.) in Computer Science and Engineering</h2>
-            <p>BGC Trust University Bangladesh · Expected December 2026</p>
+            <p>BGC Trust University Bangladesh · 8th semester · Expected December 2026</p>
             <p className="education-note">Focus: software systems, applied machine learning, computer vision, and research practice.</p>
           </div>
         </div>

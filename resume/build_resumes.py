@@ -27,7 +27,8 @@ DIST.mkdir(parents=True, exist_ok=True)
 NAME = "Touhidul Alam Seyam"
 CONTACT = (
     "Chattogram, Bangladesh  |  +880 1311-104804  |  seyamalam41@gmail.com  |  "
-    "seyamalam.vercel.app  |  github.com/Seyamalam  |  orcid.org/0009-0007-7512-1893"
+    "seyamalam.vercel.app  |  github.com/Seyamalam  |  linkedin.com/in/touhidulalamseyam  |  "
+    "orcid.org/0009-0007-7512-1893"
 )
 
 
@@ -303,7 +304,7 @@ def page_break(doc: Document) -> None:
 
 def software_resume(theme: Theme) -> Document:
     doc = configure_doc(theme)
-    add_header(doc, theme, "Software Engineer | Full-Stack and AI Systems")
+    add_header(doc, theme, "Software Engineer | Web, App and Backend Systems")
     add_section(doc, theme, "Professional Summary")
     add_text(doc, theme, "Software Engineer with experience building and deploying full-stack applications, backend services, and AI-enabled products. Works across TypeScript, React, Next.js, Node.js, Python, and PostgreSQL; also develops open-source ML tooling and reproducible data-science pipelines. Author or co-author of ten source-backed journal, conference, chapter, and preprint works.")
 
@@ -314,23 +315,22 @@ def software_resume(theme: Theme) -> Document:
     add_text(doc, theme, "AI and Data: scikit-learn, TensorFlow, PyTorch, Pandas, NumPy, computer vision, model evaluation, feature engineering")
 
     add_section(doc, theme, "Professional Experience")
-    add_role(doc, theme, "Software Engineer", "Hello World Communications Ltd", "Chattogram, Bangladesh", "Aug 2024–Present")
+    add_role(doc, theme, "Software Engineer", "Agentic Institute", "Remote", "Dec 2025-Present")
+    add_bullets(doc, theme, [
+        "Contribute to application development and AI-enabled, agentic software systems.",
+        "Work across implementation, integration, testing, and delivery using modern web and backend technologies.",
+    ])
+    add_role(doc, theme, "Software Engineer", "Hello World Communications Ltd", "Chattogram, Bangladesh", "Aug 2024-Present")
     add_bullets(doc, theme, [
         "Build, review, deploy, and maintain full-stack web applications for client and internal use across frontend, backend, and database layers.",
         "Collaborate with cross-functional stakeholders on requirements, implementation, production releases, and application support.",
         "Apply React, Next.js, Node.js, Python, PostgreSQL, and AI integrations to scalable application-development work.",
     ])
-    add_role(doc, theme, "Freelance Developer", "Self-employed", "Remote", "Mar 2021–2025")
+    add_role(doc, theme, "Freelance Developer", "Self-employed", "Remote", "Mar 2021-2025")
     add_bullets(doc, theme, [
         "Deliver web applications from requirements and interface design through backend implementation, deployment, and ongoing support.",
         "Built digital products for small businesses, nonprofit and academic organizations, and event teams using modern JavaScript and Python stacks.",
     ])
-    add_role(doc, theme, "Research Assistant", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Jul 2023–2025")
-    add_bullets(doc, theme, [
-        "Support faculty-led machine-learning research through experiment design, data analysis, implementation, academic writing, and publication preparation.",
-        "Contributed to research spanning agricultural computer vision, healthcare risk modeling, malware classification, LLM performance, and high-performance clustering.",
-    ])
-
     page_break(doc)
     add_section(doc, theme, "Selected Projects")
     add_project(doc, theme, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired ML library with native Zig acceleration, CI and benchmark gates, 209 tracked runtime exports, and documented model-selection, preprocessing, ensemble, clustering, and metrics APIs.", "https://github.com/Seyamalam/bun-scikit")
@@ -340,7 +340,7 @@ def software_resume(theme: Theme) -> Document:
 
     add_section(doc, theme, "Education")
     add_role(doc, theme, "B.Sc. (Hons.) in Computer Science and Engineering", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Expected Dec 2026")
-    add_text(doc, theme, "Research focus: software development, machine learning, computer vision, and applied AI.")
+    add_text(doc, theme, "Currently in the 8th semester. Focus: software development, machine learning, computer vision, and applied AI.")
 
     add_section(doc, theme, "Selected Publications")
     add_publication(doc, theme, "AgriScan: Next.js powered cross-platform solution for automated plant disease diagnosis and crop health management", "Journal of Electrical Systems and Information Technology", "2024", "10.1186/s43067-024-00169-7")
@@ -349,13 +349,13 @@ def software_resume(theme: Theme) -> Document:
     add_publication(doc, theme, "Architectures for AI-Driven Visual Assistance: Evaluating Server-Mediated Mobile and Direct Access Desktop Client Implementations", "Lecture Notes in Networks and Systems", "2026", "10.1007/978-3-032-15764-5_45")
 
     add_section(doc, theme, "Selected Certifications")
-    add_text(doc, theme, "IBM Applied Data Science with Python; IBM Deep Learning with TensorFlow; IEEE Computer Society Machine Learning Mastery; Cisco Python Essentials 1 and 2; Harvard CS50 for Educators")
+    add_text(doc, theme, "IBM Applied Data Science with Python; IBM Deep Learning with TensorFlow; Redis for Python Developers; Cisco Python Essentials 1 and 2; HackerRank Problem Solving (Intermediate)")
     return doc
 
 
 def research_resume(theme: Theme) -> Document:
     doc = configure_doc(theme)
-    add_header(doc, theme, "Machine Learning Engineer | Applied AI Researcher")
+    add_header(doc, theme, "Machine Learning Engineer | AI and Agentic Systems")
     add_section(doc, theme, "Research Profile")
     add_text(doc, theme, "Applied machine-learning researcher and software engineer working across computer vision, tabular modeling, healthcare analytics, agricultural AI, LLM inference, and high-performance computing. Author or co-author of ten source-backed research works, including two IEEE COMPAS papers, two SpringerOpen journal articles, and a 2026 Springer conference chapter. Builds reproducible Python pipelines and production-facing web systems that translate experiments into usable tools.")
 
@@ -364,14 +364,13 @@ def research_resume(theme: Theme) -> Document:
     add_text(doc, theme, "Engineering: Python, TypeScript, Next.js, React, Node.js, FastAPI, Django, PostgreSQL, MongoDB, Redis, Docker, Git, Zig, Bun")
     add_text(doc, theme, "Research Practice: reproducible experiments, fold-safe validation, benchmark design, data pipelines, academic writing, literature review, publication preparation")
 
-    add_section(doc, theme, "Research Experience")
-    add_role(doc, theme, "Research Assistant", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Jul 2023–2025")
+    add_section(doc, theme, "Engineering Experience")
+    add_role(doc, theme, "Software Engineer", "Agentic Institute", "Remote", "Dec 2025-Present")
     add_bullets(doc, theme, [
-        "Conduct machine-learning experiments and data analysis; implement models; prepare manuscripts, figures, and technical documentation with faculty collaborators.",
-        "Co-authored research across agricultural diagnostics, pulmonary-tuberculosis risk, cardiovascular-risk prediction, malware classification, LLM inference, and Mojo-accelerated clustering.",
-        "Help mentor junior students in research methods and support technical workshops and academic project execution.",
+        "Contribute to application development and AI-enabled, agentic software systems.",
+        "Work across implementation, integration, testing, and delivery using modern web and backend technologies.",
     ])
-    add_role(doc, theme, "Software Engineer", "Hello World Communications Ltd", "Chattogram, Bangladesh", "Aug 2024–Present")
+    add_role(doc, theme, "Software Engineer", "Hello World Communications Ltd", "Chattogram, Bangladesh", "Aug 2024-Present")
     add_bullets(doc, theme, [
         "Develop and deploy scalable applications and AI-enabled features using TypeScript, React, Next.js, Node.js, Python, and PostgreSQL.",
         "Bridge experimental software and production application requirements through code review, system design, deployment, and support.",
@@ -401,7 +400,7 @@ def research_resume(theme: Theme) -> Document:
 
     add_section(doc, theme, "Education")
     add_role(doc, theme, "B.Sc. (Hons.) in Computer Science and Engineering", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Expected Dec 2026")
-    add_text(doc, theme, "Research interests: applied machine learning, computer vision, agricultural AI, healthcare analytics, LLM systems, and high-performance ML.")
+    add_text(doc, theme, "Currently in the 8th semester. Research interests: applied machine learning, computer vision, agricultural AI, healthcare analytics, LLM systems, and agentic systems.")
 
     add_section(doc, theme, "Research Profiles")
     add_text(doc, theme, "ORCID: 0009-0007-7512-1893 | Google Scholar: scholar.google.com/citations?user=gRkTVYEAAAAJ | GitHub: github.com/Seyamalam")
@@ -410,7 +409,7 @@ def research_resume(theme: Theme) -> Document:
 
 def universal_resume(theme: Theme) -> Document:
     doc = configure_doc(theme)
-    add_header(doc, theme, "Software Engineer | Full-Stack Developer | Applied AI Researcher")
+    add_header(doc, theme, "Software Engineer | Web, App, Backend, ML/AI")
     add_section(doc, theme, "Professional Summary")
     add_text(doc, theme, "Software engineer, full-stack developer, and applied AI researcher who turns technical ideas into production-ready products and reproducible experiments. Professional experience since 2021 across TypeScript, Python, React, Next.js, Node.js, backend services, data systems, and machine learning. Builds client applications, open-source developer tools, AI agents, and research software; author or co-author of ten source-backed research works.")
 
@@ -421,6 +420,11 @@ def universal_resume(theme: Theme) -> Document:
     add_text(doc, theme, "AI and Research: scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM, computer vision, agent evaluation, reproducible experiments")
 
     add_section(doc, theme, "Professional Experience")
+    add_role(doc, theme, "Software Engineer", "Agentic Institute", "Remote", "Dec 2025-Present")
+    add_bullets(doc, theme, [
+        "Contribute to application development and AI-enabled, agentic software systems.",
+        "Work across implementation, integration, testing, and delivery using modern web and backend technologies.",
+    ])
     add_role(doc, theme, "Software Engineer", "Hello World Communications Ltd", "Chattogram, Bangladesh", "Aug 2024-Present")
     add_bullets(doc, theme, [
         "Build, review, deploy, and maintain full-stack web applications for client and internal use across frontend, backend, database, and AI-integration layers.",
@@ -431,12 +435,6 @@ def universal_resume(theme: Theme) -> Document:
         "Delivered web applications from requirements and interface design through backend implementation, deployment, and ongoing support.",
         "Built digital products for small businesses, nonprofit and academic organizations, and event teams using modern JavaScript and Python stacks.",
     ])
-    add_role(doc, theme, "Research Assistant", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Jul 2023-2025")
-    add_bullets(doc, theme, [
-        "Supported faculty-led machine-learning research through experiment design, data analysis, implementation, academic writing, and publication preparation.",
-        "Contributed to work spanning agricultural computer vision, healthcare risk modeling, malware classification, LLM performance, and high-performance clustering.",
-    ])
-
     add_section(doc, theme, "Selected Projects")
     add_project(doc, theme, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired machine-learning library with native Zig acceleration, tests and benchmark gates, 209 tracked runtime exports, and documented APIs across preprocessing, model selection, ensembles, clustering, and metrics.", "https://github.com/Seyamalam/bun-scikit")
     add_project(doc, theme, "RoboFusion", "Python, FastAPI, WebSockets, ESP32", "Developed a multi-hazard campus response platform with device integration, authentication, persistence, incident-lifecycle management, real-time dashboards, automated tests, and load-testing tools.", "https://github.com/Seyamalam/Robofusion")
@@ -445,7 +443,7 @@ def universal_resume(theme: Theme) -> Document:
 
     add_section(doc, theme, "Education")
     add_role(doc, theme, "B.Sc. (Hons.) in Computer Science and Engineering", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Expected Dec 2026")
-    add_text(doc, theme, "Focus: software engineering, machine learning, computer vision, applied AI, and research-driven product development.")
+    add_text(doc, theme, "Currently in the 8th semester. Focus: software engineering, machine learning, computer vision, applied AI, and research-driven product development.")
 
     add_section(doc, theme, "Selected Research")
     add_publication(doc, theme, "Architectures for AI-Driven Visual Assistance: Evaluating Server-Mediated Mobile and Direct Access Desktop Client Implementations", "Lecture Notes in Networks and Systems", "2026", "10.1007/978-3-032-15764-5_45")
@@ -453,31 +451,31 @@ def universal_resume(theme: Theme) -> Document:
     add_publication(doc, theme, "Next-Generation K-Means Clustering: Mojo-Driven Performance for Big Data", "International Journal of Intelligent Information Systems", "2025", "10.11648/j.ijiis.20251401.12")
 
     add_section(doc, theme, "Selected Certifications")
-    add_text(doc, theme, "IBM Applied Data Science with Python; IBM Deep Learning with TensorFlow; IEEE Computer Society Machine Learning Mastery; Cisco Python Essentials 1 and 2; Harvard CS50 for Educators")
+    add_text(doc, theme, "IBM Applied Data Science with Python; IBM Deep Learning with TensorFlow; Redis for Python Developers; Cisco Python Essentials 1 and 2; HackerRank Problem Solving (Intermediate)")
     return doc
 
 
 def compact_resume(theme: Theme) -> Document:
     doc = configure_doc(theme)
-    add_header(doc, theme, "Full-Stack Developer | Software Engineer | Applied AI")
+    add_header(doc, theme, "Web, App and Backend Developer | AI Systems")
     add_section(doc, theme, "Summary")
-    add_text(doc, theme, "Software engineer and final-year CSE student building full-stack products, Python/TypeScript developer tools, and applied ML systems. Professional experience since 2021; currently at Hello World Communications Ltd with a publication record spanning applied AI and software systems.")
+    add_text(doc, theme, "Software engineer and 8th-semester CSE student building web and mobile applications, backend services, Python/TypeScript developer tools, and applied ML systems. Currently at Agentic Institute and Hello World Communications Ltd.")
     add_section(doc, theme, "Core Skills")
     add_text(doc, theme, "TypeScript, JavaScript, Python, SQL, React, Next.js, Node.js, Django, FastAPI, Tailwind CSS, PostgreSQL, MongoDB, Redis, Prisma, Convex, Docker, Git, Vercel, TensorFlow, PyTorch, scikit-learn")
     add_section(doc, theme, "Experience")
-    add_role(doc, theme, "Software Engineer", "Hello World Communications Ltd", "Chattogram", "Aug 2024–Present")
+    add_role(doc, theme, "Software Engineer", "Agentic Institute", "Remote", "Dec 2025-Present")
+    add_bullets(doc, theme, ["Contribute to application development and AI-enabled, agentic software systems across implementation, integration, testing, and delivery."])
+    add_role(doc, theme, "Software Engineer", "Hello World Communications Ltd", "Chattogram", "Aug 2024-Present")
     add_bullets(doc, theme, ["Build, review, deploy, and support full-stack and AI-enabled applications with cross-functional teams using React/Next.js, Node.js, Python, and PostgreSQL."])
-    add_role(doc, theme, "Freelance Developer", "Self-employed", "Remote", "Mar 2021–2025")
-    add_bullets(doc, theme, ["Deliver web applications for business, nonprofit, academic, and event use—from requirements and interface work through backend development and deployment."])
-    add_role(doc, theme, "Research Assistant", "BGC Trust University Bangladesh", "Chattogram", "Jul 2023–2025")
-    add_bullets(doc, theme, ["Conduct ML experiments, data analysis, implementation, and academic writing across computer vision, healthcare, cybersecurity, LLMs, and clustering."])
+    add_role(doc, theme, "Freelance Developer", "Self-employed", "Remote", "Mar 2021-2025")
+    add_bullets(doc, theme, ["Deliver web applications for business, nonprofit, academic, and event use - from requirements and interface work through backend development and deployment."])
     add_section(doc, theme, "Selected Projects")
     add_project(doc, theme, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired ML library with native acceleration, CI/benchmark gates, and 209 tracked runtime exports.", "https://github.com/Seyamalam/bun-scikit")
     add_project(doc, theme, "ASRRO Portal", "Next.js, Convex", "Built public pages and role-aware operations for membership, events, attendance, content, reports, notifications, and finance access.", "https://github.com/Seyamalam/asrro")
     add_project(doc, theme, "Zodic", "Python, PyPI", "Published a zero-dependency, Zod-inspired Python validation package with typed parsing and nested errors.", "https://pypi.org/project/zodic/")
     add_project(doc, theme, "ML Competition Pipelines", "Python, LightGBM, XGBoost", "Created leakage-safe cross-validation, nested target encoding, schema checks, and rank-blending pipelines.", "https://github.com/Seyamalam/playground-series-s6e8")
     add_section(doc, theme, "Education and Research")
-    add_text(doc, theme, "B.Sc. (Hons.) Computer Science and Engineering, BGC Trust University Bangladesh — Expected Dec 2026")
+    add_text(doc, theme, "B.Sc. (Hons.) Computer Science and Engineering, BGC Trust University Bangladesh - 8th semester; expected Dec 2026")
     add_text(doc, theme, "Ten source-backed research works, including IEEE COMPAS papers, SpringerOpen journal articles, and a 2026 Springer conference chapter. ORCID: 0009-0007-7512-1893")
     return doc
 
@@ -565,18 +563,18 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
     )
     s = []
     if kind == "software":
-        pdf_header(s, styles, theme, "Software Engineer | Full-Stack and AI Systems")
+        pdf_header(s, styles, theme, "Software Engineer | Web, App and Backend Systems")
         pdf_section(s, styles, "Professional Summary")
         pdf_text(s, styles, "Software Engineer with experience building and deploying full-stack applications, backend services, and AI-enabled products. Works across TypeScript, React, Next.js, Node.js, Python, and PostgreSQL; also develops open-source ML tooling and reproducible data-science pipelines. Author or co-author of ten source-backed journal, conference, chapter, and preprint works.")
         pdf_section(s, styles, "Technical Skills")
         for t in ["<b>Languages:</b> TypeScript, JavaScript, Python, SQL, Go, Zig", "<b>Application Development:</b> React, Next.js, Node.js, Django, FastAPI, REST APIs, React Native, Tailwind CSS", "<b>Data and Infrastructure:</b> PostgreSQL, MongoDB, Redis, SQLite, Prisma, Convex, Docker, Git, AWS, Vercel", "<b>AI and Data:</b> scikit-learn, TensorFlow, PyTorch, Pandas, NumPy, computer vision, model evaluation, feature engineering"]: s.append(Paragraph(t, styles["body"]))
         pdf_section(s, styles, "Professional Experience")
-        pdf_role(s, styles, "Software Engineer", "Hello World Communications Ltd", "Chattogram, Bangladesh", "Aug 2024–Present")
+        pdf_role(s, styles, "Software Engineer", "Agentic Institute", "Remote", "Dec 2025-Present")
+        pdf_bullets(s, styles, ["Contribute to application development and AI-enabled, agentic software systems.", "Work across implementation, integration, testing, and delivery using modern web and backend technologies."])
+        pdf_role(s, styles, "Software Engineer", "Hello World Communications Ltd", "Chattogram, Bangladesh", "Aug 2024-Present")
         pdf_bullets(s, styles, ["Build, review, deploy, and maintain full-stack web applications for client and internal use across frontend, backend, and database layers.", "Collaborate with cross-functional stakeholders on requirements, implementation, production releases, and application support.", "Apply React, Next.js, Node.js, Python, PostgreSQL, and AI integrations to scalable application-development work."])
-        pdf_role(s, styles, "Freelance Developer", "Self-employed", "Remote", "Mar 2021–2025")
+        pdf_role(s, styles, "Freelance Developer", "Self-employed", "Remote", "Mar 2021-2025")
         pdf_bullets(s, styles, ["Deliver web applications from requirements and interface design through backend implementation, deployment, and ongoing support.", "Built digital products for small businesses, nonprofit and academic organizations, and event teams using modern JavaScript and Python stacks."])
-        pdf_role(s, styles, "Research Assistant", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Jul 2023–2025")
-        pdf_bullets(s, styles, ["Support faculty-led machine-learning research through experiment design, data analysis, implementation, academic writing, and publication preparation.", "Contributed to research spanning agricultural computer vision, healthcare risk modeling, malware classification, LLM performance, and high-performance clustering."])
         s.append(PageBreak())
         pdf_section(s, styles, "Selected Projects")
         pdf_project(s, styles, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired ML library with native Zig acceleration, CI and benchmark gates, 209 tracked runtime exports, and documented model-selection, preprocessing, ensemble, clustering, and metrics APIs.", "https://github.com/Seyamalam/bun-scikit")
@@ -585,24 +583,24 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_project(s, styles, "AgriScan", "Next.js, TensorFlow, Computer Vision", "Co-developed a cross-platform plant-disease diagnosis and crop-health system documented in a 2024 SpringerOpen journal article.", "https://doi.org/10.1186/s43067-024-00169-7")
         pdf_section(s, styles, "Education")
         pdf_role(s, styles, "B.Sc. (Hons.) in Computer Science and Engineering", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Expected Dec 2026")
-        pdf_text(s, styles, "Research focus: software development, machine learning, computer vision, and applied AI.")
+        pdf_text(s, styles, "Currently in the 8th semester. Focus: software development, machine learning, computer vision, and applied AI.")
         pdf_section(s, styles, "Selected Publications")
         pdf_publication(s, styles, "AgriScan: Next.js powered cross-platform solution for automated plant disease diagnosis and crop health management", "Journal of Electrical Systems and Information Technology", "2024", "10.1186/s43067-024-00169-7")
         pdf_publication(s, styles, "Comparing pre-trained models for efficient leaf disease detection: a study on custom CNN", "Journal of Electrical Systems and Information Technology", "2024", "10.1186/s43067-024-00137-1")
         pdf_publication(s, styles, "Next-Generation K-Means Clustering: Mojo-Driven Performance for Big Data", "International Journal of Intelligent Information Systems", "2025", "10.11648/j.ijiis.20251401.12")
         pdf_publication(s, styles, "Architectures for AI-Driven Visual Assistance: Evaluating Server-Mediated Mobile and Direct Access Desktop Client Implementations", "Lecture Notes in Networks and Systems", "2026", "10.1007/978-3-032-15764-5_45")
         pdf_section(s, styles, "Selected Certifications")
-        pdf_text(s, styles, "IBM Applied Data Science with Python; IBM Deep Learning with TensorFlow; IEEE Computer Society Machine Learning Mastery; Cisco Python Essentials 1 and 2; Harvard CS50 for Educators")
+        pdf_text(s, styles, "IBM Applied Data Science with Python; IBM Deep Learning with TensorFlow; Redis for Python Developers; Cisco Python Essentials 1 and 2; HackerRank Problem Solving (Intermediate)")
     elif kind == "research":
-        pdf_header(s, styles, theme, "Machine Learning Engineer | Applied AI Researcher")
+        pdf_header(s, styles, theme, "Machine Learning Engineer | AI and Agentic Systems")
         pdf_section(s, styles, "Research Profile")
         pdf_text(s, styles, "Applied machine-learning researcher and software engineer working across computer vision, tabular modeling, healthcare analytics, agricultural AI, LLM inference, and high-performance computing. Author or co-author of ten source-backed research works, including two IEEE COMPAS papers, two SpringerOpen journal articles, and a 2026 Springer conference chapter. Builds reproducible Python pipelines and production-facing web systems that translate experiments into usable tools.")
         pdf_section(s, styles, "Research and Engineering Skills")
         for t in ["<b>Machine Learning:</b> scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM, CNNs, transfer learning, SVM, clustering, feature engineering, cross-validation, model evaluation", "<b>Engineering:</b> Python, TypeScript, Next.js, React, Node.js, FastAPI, Django, PostgreSQL, MongoDB, Redis, Docker, Git, Zig, Bun", "<b>Research Practice:</b> reproducible experiments, fold-safe validation, benchmark design, data pipelines, academic writing, literature review, publication preparation"]: s.append(Paragraph(t, styles["body"]))
-        pdf_section(s, styles, "Research Experience")
-        pdf_role(s, styles, "Research Assistant", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Jul 2023–2025")
-        pdf_bullets(s, styles, ["Conduct machine-learning experiments and data analysis; implement models; prepare manuscripts, figures, and technical documentation with faculty collaborators.", "Co-authored research across agricultural diagnostics, pulmonary-tuberculosis risk, cardiovascular-risk prediction, malware classification, LLM inference, and Mojo-accelerated clustering.", "Help mentor junior students in research methods and support technical workshops and academic project execution."])
-        pdf_role(s, styles, "Software Engineer", "Hello World Communications Ltd", "Chattogram, Bangladesh", "Aug 2024–Present")
+        pdf_section(s, styles, "Engineering Experience")
+        pdf_role(s, styles, "Software Engineer", "Agentic Institute", "Remote", "Dec 2025-Present")
+        pdf_bullets(s, styles, ["Contribute to application development and AI-enabled, agentic software systems.", "Work across implementation, integration, testing, and delivery using modern web and backend technologies."])
+        pdf_role(s, styles, "Software Engineer", "Hello World Communications Ltd", "Chattogram, Bangladesh", "Aug 2024-Present")
         pdf_bullets(s, styles, ["Develop and deploy scalable applications and AI-enabled features using TypeScript, React, Next.js, Node.js, Python, and PostgreSQL.", "Bridge experimental software and production application requirements through code review, system design, deployment, and support."])
         pdf_section(s, styles, "Selected Research Projects")
         pdf_project(s, styles, "Smartphone Addiction Prediction", "Python, LightGBM, XGBoost, CatBoost", "Built leakage-safe, five-fold out-of-fold pipelines with nested target encoding, matched-fold experiment screening, schema checks, and rank blending.", "https://github.com/Seyamalam/playground-series-s6e8")
@@ -614,23 +612,23 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         for item in pubs: pdf_publication(s, styles, *item)
         pdf_section(s, styles, "Education")
         pdf_role(s, styles, "B.Sc. (Hons.) in Computer Science and Engineering", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Expected Dec 2026")
-        pdf_text(s, styles, "Research interests: applied machine learning, computer vision, agricultural AI, healthcare analytics, LLM systems, and high-performance ML.")
+        pdf_text(s, styles, "Currently in the 8th semester. Research interests: applied machine learning, computer vision, agricultural AI, healthcare analytics, LLM systems, and agentic systems.")
         pdf_section(s, styles, "Research Profiles")
         pdf_text(s, styles, "ORCID: 0009-0007-7512-1893 | Google Scholar: scholar.google.com/citations?user=gRkTVYEAAAAJ | GitHub: github.com/Seyamalam")
     elif kind == "universal":
-        pdf_header(s, styles, theme, "Software Engineer | Full-Stack Developer | Applied AI Researcher")
+        pdf_header(s, styles, theme, "Software Engineer | Web, App, Backend, ML/AI")
         pdf_section(s, styles, "Professional Summary")
         pdf_text(s, styles, "Software engineer, full-stack developer, and applied AI researcher who turns technical ideas into production-ready products and reproducible experiments. Professional experience since 2021 across TypeScript, Python, React, Next.js, Node.js, backend services, data systems, and machine learning. Builds client applications, open-source developer tools, AI agents, and research software; author or co-author of ten source-backed research works.")
         pdf_section(s, styles, "Core Skills")
         for t in ["<b>Languages:</b> TypeScript, JavaScript, Python, SQL, Go, Zig", "<b>Product Engineering:</b> React, Next.js, Node.js, Django, FastAPI, REST APIs, React Native, Tailwind CSS", "<b>Data and Infrastructure:</b> PostgreSQL, MongoDB, Redis, SQLite, Prisma, Convex, Docker, Git, AWS, Vercel", "<b>AI and Research:</b> scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM, computer vision, agent evaluation, reproducible experiments"]:
             s.append(Paragraph(t, styles["body"]))
         pdf_section(s, styles, "Professional Experience")
+        pdf_role(s, styles, "Software Engineer", "Agentic Institute", "Remote", "Dec 2025-Present")
+        pdf_bullets(s, styles, ["Contribute to application development and AI-enabled, agentic software systems.", "Work across implementation, integration, testing, and delivery using modern web and backend technologies."])
         pdf_role(s, styles, "Software Engineer", "Hello World Communications Ltd", "Chattogram, Bangladesh", "Aug 2024-Present")
         pdf_bullets(s, styles, ["Build, review, deploy, and maintain full-stack web applications for client and internal use across frontend, backend, database, and AI-integration layers.", "Collaborate with cross-functional stakeholders on requirements, implementation, production releases, and ongoing application support."])
         pdf_role(s, styles, "Freelance Developer", "Self-employed", "Remote", "Mar 2021-2025")
         pdf_bullets(s, styles, ["Delivered web applications from requirements and interface design through backend implementation, deployment, and ongoing support.", "Built digital products for small businesses, nonprofit and academic organizations, and event teams using modern JavaScript and Python stacks."])
-        pdf_role(s, styles, "Research Assistant", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Jul 2023-2025")
-        pdf_bullets(s, styles, ["Supported faculty-led machine-learning research through experiment design, data analysis, implementation, academic writing, and publication preparation.", "Contributed to work spanning agricultural computer vision, healthcare risk modeling, malware classification, LLM performance, and high-performance clustering."])
         pdf_section(s, styles, "Selected Projects")
         pdf_project(s, styles, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired machine-learning library with native Zig acceleration, tests and benchmark gates, 209 tracked runtime exports, and documented APIs across preprocessing, model selection, ensembles, clustering, and metrics.", "https://github.com/Seyamalam/bun-scikit")
         pdf_project(s, styles, "RoboFusion", "Python, FastAPI, WebSockets, ESP32", "Developed a multi-hazard campus response platform with device integration, authentication, persistence, incident-lifecycle management, real-time dashboards, automated tests, and load-testing tools.", "https://github.com/Seyamalam/Robofusion")
@@ -638,33 +636,33 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_project(s, styles, "Kaggriculture Autonomous Agent", "Python, Simulation, Evaluation", "Engineered a deterministic farming agent and evaluation harness with seeded seat-swapped tournaments, frozen replay corpora, manifest hashing, and regression gates.", "https://github.com/Seyamalam/Kaggriculture")
         pdf_section(s, styles, "Education")
         pdf_role(s, styles, "B.Sc. (Hons.) in Computer Science and Engineering", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Expected Dec 2026")
-        pdf_text(s, styles, "Focus: software engineering, machine learning, computer vision, applied AI, and research-driven product development.")
+        pdf_text(s, styles, "Currently in the 8th semester. Focus: software engineering, machine learning, computer vision, applied AI, and research-driven product development.")
         pdf_section(s, styles, "Selected Research")
         pdf_publication(s, styles, "Architectures for AI-Driven Visual Assistance: Evaluating Server-Mediated Mobile and Direct Access Desktop Client Implementations", "Lecture Notes in Networks and Systems", "2026", "10.1007/978-3-032-15764-5_45")
         pdf_publication(s, styles, "AgriScan: Next.js powered cross-platform solution for automated plant disease diagnosis and crop health management", "Journal of Electrical Systems and Information Technology", "2024", "10.1186/s43067-024-00169-7")
         pdf_publication(s, styles, "Next-Generation K-Means Clustering: Mojo-Driven Performance for Big Data", "International Journal of Intelligent Information Systems", "2025", "10.11648/j.ijiis.20251401.12")
         pdf_section(s, styles, "Selected Certifications")
-        pdf_text(s, styles, "IBM Applied Data Science with Python; IBM Deep Learning with TensorFlow; IEEE Computer Society Machine Learning Mastery; Cisco Python Essentials 1 and 2; Harvard CS50 for Educators")
+        pdf_text(s, styles, "IBM Applied Data Science with Python; IBM Deep Learning with TensorFlow; Redis for Python Developers; Cisco Python Essentials 1 and 2; HackerRank Problem Solving (Intermediate)")
     else:
-        pdf_header(s, styles, theme, "Full-Stack Developer | Software Engineer | Applied AI")
+        pdf_header(s, styles, theme, "Web, App and Backend Developer | AI Systems")
         pdf_section(s, styles, "Summary")
-        pdf_text(s, styles, "Software engineer and final-year CSE student building full-stack products, Python/TypeScript developer tools, and applied ML systems. Professional experience since 2021; currently at Hello World Communications Ltd with a publication record spanning applied AI and software systems.")
+        pdf_text(s, styles, "Software engineer and 8th-semester CSE student building web and mobile applications, backend services, Python/TypeScript developer tools, and applied ML systems. Currently at Agentic Institute and Hello World Communications Ltd.")
         pdf_section(s, styles, "Core Skills")
         pdf_text(s, styles, "TypeScript, JavaScript, Python, SQL, React, Next.js, Node.js, Django, FastAPI, Tailwind CSS, PostgreSQL, MongoDB, Redis, Prisma, Convex, Docker, Git, Vercel, TensorFlow, PyTorch, scikit-learn")
         pdf_section(s, styles, "Experience")
-        pdf_role(s, styles, "Software Engineer", "Hello World Communications Ltd", "Chattogram", "Aug 2024–Present")
+        pdf_role(s, styles, "Software Engineer", "Agentic Institute", "Remote", "Dec 2025-Present")
+        pdf_bullets(s, styles, ["Contribute to application development and AI-enabled, agentic software systems across implementation, integration, testing, and delivery."])
+        pdf_role(s, styles, "Software Engineer", "Hello World Communications Ltd", "Chattogram", "Aug 2024-Present")
         pdf_bullets(s, styles, ["Build, review, deploy, and support full-stack and AI-enabled applications with cross-functional teams using React/Next.js, Node.js, Python, and PostgreSQL."])
-        pdf_role(s, styles, "Freelance Developer", "Self-employed", "Remote", "Mar 2021–2025")
-        pdf_bullets(s, styles, ["Deliver web applications for business, nonprofit, academic, and event use—from requirements and interface work through backend development and deployment."])
-        pdf_role(s, styles, "Research Assistant", "BGC Trust University Bangladesh", "Chattogram", "Jul 2023–2025")
-        pdf_bullets(s, styles, ["Conduct ML experiments, data analysis, implementation, and academic writing across computer vision, healthcare, cybersecurity, LLMs, and clustering."])
+        pdf_role(s, styles, "Freelance Developer", "Self-employed", "Remote", "Mar 2021-2025")
+        pdf_bullets(s, styles, ["Deliver web applications for business, nonprofit, academic, and event use - from requirements and interface work through backend development and deployment."])
         pdf_section(s, styles, "Selected Projects")
         pdf_project(s, styles, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired ML library with native acceleration, CI/benchmark gates, and 209 tracked runtime exports.", "https://github.com/Seyamalam/bun-scikit")
         pdf_project(s, styles, "ASRRO Portal", "Next.js, Convex", "Built public pages and role-aware operations for membership, events, attendance, content, reports, notifications, and finance access.", "https://github.com/Seyamalam/asrro")
         pdf_project(s, styles, "Zodic", "Python, PyPI", "Published a zero-dependency, Zod-inspired Python validation package with typed parsing and nested errors.", "https://pypi.org/project/zodic/")
         pdf_project(s, styles, "ML Competition Pipelines", "Python, LightGBM, XGBoost", "Created leakage-safe cross-validation, nested target encoding, schema checks, and rank-blending pipelines.", "https://github.com/Seyamalam/playground-series-s6e8")
         pdf_section(s, styles, "Education and Research")
-        pdf_text(s, styles, "B.Sc. (Hons.) Computer Science and Engineering, BGC Trust University Bangladesh — Expected Dec 2026")
+        pdf_text(s, styles, "B.Sc. (Hons.) Computer Science and Engineering, BGC Trust University Bangladesh - 8th semester; expected Dec 2026")
         pdf_text(s, styles, "Ten source-backed research works, including IEEE COMPAS papers, SpringerOpen journal articles, and a 2026 Springer conference chapter. ORCID: 0009-0007-7512-1893")
     doc.build(s)
 
@@ -683,7 +681,7 @@ def main() -> None:
         document.core_properties.title = f"{NAME} - {theme.key.replace('_', ' ')}"
         document.core_properties.subject = "ATS-compatible resume"
         document.core_properties.author = NAME
-        document.core_properties.keywords = "software engineer, full stack, machine learning, research, TypeScript, Python"
+        document.core_properties.keywords = "software engineer, web development, app development, backend, machine learning, AI, agentic systems, TypeScript, Python"
         docx_path = DIST / f"{base}.docx"
         pdf_path = DIST / f"{base}.pdf"
         document.save(docx_path)

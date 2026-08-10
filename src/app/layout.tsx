@@ -84,15 +84,15 @@ const personSchema = {
     addressLocality: "Chattogram",
     addressCountry: "BD",
   },
-  worksFor: {
-    "@type": "Organization",
-    name: "Hello World Communications Ltd",
-  },
+  worksFor: [
+    { "@type": "Organization", name: "Agentic Institute" },
+    { "@type": "Organization", name: "Hello World Communications Ltd" },
+  ],
   affiliation: {
     "@type": "CollegeOrUniversity",
     name: "BGC Trust University Bangladesh",
   },
-  sameAs: [profile.github, profile.orcid, profile.scholar, profile.x],
+  sameAs: [profile.github, profile.linkedin, profile.orcid, profile.scholar, profile.x],
   knowsAbout: [
     "Software engineering",
     "Next.js",
@@ -100,6 +100,7 @@ const personSchema = {
     "Python",
     "Machine learning",
     "Computer vision",
+    "Agentic systems",
     "Reproducible evaluation",
   ],
 };

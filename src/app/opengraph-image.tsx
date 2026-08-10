@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Touhidul Alam Seyam — Software Engineer & Applied AI Researcher";
+export const alt = "Touhidul Alam Seyam — Software Engineer · Web, App, Backend & Agentic AI";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

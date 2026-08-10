@@ -21,7 +21,7 @@ export default function ContactPage() {
           <p className="eyebrow">Direct</p>
           <a className="contact-email" href={`mailto:${profile.email}`}>{profile.email}</a>
           <p>
-            For software engineering, applied AI, technical collaboration, or research. I am based in {profile.location} and can work asynchronously across time zones.
+            For web, app, backend, ML/AI, agentic systems, or technical collaboration. I prefer remote opportunities and roles based in Chattogram or Dhaka.
           </p>
           <a className="button button-primary" href={`mailto:${profile.email}?subject=Project%20or%20research%20inquiry`}>Start an email <span aria-hidden="true">↗</span></a>
         </div>
@@ -50,7 +50,7 @@ export default function ContactPage() {
               <span>01 · PDF</span><strong>Software engineer</strong><b aria-hidden="true">↓</b>
             </a>
             <a href="/resume/ml-research-ats.pdf" download>
-              <span>02 · PDF</span><strong>ML &amp; research</strong><b aria-hidden="true">↓</b>
+              <span>02 · PDF</span><strong>ML, AI &amp; agents</strong><b aria-hidden="true">↓</b>
             </a>
             <a href="/resume/full-stack-compact-ats.pdf" download>
               <span>03 · PDF</span><strong>Full-stack compact</strong><b aria-hidden="true">↓</b>
@@ -68,7 +68,7 @@ export default function ContactPage() {
         <a href={profile.github}><span>Code</span><strong>GitHub</strong><b aria-hidden="true">↗</b></a>
         <a href={profile.orcid}><span>Research identity</span><strong>ORCID</strong><b aria-hidden="true">↗</b></a>
         <a href={profile.scholar}><span>Citations</span><strong>Google Scholar</strong><b aria-hidden="true">↗</b></a>
-        <a href={profile.x}><span>Updates</span><strong>X / Twitter</strong><b aria-hidden="true">↗</b></a>
+        <a href={profile.linkedin}><span>Professional profile</span><strong>LinkedIn</strong><b aria-hidden="true">↗</b></a>
       </section>
     </>
   );
