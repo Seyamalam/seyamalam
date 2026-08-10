@@ -1,40 +1,10 @@
-import { MetadataRoute } from 'next'
-import { siteConfig } from '@/config/site.config'
+import type { MetadataRoute } from "next";
+import { siteConfig } from "@/config/site.config";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [
-      {
-        userAgent: '*',
-        allow: ['/', '/_next/static/', '/_next/image'],
-        disallow: [
-          '/api/',
-          '/_next/',
-          '/admin/',
-          '/*.json$',
-          '/.well-known/',
-        ],
-      },
-      {
-        userAgent: 'Googlebot',
-        allow: ['/', '/_next/static/', '/_next/image'],
-        disallow: [
-          '/api/',
-          '/_next/',
-          '/admin/',
-        ],
-      },
-      {
-        userAgent: 'Bingbot',
-        allow: ['/', '/_next/static/', '/_next/image'],
-        disallow: [
-          '/api/',
-          '/_next/',
-          '/admin/',
-        ],
-      },
-    ],
+    rules: { userAgent: "*", allow: "/", disallow: "/api/" },
     sitemap: `${siteConfig.origin}/sitemap.xml`,
     host: siteConfig.origin,
-  }
+  };
 }

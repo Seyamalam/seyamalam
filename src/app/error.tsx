@@ -1,42 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export default function ErrorPage({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   useEffect(() => {
     console.error(error);
   }, [error]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <Card className="w-[420px]">
-        <CardHeader>
-          <CardTitle>Something went wrong!</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">
-            An error occurred while loading this page.
-          </p>
-        </CardContent>
-        <CardFooter>
-          <Button
-            onClick={
-              () => reset()
-            }
-            variant="default"
-          >
-            Try again
-          </Button>
-        </CardFooter>
-      </Card>
-    </div>
+    <section className="error-page shell">
+      <div>
+        <p className="eyebrow">Runtime interruption</p>
+        <h1>Signal lost.</h1>
+        <p>This page failed to render. Retry the route; if it repeats, the error has been logged for diagnosis.</p>
+        <button className="button button-primary" type="button" onClick={reset}>Try again</button>
+      </div>
+    </section>
   );
 }

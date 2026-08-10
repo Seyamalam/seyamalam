@@ -1,0 +1,35 @@
+import type { Metadata } from "next";
+import { PageIntro } from "@/components/page-intro";
+import { ProjectCard } from "@/components/project-card";
+import { projects } from "@/data/site";
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description: "Selected software systems, developer tools, and reproducible machine-learning projects by Touhidul Alam Seyam.",
+  alternates: { canonical: "/projects" },
+};
+
+export default function ProjectsPage() {
+  return (
+    <>
+      <PageIntro
+        eyebrow="Selected work · 2025—2026"
+        title="Systems with receipts."
+        description="A focused set of open, inspectable builds. Each one is chosen for its engineering decisions—not for a screenshot count."
+      />
+      <section className="shell page-section">
+        <div className="project-list project-list-full">
+          {projects.map((project, index) => <ProjectCard key={project.title} project={project} index={index} />)}
+        </div>
+      </section>
+      <section className="shell page-callout deferred-section">
+        <p className="eyebrow">Older web work</p>
+        <h2>The archive still exists. The shortlist changed.</h2>
+        <p>
+          Earlier commerce, editorial, academic, and event sites are available on GitHub. This page prioritizes current work with stronger technical depth and reproducible evidence.
+        </p>
+        <a className="text-link" href="https://github.com/Seyamalam?tab=repositories">Browse the repository archive <span aria-hidden="true">↗</span></a>
+      </section>
+    </>
+  );
+}
