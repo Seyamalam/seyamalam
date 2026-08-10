@@ -11,6 +11,10 @@ export function ProjectTeaser({ slug }: { slug: string }) {
     return <div className="teaser teaser-portal" aria-hidden="true"><span /><span /><span /><i /></div>;
   }
 
+  if (slug === "paris-summit-platform") {
+    return <div className="teaser teaser-paris" aria-hidden="true"><span>01</span><span>06</span><b>10 directions</b><i>selected → live</i></div>;
+  }
+
   if (slug === "kaggriculture-agent") {
     return <div className="teaser teaser-agent" aria-hidden="true">{Array.from({ length: 12 }, (_, index) => <span key={index} />)}<b>A</b><i>B</i></div>;
   }

@@ -33,6 +33,34 @@ export function ProjectArtifact({ project, detail }: { project: Project; detail:
     );
   }
 
+  if (detail.visual === "concept-production") {
+    return (
+      <div className="artifact artifact-concept-production" aria-label="Paris summit design direction becoming the production platform">
+        <div className="concept-frame concept-frame-source">
+          <span>06 / selected direction</span>
+          <Image
+            src="/project-media/paris/concept-06.webp"
+            alt="Selected Paris Assembly design direction"
+            fill
+            loading="eager"
+            fetchPriority="high"
+            sizes="(max-width: 760px) 88vw, 560px"
+          />
+        </div>
+        <div className="concept-transition" aria-hidden="true"><b>10</b><span>live directions</span><i>→</i></div>
+        <div className="concept-frame concept-frame-production">
+          <span>production / editorial system</span>
+          <Image
+            src="/project-media/paris/production-light.webp"
+            alt="Production Paris summit platform"
+            fill
+            sizes="(max-width: 760px) 88vw, 560px"
+          />
+        </div>
+      </div>
+    );
+  }
+
   if (detail.visual === "native-ml") {
     return (
       <div className="artifact artifact-native" aria-label="Animated bun-scikit training trace and benchmark comparison">

@@ -98,7 +98,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
           <div>
             <p>{detail.recognition.note}</p>
-            <a className="text-link" href={detail.recognition.href}>Watch the event post <span aria-hidden="true">↗</span></a>
+            <a className="text-link" href={detail.recognition.href}>{detail.recognition.linkLabel ?? "Watch the event post"} <span aria-hidden="true">↗</span></a>
           </div>
         </section>
       )}

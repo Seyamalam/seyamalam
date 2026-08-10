@@ -61,6 +61,16 @@ export const projects: Project[] = [
     status: "Product platform · 2026",
   },
   {
+    slug: "paris-summit-platform",
+    title: "Paris Summit Platform",
+    summary: "A client brief taken through ten live design directions into a production event and editorial platform.",
+    contribution:
+      "Designed ten responsive, interactive concepts, translated the selected civic direction into a 19-route production site, and built Convex-backed editorial tools, protected team access, forms, files, programme management, and launch-safe donation flows.",
+    stack: ["Next.js", "TypeScript", "Convex", "Better Auth"],
+    href: "https://github.com/Seyamalam/paris-hindu-summit-2026",
+    status: "Client platform · 2026",
+  },
+  {
     slug: "kaggriculture-agent",
     title: "Kaggriculture Agent",
     summary: "A reproducible autonomous policy for a two-player farming simulation.",

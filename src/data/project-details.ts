@@ -2,6 +2,7 @@ export type ProjectVisual =
   | "native-ml"
   | "incident-grid"
   | "operations-portal"
+  | "concept-production"
   | "agent-replay"
   | "fold-pipeline"
   | "validation-flow";
@@ -31,6 +32,7 @@ export type ProjectDetail = {
     title: string;
     note: string;
     href: string;
+    linkLabel?: string;
   };
 };
 
@@ -174,6 +176,84 @@ await ctx.db.patch(applicationId, {
         height: 1000,
       },
     ],
+  },
+  "paris-summit-platform": {
+    visual: "concept-production",
+    thesis: "A real client decision process—not one polished guess: ten working directions, one selected system, then a production editorial platform.",
+    challenge: "The summit needed stakeholders to evaluate genuinely different identities while the eventual product still had to support a large information architecture, changing programme content, public participation, controlled team access, and a safe path toward donations.",
+    response: "I built ten responsive React directions with complete content and interactions, then carried the selected Paris Assembly language into a Next.js 16 platform backed by Convex, Better Auth, file storage, structured editors, audit events, and protected operational tools.",
+    outcome: "The result spans the design decision and the delivery system: stakeholders could compare live concepts instead of static moodboards, while editors received a production-shaped platform they can update without code changes.",
+    proof: [
+      { value: "10", label: "live design directions" },
+      { value: "19", label: "production routes" },
+      { value: "68", label: "editable brief records" },
+      { value: "2", label: "persistent color modes" },
+    ],
+    decisions: [
+      { title: "Concepts had to behave", description: "Every direction used real HTML, responsive layouts, navigation, forms, and concept-specific interactions so selection reflected an actual product experience." },
+      { title: "Editorial work follows pages", description: "The admin system organizes controls around recognizable website pages, programmes, people, media, and enquiries instead of exposing a generic database console." },
+      { title: "Sensitive operations fail closed", description: "Better Auth roles protect mutations, invitation-only access replaces public signup after bootstrap, and donation processing stays in demo mode until the chosen provider is fully verified." },
+    ],
+    codeTitle: "Authenticated settings with an audit trail",
+    code: `export const save = mutation({
+  args: settingsFieldsValidator.fields,
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const actor = await getAdmin(ctx);
+    const existing = await ctx.db
+      .query("siteSettings")
+      .withIndex("by_key", q => q.eq("key", "primary"))
+      .unique();
+
+    const value = { ...args, key: "primary", updatedAt: Date.now() };
+    if (existing) await ctx.db.replace(existing._id, value);
+    else await ctx.db.insert("siteSettings", value);
+    await writeAudit(ctx, actor, {
+      action: "save",
+      entityType: "siteSettings",
+      entityId: "primary",
+      summary: "Updated global site settings",
+    });
+    return null;
+  },
+});`,
+    media: [
+      {
+        src: "/project-media/paris/concept-01.webp",
+        alt: "Witness Mosaic, the first live design direction for the Paris summit",
+        caption: "Witness Mosaic explored a documentary, testimony-led identity as one of ten fully interactive directions.",
+        width: 1440,
+        height: 1024,
+      },
+      {
+        src: "/project-media/paris/concept-06.webp",
+        alt: "Paris Assembly, the selected sixth design direction",
+        caption: "Paris Assembly established the selected civic system: cobalt structure, signal-red action, and institutional rhythm.",
+        width: 1440,
+        height: 1024,
+      },
+      {
+        src: "/project-media/paris/production-light.webp",
+        alt: "Production Paris summit homepage in light mode",
+        caption: "The selected direction expanded into a responsive production homepage and a nineteen-route content system.",
+        width: 1440,
+        height: 1024,
+      },
+      {
+        src: "/project-media/paris/production-dark.webp",
+        alt: "Production Paris summit homepage in dark mode",
+        caption: "The complete visual language supports persistent light and dark modes rather than treating dark mode as an afterthought.",
+        width: 1440,
+        height: 1024,
+      },
+    ],
+    recognition: {
+      kicker: "Design process",
+      title: "Ten live directions preceded the production build",
+      note: "The separate showcase preserves the full client selection process, including responsive demos, keyboard navigation, registration, donation, and concept-specific interactions.",
+      href: "https://github.com/Seyamalam/paris-2026-design-showcase",
+      linkLabel: "Explore all ten directions",
+    },
   },
   "kaggriculture-agent": {
     visual: "agent-replay",
