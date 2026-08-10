@@ -24,7 +24,8 @@ export function ProjectArtifact({ project, detail }: { project: Project; detail:
           src="/project-media/asrro/dashboard-overview.webp"
           alt="ASRRO operations dashboard overview"
           fill
-          priority
+          loading="eager"
+          fetchPriority="high"
           sizes="(max-width: 760px) 94vw, 1180px"
         />
         <div className="portal-route" aria-hidden="true">public site → application → approval → member</div>
