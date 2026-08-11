@@ -49,7 +49,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     name: project.title,
     description: project.summary,
     url: `${siteConfig.origin}/projects/${project.slug}`,
-    codeRepository: project.href,
+    ...(project.href.includes("github.com") ? { codeRepository: project.href } : {}),
     author: { "@type": "Person", name: profile.name, url: siteConfig.origin },
     programmingLanguage: project.stack,
   };
@@ -68,7 +68,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <div className="case-hero-copy">
             <p>{detail.thesis}</p>
             <div className="case-actions">
-              <a className="button button-primary" href={project.href}>View source <span aria-hidden="true">↗</span></a>
+              <a className="button button-primary" href={project.href}>{project.href.includes("github.com") ? "View source" : "Open project"} <span aria-hidden="true">↗</span></a>
               <Link className="button button-secondary" href="#case-notes">Read the build notes <span aria-hidden="true">↓</span></Link>
             </div>
           </div>

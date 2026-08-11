@@ -7,6 +7,22 @@ export function ProjectTeaser({ slug }: { slug: string }) {
     return <div className="teaser teaser-risk" aria-hidden="true"><span /><span /><span /><b>65</b><i>critical</i></div>;
   }
 
+  if (slug === "huntrix-delta") {
+    return <div className="teaser teaser-delta" aria-hidden="true"><span>offline</span><b>mesh</b><i>sync ↗</i></div>;
+  }
+
+  if (slug === "blood-league-kickoff") {
+    return <div className="teaser teaser-game" aria-hidden="true"><span /><span /><b>⚽</b><i>05</i></div>;
+  }
+
+  if (slug === "careerpath") {
+    return <div className="teaser teaser-career" aria-hidden="true"><span /><span /><span /><b>78%</b><i>next skill →</i></div>;
+  }
+
+  if (slug === "microops") {
+    return <div className="teaser teaser-ops" aria-hidden="true"><span>202</span><i>→</i><span>job</span><i>→</i><span>S3</span></div>;
+  }
+
   if (slug === "asrro-portal") {
     return <div className="teaser teaser-portal" aria-hidden="true"><span /><span /><span /><i /></div>;
   }

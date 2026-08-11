@@ -4,6 +4,73 @@ import type { Project } from "@/data/site";
 import type { ProjectDetail } from "@/data/project-details";
 
 export function ProjectArtifact({ project, detail }: { project: Project; detail: ProjectDetail }) {
+  if (detail.visual === "offline-delta") {
+    return (
+      <div className="artifact artifact-delta">
+        <div className="artifact-window-bar"><span /><span /><span /><b>OFFLINE / MESH / RECONCILE</b></div>
+        <Image
+          src="/project-media/huntrix-delta/architecture.webp"
+          alt="Huntrix Delta offline disaster logistics architecture"
+          fill
+          loading="eager"
+          fetchPriority="high"
+          sizes="(max-width: 760px) 94vw, 1180px"
+        />
+        <div className="delta-signal" aria-hidden="true"><span>network</span><b>offline</b><i>field work continues</i></div>
+      </div>
+    );
+  }
+
+  if (detail.visual === "game-arena") {
+    return (
+      <div className="artifact artifact-game">
+        <Image
+          src="/project-media/blood-league/gameplay.webp"
+          alt="Blood League Kickoff football-combat gameplay"
+          fill
+          loading="eager"
+          fetchPriority="high"
+          sizes="(max-width: 760px) 94vw, 1180px"
+        />
+        <div className="game-score" aria-hidden="true"><span>first GameJam</span><b>05</b><i>place</i></div>
+      </div>
+    );
+  }
+
+  if (detail.visual === "career-map") {
+    return (
+      <div className="artifact artifact-career">
+        <div className="artifact-window-bar"><span /><span /><span /><b>PROFILE → GAP → ROADMAP</b></div>
+        <Image
+          src="/project-media/careerpath/dashboard.webp"
+          alt="CareerPath AI-assisted career dashboard"
+          fill
+          loading="eager"
+          fetchPriority="high"
+          sizes="(max-width: 760px) 94vw, 1180px"
+        />
+        <div className="career-route" aria-hidden="true"><span>skills</span><i>→</i><span>match</span><i>→</i><span>next step</span></div>
+      </div>
+    );
+  }
+
+  if (detail.visual === "async-ops") {
+    return (
+      <div className="artifact artifact-ops" aria-label="MicroOps asynchronous file delivery flow">
+        <div className="ops-flow" aria-hidden="true">
+          <div><span>01</span><b>Accept</b><i>202 + job ID</i></div>
+          <em>→</em>
+          <div><span>02</span><b>Queue</b><i>durable state</i></div>
+          <em>→</em>
+          <div><span>03</span><b>Worker</b><i>10-120 sec</i></div>
+          <em>→</em>
+          <div><span>04</span><b>Store</b><i>S3-compatible</i></div>
+        </div>
+        <div className="ops-status"><span>job_7H3A</span><b>completed</b><i>signed result URL ready</i></div>
+      </div>
+    );
+  }
+
   if (detail.visual === "incident-grid" && detail.video) {
     return (
       <div className="artifact artifact-incident">

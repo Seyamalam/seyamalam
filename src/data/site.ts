@@ -16,6 +16,14 @@ export type Publication = {
   kind: "Journal" | "Conference" | "Chapter" | "Preprint";
 };
 
+export type Achievement = {
+  result: string;
+  title: string;
+  organizer: string;
+  note: string;
+  href?: string;
+};
+
 export const profile = {
   name: "Touhidul Alam Seyam",
   shortName: "Seyam",
@@ -50,6 +58,46 @@ export const projects: Project[] = [
     stack: ["Python", "FastAPI", "WebSockets", "ESP32"],
     href: "https://github.com/Seyamalam/Robofusion",
     status: "Techathon winner · 2026",
+  },
+  {
+    slug: "huntrix-delta",
+    title: "Huntrix Delta",
+    summary: "Offline-first disaster logistics for the moment networks and power disappear.",
+    contribution:
+      "Built the solo HackFusion entry across an Expo field app, Go and gRPC services, CRDT inventory sync, signed proof of delivery, offline maps, mesh handoff, route decay, and a reproducible chaos harness.",
+    stack: ["Expo", "Go", "gRPC", "Offline-first"],
+    href: "https://github.com/Seyamalam/hackfusion_huntrix",
+    status: "HackFusion champion · 2026",
+  },
+  {
+    slug: "blood-league-kickoff",
+    title: "Blood League: Kickoff",
+    summary: "A 3D football-combat horde-survival roguelite built for the browser and desktop.",
+    contribution:
+      "Co-built the first-game-jam entry with fixed-step Rapier physics, six original heroes, eleven enemy behaviours, an eight-to-ten-minute run loop, performance budgets, and multi-platform packaging.",
+    stack: ["Three.js", "TypeScript", "Rapier", "Electron"],
+    href: "https://github.com/Seyamalam/blood-league-kickoff",
+    status: "GameJam 5th place · 2026",
+  },
+  {
+    slug: "careerpath",
+    title: "CareerPath",
+    summary: "An AI-assisted employment and career-roadmap platform designed around SDG 8.",
+    contribution:
+      "Built job discovery, profile and skill modelling, course recommendations, match scoring, skill-gap analysis, CV assistance, authentication, and a PostgreSQL-backed product surface in Next.js 16.",
+    stack: ["Next.js", "PostgreSQL", "AI SDK", "Drizzle"],
+    href: "https://careerpath-vert.vercel.app",
+    status: "NextGen 5th place · 2025",
+  },
+  {
+    slug: "microops",
+    title: "MicroOps",
+    summary: "A resilient asynchronous file-delivery service for long-running, failure-prone work.",
+    contribution:
+      "Co-built the winning CUET system around job orchestration, self-hosted S3-compatible storage, non-blocking status delivery, containerized local infrastructure, CI/CD, and observable failure handling.",
+    stack: ["Node.js", "Docker", "S3", "CI/CD"],
+    href: "https://github.com/Seyamalam/cuet-hackathon-1",
+    status: "MicroOps champion · 2025",
   },
   {
     slug: "asrro-portal",
@@ -216,6 +264,63 @@ export const experience = [
     ],
   },
 ] as const;
+
+export const achievements: Achievement[] = [
+  {
+    result: "Champion · 2026",
+    title: "HackFusion InnoNation",
+    organizer: "IEEE Computer Society LU Student Branch Chapter · Leading University",
+    note: "Won the 24-hour national inter-university hackathon as solo Team Huntrix with Huntrix Delta.",
+    href: "/projects/huntrix-delta",
+  },
+  {
+    result: "Champion · 2025",
+    title: "MicroOps Hackathon",
+    organizer: "CUET CSE IT Fest",
+    note: "Built the winning resilient file-delivery system with teammate Abtahee Kabir.",
+    href: "/projects/microops",
+  },
+  {
+    result: "Winner · 2026",
+    title: "RoboFusion 1.0 Techathon",
+    organizer: "RoboFusion 1.0",
+    note: "Built a multi-hazard smart-campus response grid as Team Huntrix.",
+    href: "/projects/robofusion",
+  },
+  {
+    result: "5th place · 2026",
+    title: "IUT ICT Fest GameJam",
+    organizer: "12th IUT ICT Fest",
+    note: "First game jam; co-built Blood League: Kickoff with Abtahee Kabir.",
+    href: "/projects/blood-league-kickoff",
+  },
+  {
+    result: "5th place · 2025",
+    title: "NextGen Hackathon",
+    organizer: "IIUC Tech Fest · Programming Hero",
+    note: "Team Huntrix built CareerPath, an AI-assisted youth employment and career-roadmap platform.",
+    href: "/projects/careerpath",
+  },
+  {
+    result: "Finalist",
+    title: "The Infinity AI BuildFest",
+    organizer: "AI BuildFest",
+    note: "Selected as a finalist in the AI product-building competition.",
+  },
+  {
+    result: "Best Campus Ambassador",
+    title: "SciBlitz 2.0",
+    organizer: "SheSTEM · IEEE CUET Student Branch · IEEE Bangladesh Section",
+    note: "Recognized for campus leadership and community outreach.",
+  },
+];
+
+export const leadership = {
+  period: "Present",
+  role: "Assistant General Secretary",
+  organization: "BGCTUB IT Club",
+  note: "Help lead student technology activities, community programs, and club operations.",
+} as const;
 
 export const skillGroups = [
   {

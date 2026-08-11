@@ -31,6 +31,15 @@ CONTACT = (
     "orcid.org/0009-0007-7512-1893"
 )
 
+LEADERSHIP = "Assistant General Secretary | BGCTUB IT Club | Present - Help lead student technology activities, community programs, and club operations."
+SELECTED_HONORS = [
+    "Champion, HackFusion InnoNation National Hackathon (solo Team Huntrix), 2026",
+    "Champion, MicroOps Hackathon at CUET CSE IT Fest (with Abtahee Kabir), 2025",
+    "Winner, RoboFusion 1.0 Techathon, 2026",
+    "5th Place, 12th IUT ICT Fest GameJam, 2026; 5th Place, IIUC NextGen Hackathon, 2025",
+    "Finalist, The Infinity AI BuildFest; Best Campus Ambassador, SciBlitz 2.0",
+]
+
 
 @dataclass(frozen=True)
 class Theme:
@@ -298,6 +307,12 @@ def add_publication(doc: Document, theme: Theme, title: str, venue: str, year: s
     add_hyperlink(p, doi.replace("https://", ""), doi if is_url else f"https://doi.org/{doi}", theme)
 
 
+def add_leadership_and_honors(doc: Document, theme: Theme, *, compact: bool = False) -> None:
+    add_section(doc, theme, "Leadership and Honors")
+    add_text(doc, theme, LEADERSHIP)
+    add_bullets(doc, theme, SELECTED_HONORS[:3] if compact else SELECTED_HONORS)
+
+
 def page_break(doc: Document) -> None:
     doc.add_page_break()
 
@@ -334,6 +349,7 @@ def software_resume(theme: Theme) -> Document:
     page_break(doc)
     add_section(doc, theme, "Selected Projects")
     add_project(doc, theme, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired ML library with native Zig acceleration, CI and benchmark gates, 209 tracked runtime exports, and documented model-selection, preprocessing, ensemble, clustering, and metrics APIs.", "https://github.com/Seyamalam/bun-scikit")
+    add_project(doc, theme, "Huntrix Delta", "Expo, Go, gRPC, Offline-first", "Built the solo HackFusion champion across CRDT inventory sync, signed proof of delivery, offline maps, device-to-device handoff, routing, and reproducible chaos testing.", "https://github.com/Seyamalam/hackfusion_huntrix")
     add_project(doc, theme, "ASRRO Portal", "Next.js, TypeScript, Convex, Better Auth", "Developed a public website and role-aware organization-management system covering membership approvals, events, attendance, content, reporting, notifications, and restricted finance workflows.", "https://github.com/Seyamalam/asrro")
     add_project(doc, theme, "Zodic", "Python, PyPI", "Published an MIT-licensed, zero-dependency Python validation package with chainable schemas, typed parsing, nested error reporting, transformations, unions, dates, enums, and framework-agnostic integration.", "https://pypi.org/project/zodic/")
     add_project(doc, theme, "AgriScan", "Next.js, TensorFlow, Computer Vision", "Co-developed a cross-platform plant-disease diagnosis and crop-health system documented in a 2024 SpringerOpen journal article.", "https://doi.org/10.1186/s43067-024-00169-7")
@@ -350,6 +366,7 @@ def software_resume(theme: Theme) -> Document:
 
     add_section(doc, theme, "Selected Certifications")
     add_text(doc, theme, "IBM Applied Data Science with Python; IBM Deep Learning with TensorFlow; Redis for Python Developers; Cisco Python Essentials 1 and 2; HackerRank Problem Solving (Intermediate)")
+    add_leadership_and_honors(doc, theme)
     return doc
 
 
@@ -404,6 +421,7 @@ def research_resume(theme: Theme) -> Document:
 
     add_section(doc, theme, "Research Profiles")
     add_text(doc, theme, "ORCID: 0009-0007-7512-1893 | Google Scholar: scholar.google.com/citations?user=gRkTVYEAAAAJ | GitHub: github.com/Seyamalam")
+    add_leadership_and_honors(doc, theme)
     return doc
 
 
@@ -438,6 +456,7 @@ def universal_resume(theme: Theme) -> Document:
     add_section(doc, theme, "Selected Projects")
     add_project(doc, theme, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired machine-learning library with native Zig acceleration, tests and benchmark gates, 209 tracked runtime exports, and documented APIs across preprocessing, model selection, ensembles, clustering, and metrics.", "https://github.com/Seyamalam/bun-scikit")
     add_project(doc, theme, "RoboFusion", "Python, FastAPI, WebSockets, ESP32", "Developed a multi-hazard campus response platform with device integration, authentication, persistence, incident-lifecycle management, real-time dashboards, automated tests, and load-testing tools.", "https://github.com/Seyamalam/Robofusion")
+    add_project(doc, theme, "Huntrix Delta", "Expo, Go, gRPC, Offline-first", "Built the solo HackFusion champion with CRDT inventory sync, signed proof of delivery, offline maps, mesh handoff, routing, and chaos testing.", "https://github.com/Seyamalam/hackfusion_huntrix")
     add_project(doc, theme, "ASRRO Portal", "Next.js, TypeScript, Convex, Better Auth", "Developed a public website and role-aware organization-management system covering membership approvals, events, attendance, content, reports, notifications, and restricted finance workflows.", "https://github.com/Seyamalam/asrro")
     add_project(doc, theme, "Kaggriculture Autonomous Agent", "Python, Simulation, Evaluation", "Engineered a deterministic farming agent and evaluation harness with seeded seat-swapped tournaments, frozen replay corpora, manifest hashing, and regression gates.", "https://github.com/Seyamalam/Kaggriculture")
 
@@ -452,6 +471,7 @@ def universal_resume(theme: Theme) -> Document:
 
     add_section(doc, theme, "Selected Certifications")
     add_text(doc, theme, "IBM Applied Data Science with Python; IBM Deep Learning with TensorFlow; Redis for Python Developers; Cisco Python Essentials 1 and 2; HackerRank Problem Solving (Intermediate)")
+    add_leadership_and_honors(doc, theme)
     return doc
 
 
@@ -477,6 +497,7 @@ def compact_resume(theme: Theme) -> Document:
     add_section(doc, theme, "Education and Research")
     add_text(doc, theme, "B.Sc. (Hons.) Computer Science and Engineering, BGC Trust University Bangladesh - 8th semester; expected Dec 2026")
     add_text(doc, theme, "Ten source-backed research works, including IEEE COMPAS papers, SpringerOpen journal articles, and a 2026 Springer conference chapter. ORCID: 0009-0007-7512-1893")
+    add_leadership_and_honors(doc, theme, compact=True)
     return doc
 
 
@@ -553,6 +574,12 @@ def pdf_publication(story, styles, title, venue, year, doi):
     story.append(Paragraph(f"• <i>“{title}.”</i> {venue}, {year}. {'Link' if is_url else 'DOI'}: <link href='{href}' color='#315B5B'>{label}</link>", styles["bullet"]))
 
 
+def pdf_leadership_and_honors(story, styles, *, compact=False):
+    pdf_section(story, styles, "Leadership and Honors")
+    pdf_text(story, styles, LEADERSHIP)
+    pdf_bullets(story, styles, SELECTED_HONORS[:3] if compact else SELECTED_HONORS)
+
+
 def build_pdf(theme: Theme, kind: str, path: Path) -> None:
     styles = pdf_styles(theme)
     doc = SimpleDocTemplate(
@@ -578,6 +605,7 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         s.append(PageBreak())
         pdf_section(s, styles, "Selected Projects")
         pdf_project(s, styles, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired ML library with native Zig acceleration, CI and benchmark gates, 209 tracked runtime exports, and documented model-selection, preprocessing, ensemble, clustering, and metrics APIs.", "https://github.com/Seyamalam/bun-scikit")
+        pdf_project(s, styles, "Huntrix Delta", "Expo, Go, gRPC, Offline-first", "Built the solo HackFusion champion across CRDT inventory sync, signed proof of delivery, offline maps, device-to-device handoff, routing, and reproducible chaos testing.", "https://github.com/Seyamalam/hackfusion_huntrix")
         pdf_project(s, styles, "ASRRO Portal", "Next.js, TypeScript, Convex, Better Auth", "Developed a public website and role-aware organization-management system covering membership approvals, events, attendance, content, reporting, notifications, and restricted finance workflows.", "https://github.com/Seyamalam/asrro")
         pdf_project(s, styles, "Zodic", "Python, PyPI", "Published an MIT-licensed, zero-dependency Python validation package with chainable schemas, typed parsing, nested error reporting, transformations, unions, dates, enums, and framework-agnostic integration.", "https://pypi.org/project/zodic/")
         pdf_project(s, styles, "AgriScan", "Next.js, TensorFlow, Computer Vision", "Co-developed a cross-platform plant-disease diagnosis and crop-health system documented in a 2024 SpringerOpen journal article.", "https://doi.org/10.1186/s43067-024-00169-7")
@@ -591,6 +619,7 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_publication(s, styles, "Architectures for AI-Driven Visual Assistance: Evaluating Server-Mediated Mobile and Direct Access Desktop Client Implementations", "Lecture Notes in Networks and Systems", "2026", "10.1007/978-3-032-15764-5_45")
         pdf_section(s, styles, "Selected Certifications")
         pdf_text(s, styles, "IBM Applied Data Science with Python; IBM Deep Learning with TensorFlow; Redis for Python Developers; Cisco Python Essentials 1 and 2; HackerRank Problem Solving (Intermediate)")
+        pdf_leadership_and_honors(s, styles)
     elif kind == "research":
         pdf_header(s, styles, theme, "Machine Learning Engineer | AI and Agentic Systems")
         pdf_section(s, styles, "Research Profile")
@@ -615,6 +644,7 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_text(s, styles, "Currently in the 8th semester. Research interests: applied machine learning, computer vision, agricultural AI, healthcare analytics, LLM systems, and agentic systems.")
         pdf_section(s, styles, "Research Profiles")
         pdf_text(s, styles, "ORCID: 0009-0007-7512-1893 | Google Scholar: scholar.google.com/citations?user=gRkTVYEAAAAJ | GitHub: github.com/Seyamalam")
+        pdf_leadership_and_honors(s, styles)
     elif kind == "universal":
         pdf_header(s, styles, theme, "Software Engineer | Web, App, Backend, ML/AI")
         pdf_section(s, styles, "Professional Summary")
@@ -632,6 +662,7 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_section(s, styles, "Selected Projects")
         pdf_project(s, styles, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired machine-learning library with native Zig acceleration, tests and benchmark gates, 209 tracked runtime exports, and documented APIs across preprocessing, model selection, ensembles, clustering, and metrics.", "https://github.com/Seyamalam/bun-scikit")
         pdf_project(s, styles, "RoboFusion", "Python, FastAPI, WebSockets, ESP32", "Developed a multi-hazard campus response platform with device integration, authentication, persistence, incident-lifecycle management, real-time dashboards, automated tests, and load-testing tools.", "https://github.com/Seyamalam/Robofusion")
+        pdf_project(s, styles, "Huntrix Delta", "Expo, Go, gRPC, Offline-first", "Built the solo HackFusion champion with CRDT inventory sync, signed proof of delivery, offline maps, mesh handoff, routing, and chaos testing.", "https://github.com/Seyamalam/hackfusion_huntrix")
         pdf_project(s, styles, "ASRRO Portal", "Next.js, TypeScript, Convex, Better Auth", "Developed a public website and role-aware organization-management system covering membership approvals, events, attendance, content, reports, notifications, and restricted finance workflows.", "https://github.com/Seyamalam/asrro")
         pdf_project(s, styles, "Kaggriculture Autonomous Agent", "Python, Simulation, Evaluation", "Engineered a deterministic farming agent and evaluation harness with seeded seat-swapped tournaments, frozen replay corpora, manifest hashing, and regression gates.", "https://github.com/Seyamalam/Kaggriculture")
         pdf_section(s, styles, "Education")
@@ -643,6 +674,7 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_publication(s, styles, "Next-Generation K-Means Clustering: Mojo-Driven Performance for Big Data", "International Journal of Intelligent Information Systems", "2025", "10.11648/j.ijiis.20251401.12")
         pdf_section(s, styles, "Selected Certifications")
         pdf_text(s, styles, "IBM Applied Data Science with Python; IBM Deep Learning with TensorFlow; Redis for Python Developers; Cisco Python Essentials 1 and 2; HackerRank Problem Solving (Intermediate)")
+        pdf_leadership_and_honors(s, styles)
     else:
         pdf_header(s, styles, theme, "Web, App and Backend Developer | AI Systems")
         pdf_section(s, styles, "Summary")
@@ -664,6 +696,7 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_section(s, styles, "Education and Research")
         pdf_text(s, styles, "B.Sc. (Hons.) Computer Science and Engineering, BGC Trust University Bangladesh - 8th semester; expected Dec 2026")
         pdf_text(s, styles, "Ten source-backed research works, including IEEE COMPAS papers, SpringerOpen journal articles, and a 2026 Springer conference chapter. ORCID: 0009-0007-7512-1893")
+        pdf_leadership_and_honors(s, styles, compact=True)
     doc.build(s)
 
 
