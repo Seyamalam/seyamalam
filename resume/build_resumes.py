@@ -17,7 +17,7 @@ from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import inch
-from reportlab.platypus import PageBreak, Paragraph, SimpleDocTemplate, Spacer
+from reportlab.platypus import HRFlowable, PageBreak, Paragraph, SimpleDocTemplate, Spacer
 
 
 ROOT = Path(__file__).resolve().parent
@@ -32,13 +32,42 @@ CONTACT = (
 )
 
 LEADERSHIP = "Assistant General Secretary | BGCTUB IT Club | Present - Help lead student technology activities, community programs, and club operations."
-SELECTED_HONORS = [
+PRIMARY_WINS = [
     "Champion, HackFusion InnoNation National Hackathon (solo Team Huntrix), 2026",
     "Champion, MicroOps Hackathon at CUET CSE IT Fest (with Abtahee Kabir), 2025",
     "Winner, RoboFusion 1.0 Techathon, 2026",
+]
+ADDITIONAL_HONORS = [
     "5th Place, 12th IUT ICT Fest GameJam, 2026; 5th Place, IIUC NextGen Hackathon, 2025",
     "Finalist, The Infinity AI BuildFest; Best Campus Ambassador, SciBlitz 2.0",
 ]
+
+PROJECT_SETS = {
+    "software": [
+        ("Paris Summit Platform", "Next.js, TypeScript, Convex, Better Auth", "Designed ten responsive directions, then delivered the selected identity as a 19-route client platform with editorial tooling, protected operations, files, forms, and launch-safe donation flows.", "https://github.com/Seyamalam/paris-hindu-summit-2026"),
+        ("Huntrix Delta", "Expo, Go, gRPC, Offline-first", "Built the solo HackFusion champion with CRDT inventory sync, signed proof of delivery, offline maps, device-to-device handoff, routing, and reproducible chaos testing.", "https://github.com/Seyamalam/hackfusion_huntrix"),
+        ("MicroOps", "Node.js, Docker, S3, CI/CD", "Co-built the CUET champion: a non-blocking file-delivery system with durable jobs, S3-compatible storage, containerized infrastructure, status streaming, and automated delivery checks.", "https://github.com/Seyamalam/cuet-hackathon-1"),
+        ("bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired ML library with native Zig acceleration, 209 tracked runtime exports, benchmark gates, and broad preprocessing, model-selection, ensemble, clustering, and metrics APIs.", "https://github.com/Seyamalam/bun-scikit"),
+    ],
+    "research": [
+        ("bun-scikit", "TypeScript, Bun, Zig", "Implemented native-accelerated classical ML with parity contracts, reproducible benchmarks, documentation coverage checks, and 209 tracked runtime exports.", "https://github.com/Seyamalam/bun-scikit"),
+        ("Kaggriculture Autonomous Agent", "Python, Simulation, Evaluation", "Engineered a deterministic farming agent and evaluation harness with seeded seat-swapped tournaments, frozen replay corpora, manifest hashing, loss attribution, and regression gates.", "https://github.com/Seyamalam/Kaggriculture"),
+        ("Fold-safe ML Pipelines", "Python, LightGBM, XGBoost, CatBoost", "Built leakage-safe five-fold out-of-fold pipelines with nested target encoding, matched-fold screening, schema checks, rank blending, and a 0.96919 public ROC AUC submission.", "https://github.com/Seyamalam/playground-series-s6e8"),
+        ("Huntrix Delta", "Expo, Go, gRPC, Offline AI", "Built autonomous triage and predictive route-decay features inside an offline-first disaster logistics system, supported by model-card methodology and a reproducible chaos simulator.", "https://github.com/Seyamalam/hackfusion_huntrix"),
+    ],
+    "fullstack": [
+        ("Paris Summit Platform", "Next.js, Convex, Better Auth", "Turned ten live design directions into a 19-route client platform with structured editing, protected team access, files, forms, and production delivery workflows.", "https://github.com/Seyamalam/paris-hindu-summit-2026"),
+        ("ASRRO Portal", "Next.js, TypeScript, Convex", "Built public pages and role-aware operations for membership approvals, events, attendance, content, reports, notifications, and restricted finance access.", "https://github.com/Seyamalam/asrro"),
+        ("CareerPath", "Next.js 16, PostgreSQL, AI SDK", "Built profiles, job discovery, explainable match scoring, skill-gap analysis, course recommendations, CV assistance, and generated career roadmaps.", "https://careerpath-vert.vercel.app"),
+        ("MicroOps", "Node.js, Docker, S3, CI/CD", "Co-built the CUET champion around durable background jobs, self-hosted S3-compatible storage, responsive status delivery, and containerized infrastructure.", "https://github.com/Seyamalam/cuet-hackathon-1"),
+    ],
+    "universal": [
+        ("Huntrix Delta", "Expo, Go, gRPC, Offline-first", "Built the solo HackFusion champion across offline identity, CRDT inventory, mesh handoff, signed delivery proof, routing, and chaos testing.", "https://github.com/Seyamalam/hackfusion_huntrix"),
+        ("Paris Summit Platform", "Next.js, TypeScript, Convex", "Designed ten responsive concepts and shipped the selected direction as a 19-route client platform with protected editorial operations.", "https://github.com/Seyamalam/paris-hindu-summit-2026"),
+        ("bun-scikit", "TypeScript, Bun, Zig", "Built a native-accelerated ML library with 209 tracked runtime exports, benchmark gates, and broad estimator and evaluation APIs.", "https://github.com/Seyamalam/bun-scikit"),
+        ("RoboFusion", "Python, FastAPI, WebSockets, ESP32", "Built the winning smart-campus response grid with authenticated ingestion, deterministic risk fusion, persistent incident lifecycles, live dashboards, and load tooling.", "https://github.com/Seyamalam/Robofusion"),
+    ],
+}
 
 
 @dataclass(frozen=True)
@@ -58,54 +87,54 @@ class Theme:
 
 CLASSIC = Theme(
     key="Software_Engineer_ATS",
-    preset="standard_business_brief",
+    preset="editorial_engineering",
     font="Arial",
     ink="202020",
-    accent="202020",
-    muted="555555",
-    title_size=22,
-    body_size=10.2,
-    margins=0.72,
+    accent="A73526",
+    muted="5C5854",
+    title_size=28,
+    body_size=9.85,
+    margins=0.66,
     rule=True,
 )
 
 MODERN = Theme(
     key="ML_Research_ATS",
-    preset="decision_memo",
+    preset="research_blueprint",
     font="Arial",
     ink="17202A",
     accent="1F4E79",
     muted="536273",
-    title_size=23,
-    body_size=10.0,
-    margins=0.70,
+    title_size=27,
+    body_size=9.7,
+    margins=0.66,
     rule=True,
 )
 
 COMPACT = Theme(
     key="Full_Stack_Compact_ATS",
-    preset="compact_reference_guide",
+    preset="compact_product_sheet",
     font="Calibri",
     ink="1F2933",
-    accent="315B5B",
+    accent="0D7168",
     muted="5B6770",
-    title_size=21,
-    body_size=9.65,
-    margins=0.62,
+    title_size=25,
+    body_size=9.15,
+    margins=0.55,
     rule=False,
     compact=True,
 )
 
 UNIVERSAL = Theme(
     key="Universal_ATS",
-    preset="standard_business_brief",
+    preset="universal_navy",
     font="Arial",
     ink="17202A",
     accent="183B56",
     muted="536273",
-    title_size=22,
-    body_size=9.9,
-    margins=0.68,
+    title_size=28,
+    body_size=9.55,
+    margins=0.62,
     rule=True,
 )
 
@@ -122,6 +151,13 @@ def set_cellless_border(paragraph, color: str, size: int = 8) -> None:
     bottom.set(qn("w:space"), "4")
     bottom.set(qn("w:color"), color)
     p_bdr.append(bottom)
+
+
+def set_paragraph_shading(paragraph, color: str) -> None:
+    p_pr = paragraph._p.get_or_add_pPr()
+    shading = OxmlElement("w:shd")
+    shading.set(qn("w:fill"), color)
+    p_pr.append(shading)
 
 
 def set_run_font(run, theme: Theme, size: float | None = None, color: str | None = None,
@@ -198,8 +234,8 @@ def configure_doc(theme: Theme) -> Document:
         style.font.size = Pt(size)
         style.font.bold = True
         style.font.color.rgb = RGBColor.from_string(theme.accent)
-        style.paragraph_format.space_before = Pt(7 if theme.compact else 9)
-        style.paragraph_format.space_after = Pt(3)
+        style.paragraph_format.space_before = Pt(6 if theme.compact else 8)
+        style.paragraph_format.space_after = Pt(4)
         style.paragraph_format.keep_with_next = True
 
     bullet = doc.styles["List Bullet"]
@@ -236,24 +272,37 @@ def add_header(doc: Document, theme: Theme, target: str) -> None:
 
     role = doc.add_paragraph()
     role.alignment = p.alignment
-    role.paragraph_format.space_after = Pt(3)
+    role.paragraph_format.space_after = Pt(4)
     r = role.add_run(target.upper() if theme is MODERN else target)
     set_run_font(r, theme, 9.5 if theme.compact else 10.5, theme.muted, True)
 
     contact = doc.add_paragraph()
     contact.alignment = p.alignment
-    contact.paragraph_format.space_after = Pt(6 if theme.compact else 8)
+    contact.paragraph_format.space_after = Pt(7 if theme.compact else 9)
     contact.paragraph_format.line_spacing = 1.0
     cr = contact.add_run(CONTACT)
     set_run_font(cr, theme, 8.4 if theme.compact else 9.0, theme.muted)
-    if theme.rule:
-        set_cellless_border(contact, theme.accent, 7)
+    set_cellless_border(contact, theme.accent, 14 if theme in (CLASSIC, UNIVERSAL) else 8)
 
 
 def add_section(doc: Document, theme: Theme, title: str) -> None:
     p = doc.add_paragraph(title.upper(), style="Heading 1")
-    if theme in (CLASSIC, UNIVERSAL):
-        set_cellless_border(p, "B7B7B7", 4)
+    if theme is CLASSIC:
+        set_cellless_border(p, theme.accent, 10)
+    elif theme is MODERN:
+        set_paragraph_shading(p, "E8F0FA")
+        p.paragraph_format.left_indent = Inches(0.08)
+        p.paragraph_format.right_indent = Inches(0.08)
+    elif theme is COMPACT:
+        set_paragraph_shading(p, theme.accent)
+        p.paragraph_format.left_indent = Inches(0.08)
+        p.paragraph_format.right_indent = Inches(0.08)
+        for run in p.runs:
+            set_run_font(run, theme, color="FFFFFF", bold=True)
+    else:
+        set_paragraph_shading(p, "EAF0F5")
+        p.paragraph_format.left_indent = Inches(0.08)
+        p.paragraph_format.right_indent = Inches(0.08)
 
 
 def add_text(doc: Document, theme: Theme, text: str, *, bold_prefix: str | None = None) -> None:
@@ -296,6 +345,11 @@ def add_project(doc: Document, theme: Theme, name: str, stack: str, text: str, u
     add_bullets(doc, theme, [text])
 
 
+def add_project_set(doc: Document, theme: Theme, key: str) -> None:
+    for project in PROJECT_SETS[key]:
+        add_project(doc, theme, *project)
+
+
 def add_publication(doc: Document, theme: Theme, title: str, venue: str, year: str, doi: str) -> None:
     p = doc.add_paragraph(style="List Bullet")
     p.paragraph_format.keep_together = True
@@ -307,10 +361,15 @@ def add_publication(doc: Document, theme: Theme, title: str, venue: str, year: s
     add_hyperlink(p, doi.replace("https://", ""), doi if is_url else f"https://doi.org/{doi}", theme)
 
 
-def add_leadership_and_honors(doc: Document, theme: Theme, *, compact: bool = False) -> None:
-    add_section(doc, theme, "Leadership and Honors")
+def add_competition_highlights(doc: Document, theme: Theme, *, compact: bool = False) -> None:
+    add_section(doc, theme, "Selected Wins")
+    add_bullets(doc, theme, PRIMARY_WINS[:2] if compact else PRIMARY_WINS)
+
+
+def add_leadership_and_honors(doc: Document, theme: Theme) -> None:
+    add_section(doc, theme, "Leadership and Additional Honors")
     add_text(doc, theme, LEADERSHIP)
-    add_bullets(doc, theme, SELECTED_HONORS[:3] if compact else SELECTED_HONORS)
+    add_bullets(doc, theme, ADDITIONAL_HONORS)
 
 
 def page_break(doc: Document) -> None:
@@ -321,7 +380,8 @@ def software_resume(theme: Theme) -> Document:
     doc = configure_doc(theme)
     add_header(doc, theme, "Software Engineer | Web, App and Backend Systems")
     add_section(doc, theme, "Professional Summary")
-    add_text(doc, theme, "Software Engineer with experience building and deploying full-stack applications, backend services, and AI-enabled products. Works across TypeScript, React, Next.js, Node.js, Python, and PostgreSQL; also develops open-source ML tooling and reproducible data-science pipelines. Author or co-author of ten source-backed journal, conference, chapter, and preprint works.")
+    add_text(doc, theme, "Software engineer building production web applications, backend services, mobile systems, and AI-enabled products across TypeScript, Next.js, Node.js, Python, Go, PostgreSQL, and cloud infrastructure. Ships client platforms, resilient distributed prototypes, and open-source developer tooling from architecture through deployment.")
+    add_competition_highlights(doc, theme)
 
     add_section(doc, theme, "Technical Skills")
     add_text(doc, theme, "Languages: TypeScript, JavaScript, Python, SQL, Go, Zig")
@@ -348,11 +408,7 @@ def software_resume(theme: Theme) -> Document:
     ])
     page_break(doc)
     add_section(doc, theme, "Selected Projects")
-    add_project(doc, theme, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired ML library with native Zig acceleration, CI and benchmark gates, 209 tracked runtime exports, and documented model-selection, preprocessing, ensemble, clustering, and metrics APIs.", "https://github.com/Seyamalam/bun-scikit")
-    add_project(doc, theme, "Huntrix Delta", "Expo, Go, gRPC, Offline-first", "Built the solo HackFusion champion across CRDT inventory sync, signed proof of delivery, offline maps, device-to-device handoff, routing, and reproducible chaos testing.", "https://github.com/Seyamalam/hackfusion_huntrix")
-    add_project(doc, theme, "ASRRO Portal", "Next.js, TypeScript, Convex, Better Auth", "Developed a public website and role-aware organization-management system covering membership approvals, events, attendance, content, reporting, notifications, and restricted finance workflows.", "https://github.com/Seyamalam/asrro")
-    add_project(doc, theme, "Zodic", "Python, PyPI", "Published an MIT-licensed, zero-dependency Python validation package with chainable schemas, typed parsing, nested error reporting, transformations, unions, dates, enums, and framework-agnostic integration.", "https://pypi.org/project/zodic/")
-    add_project(doc, theme, "AgriScan", "Next.js, TensorFlow, Computer Vision", "Co-developed a cross-platform plant-disease diagnosis and crop-health system documented in a 2024 SpringerOpen journal article.", "https://doi.org/10.1186/s43067-024-00169-7")
+    add_project_set(doc, theme, "software")
 
     add_section(doc, theme, "Education")
     add_role(doc, theme, "B.Sc. (Hons.) in Computer Science and Engineering", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Expected Dec 2026")
@@ -375,6 +431,7 @@ def research_resume(theme: Theme) -> Document:
     add_header(doc, theme, "Machine Learning Engineer | AI and Agentic Systems")
     add_section(doc, theme, "Research Profile")
     add_text(doc, theme, "Applied machine-learning researcher and software engineer working across computer vision, tabular modeling, healthcare analytics, agricultural AI, LLM inference, and high-performance computing. Author or co-author of ten source-backed research works, including two IEEE COMPAS papers, two SpringerOpen journal articles, and a 2026 Springer conference chapter. Builds reproducible Python pipelines and production-facing web systems that translate experiments into usable tools.")
+    add_competition_highlights(doc, theme)
 
     add_section(doc, theme, "Research and Engineering Skills")
     add_text(doc, theme, "Machine Learning: scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM, CNNs, transfer learning, SVM, clustering, feature engineering, cross-validation, model evaluation")
@@ -394,9 +451,7 @@ def research_resume(theme: Theme) -> Document:
     ])
 
     add_section(doc, theme, "Selected Research Projects")
-    add_project(doc, theme, "Smartphone Addiction Prediction", "Python, LightGBM, XGBoost, CatBoost", "Built leakage-safe, five-fold out-of-fold pipelines with nested target encoding, matched-fold experiment screening, schema checks, and rank blending.", "https://github.com/Seyamalam/playground-series-s6e8")
-    add_project(doc, theme, "Kaggriculture Autonomous Agent", "Python, Simulation, Evaluation", "Engineered a deterministic farming agent and reproducible evaluation harness with seat-swapped tournaments, frozen replay corpora, manifest hashing, and regression gates.", "https://github.com/Seyamalam/Kaggriculture")
-    add_project(doc, theme, "bun-scikit", "TypeScript, Bun, Zig", "Implemented a scikit-learn-inspired API with native Zig acceleration, parity contracts, benchmarks, documentation coverage checks, and broad model/preprocessing/evaluation support.", "https://github.com/Seyamalam/bun-scikit")
+    add_project_set(doc, theme, "research")
 
     page_break(doc)
     add_section(doc, theme, "Publications")
@@ -430,6 +485,7 @@ def universal_resume(theme: Theme) -> Document:
     add_header(doc, theme, "Software Engineer | Web, App, Backend, ML/AI")
     add_section(doc, theme, "Professional Summary")
     add_text(doc, theme, "Software engineer, full-stack developer, and applied AI researcher who turns technical ideas into production-ready products and reproducible experiments. Professional experience since 2021 across TypeScript, Python, React, Next.js, Node.js, backend services, data systems, and machine learning. Builds client applications, open-source developer tools, AI agents, and research software; author or co-author of ten source-backed research works.")
+    add_competition_highlights(doc, theme)
 
     add_section(doc, theme, "Core Skills")
     add_text(doc, theme, "Languages: TypeScript, JavaScript, Python, SQL, Go, Zig")
@@ -454,11 +510,7 @@ def universal_resume(theme: Theme) -> Document:
         "Built digital products for small businesses, nonprofit and academic organizations, and event teams using modern JavaScript and Python stacks.",
     ])
     add_section(doc, theme, "Selected Projects")
-    add_project(doc, theme, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired machine-learning library with native Zig acceleration, tests and benchmark gates, 209 tracked runtime exports, and documented APIs across preprocessing, model selection, ensembles, clustering, and metrics.", "https://github.com/Seyamalam/bun-scikit")
-    add_project(doc, theme, "RoboFusion", "Python, FastAPI, WebSockets, ESP32", "Developed a multi-hazard campus response platform with device integration, authentication, persistence, incident-lifecycle management, real-time dashboards, automated tests, and load-testing tools.", "https://github.com/Seyamalam/Robofusion")
-    add_project(doc, theme, "Huntrix Delta", "Expo, Go, gRPC, Offline-first", "Built the solo HackFusion champion with CRDT inventory sync, signed proof of delivery, offline maps, mesh handoff, routing, and chaos testing.", "https://github.com/Seyamalam/hackfusion_huntrix")
-    add_project(doc, theme, "ASRRO Portal", "Next.js, TypeScript, Convex, Better Auth", "Developed a public website and role-aware organization-management system covering membership approvals, events, attendance, content, reports, notifications, and restricted finance workflows.", "https://github.com/Seyamalam/asrro")
-    add_project(doc, theme, "Kaggriculture Autonomous Agent", "Python, Simulation, Evaluation", "Engineered a deterministic farming agent and evaluation harness with seeded seat-swapped tournaments, frozen replay corpora, manifest hashing, and regression gates.", "https://github.com/Seyamalam/Kaggriculture")
+    add_project_set(doc, theme, "universal")
 
     add_section(doc, theme, "Education")
     add_role(doc, theme, "B.Sc. (Hons.) in Computer Science and Engineering", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Expected Dec 2026")
@@ -480,6 +532,7 @@ def compact_resume(theme: Theme) -> Document:
     add_header(doc, theme, "Web, App and Backend Developer | AI Systems")
     add_section(doc, theme, "Summary")
     add_text(doc, theme, "Software engineer and 8th-semester CSE student building web and mobile applications, backend services, Python/TypeScript developer tools, and applied ML systems. Currently at Agentic Institute and Hello World Communications Ltd.")
+    add_competition_highlights(doc, theme, compact=True)
     add_section(doc, theme, "Core Skills")
     add_text(doc, theme, "TypeScript, JavaScript, Python, SQL, React, Next.js, Node.js, Django, FastAPI, Tailwind CSS, PostgreSQL, MongoDB, Redis, Prisma, Convex, Docker, Git, Vercel, TensorFlow, PyTorch, scikit-learn")
     add_section(doc, theme, "Experience")
@@ -490,23 +543,30 @@ def compact_resume(theme: Theme) -> Document:
     add_role(doc, theme, "Freelance Developer", "Self-employed", "Remote", "Mar 2021-2025")
     add_bullets(doc, theme, ["Deliver web applications for business, nonprofit, academic, and event use - from requirements and interface work through backend development and deployment."])
     add_section(doc, theme, "Selected Projects")
-    add_project(doc, theme, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired ML library with native acceleration, CI/benchmark gates, and 209 tracked runtime exports.", "https://github.com/Seyamalam/bun-scikit")
-    add_project(doc, theme, "ASRRO Portal", "Next.js, Convex", "Built public pages and role-aware operations for membership, events, attendance, content, reports, notifications, and finance access.", "https://github.com/Seyamalam/asrro")
-    add_project(doc, theme, "Zodic", "Python, PyPI", "Published a zero-dependency, Zod-inspired Python validation package with typed parsing and nested errors.", "https://pypi.org/project/zodic/")
-    add_project(doc, theme, "ML Competition Pipelines", "Python, LightGBM, XGBoost", "Created leakage-safe cross-validation, nested target encoding, schema checks, and rank-blending pipelines.", "https://github.com/Seyamalam/playground-series-s6e8")
+    add_project_set(doc, theme, "fullstack")
     add_section(doc, theme, "Education and Research")
     add_text(doc, theme, "B.Sc. (Hons.) Computer Science and Engineering, BGC Trust University Bangladesh - 8th semester; expected Dec 2026")
     add_text(doc, theme, "Ten source-backed research works, including IEEE COMPAS papers, SpringerOpen journal articles, and a 2026 Springer conference chapter. ORCID: 0009-0007-7512-1893")
-    add_leadership_and_honors(doc, theme, compact=True)
+    add_leadership_and_honors(doc, theme)
     return doc
 
 
 def pdf_styles(theme: Theme):
     leading = theme.body_size * (1.12 if theme.compact else 1.18)
+    section_fill = None
+    section_color = theme.accent
+    section_padding = 0
+    if theme is MODERN:
+        section_fill, section_padding = "E8F0FA", 4
+    elif theme is COMPACT:
+        section_fill, section_color, section_padding = theme.accent, "FFFFFF", 4
+    elif theme is UNIVERSAL:
+        section_fill, section_padding = "EAF0F5", 4
     return {
+        "_theme": theme,
         "name": ParagraphStyle("name", fontName="Helvetica-Bold", fontSize=theme.title_size,
-                               textColor=HexColor("#" + theme.accent), leading=theme.title_size + 2,
-                               alignment=TA_CENTER if theme is MODERN else TA_LEFT, spaceAfter=1),
+                               textColor=HexColor("#" + theme.accent), leading=theme.title_size + 1,
+                               alignment=TA_CENTER if theme is MODERN else TA_LEFT, spaceAfter=0),
         "target": ParagraphStyle("target", fontName="Helvetica-Bold", fontSize=9.5 if theme.compact else 10.5,
                                  textColor=HexColor("#" + theme.muted), leading=12,
                                  alignment=TA_CENTER if theme is MODERN else TA_LEFT, spaceAfter=2),
@@ -514,12 +574,11 @@ def pdf_styles(theme: Theme):
                                   textColor=HexColor("#" + theme.muted), leading=10.2,
                                   alignment=TA_CENTER if theme is MODERN else TA_LEFT,
                                   spaceAfter=6 if theme.compact else 8),
-        "h1": ParagraphStyle("h1", fontName="Helvetica-Bold", fontSize=11.3 if theme.compact else 12.2,
-                             textColor=HexColor("#" + theme.accent), leading=14,
-                             spaceBefore=5 if theme.compact else 7, spaceAfter=3,
-                             keepWithNext=True,
-                             borderWidth=0 if theme is not CLASSIC else 0.35,
-                             borderColor=HexColor("#B7B7B7"), borderPadding=(0, 0, 2, 0)),
+        "h1": ParagraphStyle("h1", fontName="Helvetica-Bold", fontSize=10.7 if theme.compact else 11.6,
+                             textColor=HexColor("#" + section_color), leading=14,
+                             spaceBefore=5 if theme.compact else 7, spaceAfter=4,
+                             keepWithNext=True, backColor=HexColor("#" + section_fill) if section_fill else None,
+                             borderPadding=section_padding),
         "body": ParagraphStyle("body", fontName="Helvetica", fontSize=theme.body_size,
                                textColor=HexColor("#" + theme.ink), leading=leading,
                                spaceAfter=3 if theme.compact else 4),
@@ -542,9 +601,15 @@ def pdf_header(story, styles, theme: Theme, target: str):
     story.append(Paragraph(NAME, styles["name"]))
     story.append(Paragraph(target.upper() if theme is MODERN else target, styles["target"]))
     story.append(Paragraph(CONTACT.replace("  |  ", " &nbsp;|&nbsp; "), styles["contact"]))
+    story.append(HRFlowable(width="100%", thickness=2.2 if theme in (CLASSIC, UNIVERSAL) else 1.2,
+                            color=HexColor("#" + theme.accent), spaceBefore=0, spaceAfter=4))
 
 
 def pdf_section(story, styles, title):
+    theme = styles["_theme"]
+    if theme is CLASSIC:
+        story.append(HRFlowable(width="100%", thickness=1.1, color=HexColor("#" + theme.accent),
+                                spaceBefore=6, spaceAfter=2))
     story.append(Paragraph(title.upper(), styles["h1"]))
 
 
@@ -562,7 +627,8 @@ def pdf_bullets(story, styles, items):
 
 
 def pdf_project(story, styles, name, stack, text, url=None):
-    link = f" | <link href='{url}' color='#315B5B'>{url.replace('https://', '')}</link>" if url else ""
+    accent = styles["_theme"].accent
+    link = f" | <link href='{url}' color='#{accent}'>{url.replace('https://', '')}</link>" if url else ""
     story.append(Paragraph(f"{name} <font color='#66717D'>| {stack}</font>{link}", styles["role"]))
     pdf_bullets(story, styles, [text])
 
@@ -571,13 +637,24 @@ def pdf_publication(story, styles, title, venue, year, doi):
     is_url = doi.startswith("http")
     href = doi if is_url else f"https://doi.org/{doi}"
     label = doi.replace("https://", "") if is_url else doi
-    story.append(Paragraph(f"• <i>“{title}.”</i> {venue}, {year}. {'Link' if is_url else 'DOI'}: <link href='{href}' color='#315B5B'>{label}</link>", styles["bullet"]))
+    accent = styles["_theme"].accent
+    story.append(Paragraph(f"• <i>“{title}.”</i> {venue}, {year}. {'Link' if is_url else 'DOI'}: <link href='{href}' color='#{accent}'>{label}</link>", styles["bullet"]))
 
 
-def pdf_leadership_and_honors(story, styles, *, compact=False):
-    pdf_section(story, styles, "Leadership and Honors")
+def pdf_project_set(story, styles, key):
+    for project in PROJECT_SETS[key]:
+        pdf_project(story, styles, *project)
+
+
+def pdf_competition_highlights(story, styles, *, compact=False):
+    pdf_section(story, styles, "Selected Wins")
+    pdf_bullets(story, styles, PRIMARY_WINS[:2] if compact else PRIMARY_WINS)
+
+
+def pdf_leadership_and_honors(story, styles):
+    pdf_section(story, styles, "Leadership and Additional Honors")
     pdf_text(story, styles, LEADERSHIP)
-    pdf_bullets(story, styles, SELECTED_HONORS[:3] if compact else SELECTED_HONORS)
+    pdf_bullets(story, styles, ADDITIONAL_HONORS)
 
 
 def build_pdf(theme: Theme, kind: str, path: Path) -> None:
@@ -592,7 +669,8 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
     if kind == "software":
         pdf_header(s, styles, theme, "Software Engineer | Web, App and Backend Systems")
         pdf_section(s, styles, "Professional Summary")
-        pdf_text(s, styles, "Software Engineer with experience building and deploying full-stack applications, backend services, and AI-enabled products. Works across TypeScript, React, Next.js, Node.js, Python, and PostgreSQL; also develops open-source ML tooling and reproducible data-science pipelines. Author or co-author of ten source-backed journal, conference, chapter, and preprint works.")
+        pdf_text(s, styles, "Software engineer building production web applications, backend services, mobile systems, and AI-enabled products across TypeScript, Next.js, Node.js, Python, Go, PostgreSQL, and cloud infrastructure. Ships client platforms, resilient distributed prototypes, and open-source developer tooling from architecture through deployment.")
+        pdf_competition_highlights(s, styles)
         pdf_section(s, styles, "Technical Skills")
         for t in ["<b>Languages:</b> TypeScript, JavaScript, Python, SQL, Go, Zig", "<b>Application Development:</b> React, Next.js, Node.js, Django, FastAPI, REST APIs, React Native, Tailwind CSS", "<b>Data and Infrastructure:</b> PostgreSQL, MongoDB, Redis, SQLite, Prisma, Convex, Docker, Git, AWS, Vercel", "<b>AI and Data:</b> scikit-learn, TensorFlow, PyTorch, Pandas, NumPy, computer vision, model evaluation, feature engineering"]: s.append(Paragraph(t, styles["body"]))
         pdf_section(s, styles, "Professional Experience")
@@ -604,11 +682,7 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_bullets(s, styles, ["Deliver web applications from requirements and interface design through backend implementation, deployment, and ongoing support.", "Built digital products for small businesses, nonprofit and academic organizations, and event teams using modern JavaScript and Python stacks."])
         s.append(PageBreak())
         pdf_section(s, styles, "Selected Projects")
-        pdf_project(s, styles, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired ML library with native Zig acceleration, CI and benchmark gates, 209 tracked runtime exports, and documented model-selection, preprocessing, ensemble, clustering, and metrics APIs.", "https://github.com/Seyamalam/bun-scikit")
-        pdf_project(s, styles, "Huntrix Delta", "Expo, Go, gRPC, Offline-first", "Built the solo HackFusion champion across CRDT inventory sync, signed proof of delivery, offline maps, device-to-device handoff, routing, and reproducible chaos testing.", "https://github.com/Seyamalam/hackfusion_huntrix")
-        pdf_project(s, styles, "ASRRO Portal", "Next.js, TypeScript, Convex, Better Auth", "Developed a public website and role-aware organization-management system covering membership approvals, events, attendance, content, reporting, notifications, and restricted finance workflows.", "https://github.com/Seyamalam/asrro")
-        pdf_project(s, styles, "Zodic", "Python, PyPI", "Published an MIT-licensed, zero-dependency Python validation package with chainable schemas, typed parsing, nested error reporting, transformations, unions, dates, enums, and framework-agnostic integration.", "https://pypi.org/project/zodic/")
-        pdf_project(s, styles, "AgriScan", "Next.js, TensorFlow, Computer Vision", "Co-developed a cross-platform plant-disease diagnosis and crop-health system documented in a 2024 SpringerOpen journal article.", "https://doi.org/10.1186/s43067-024-00169-7")
+        pdf_project_set(s, styles, "software")
         pdf_section(s, styles, "Education")
         pdf_role(s, styles, "B.Sc. (Hons.) in Computer Science and Engineering", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Expected Dec 2026")
         pdf_text(s, styles, "Currently in the 8th semester. Focus: software development, machine learning, computer vision, and applied AI.")
@@ -624,6 +698,7 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_header(s, styles, theme, "Machine Learning Engineer | AI and Agentic Systems")
         pdf_section(s, styles, "Research Profile")
         pdf_text(s, styles, "Applied machine-learning researcher and software engineer working across computer vision, tabular modeling, healthcare analytics, agricultural AI, LLM inference, and high-performance computing. Author or co-author of ten source-backed research works, including two IEEE COMPAS papers, two SpringerOpen journal articles, and a 2026 Springer conference chapter. Builds reproducible Python pipelines and production-facing web systems that translate experiments into usable tools.")
+        pdf_competition_highlights(s, styles)
         pdf_section(s, styles, "Research and Engineering Skills")
         for t in ["<b>Machine Learning:</b> scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM, CNNs, transfer learning, SVM, clustering, feature engineering, cross-validation, model evaluation", "<b>Engineering:</b> Python, TypeScript, Next.js, React, Node.js, FastAPI, Django, PostgreSQL, MongoDB, Redis, Docker, Git, Zig, Bun", "<b>Research Practice:</b> reproducible experiments, fold-safe validation, benchmark design, data pipelines, academic writing, literature review, publication preparation"]: s.append(Paragraph(t, styles["body"]))
         pdf_section(s, styles, "Engineering Experience")
@@ -632,9 +707,7 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_role(s, styles, "Software Engineer", "Hello World Communications Ltd", "Chattogram, Bangladesh", "Aug 2024-Present")
         pdf_bullets(s, styles, ["Develop and deploy scalable applications and AI-enabled features using TypeScript, React, Next.js, Node.js, Python, and PostgreSQL.", "Bridge experimental software and production application requirements through code review, system design, deployment, and support."])
         pdf_section(s, styles, "Selected Research Projects")
-        pdf_project(s, styles, "Smartphone Addiction Prediction", "Python, LightGBM, XGBoost, CatBoost", "Built leakage-safe, five-fold out-of-fold pipelines with nested target encoding, matched-fold experiment screening, schema checks, and rank blending.", "https://github.com/Seyamalam/playground-series-s6e8")
-        pdf_project(s, styles, "Kaggriculture Autonomous Agent", "Python, Simulation, Evaluation", "Engineered a deterministic farming agent and reproducible evaluation harness with seat-swapped tournaments, frozen replay corpora, manifest hashing, and regression gates.", "https://github.com/Seyamalam/Kaggriculture")
-        pdf_project(s, styles, "bun-scikit", "TypeScript, Bun, Zig", "Implemented a scikit-learn-inspired API with native Zig acceleration, parity contracts, benchmarks, documentation coverage checks, and broad model/preprocessing/evaluation support.", "https://github.com/Seyamalam/bun-scikit")
+        pdf_project_set(s, styles, "research")
         s.append(PageBreak())
         pdf_section(s, styles, "Publications")
         pubs = [("Architectures for AI-Driven Visual Assistance: Evaluating Server-Mediated Mobile and Direct Access Desktop Client Implementations", "Lecture Notes in Networks and Systems", "2026", "10.1007/978-3-032-15764-5_45"), ("Enhancing Agricultural Diagnostics: Advanced Training of Pre-Trained CNN Models for Paddy Leaf Disease Detection", "Machine Learning Research", "2025", "10.11648/j.mlr.20251001.11"), ("Next-Generation K-Means Clustering: Mojo-Driven Performance for Big Data", "International Journal of Intelligent Information Systems", "2025", "10.11648/j.ijiis.20251401.12"), ("Efficient Malware Classification Using Multiprocessing and Bag-of-Words Vectorization", "Advances in Networks", "2025", "10.11648/j.net.20251201.12"), ("Fine-tuning LLaMA 2 interference: a comparative study of language implementations for optimal efficiency", "arXiv", "2025", "10.48550/arXiv.2502.01651"), ("AgriScan: Next.js powered cross-platform solution for automated plant disease diagnosis and crop health management", "Journal of Electrical Systems and Information Technology", "2024", "10.1186/s43067-024-00169-7"), ("Application of Machine Learning K-Means Clustering and Linear Regression in Determining the Risk Level of Pulmonary Tuberculosis", "IEEE COMPAS", "2024", "10.1109/COMPAS60761.2024.10796963"), ("Enhancing Cardiovascular Risk Prediction Using Support Vector Machines and Advanced Machine Learning Algorithms", "IEEE COMPAS", "2024", "10.1109/COMPAS60761.2024.10796805"), ("Comparing pre-trained models for efficient leaf disease detection: a study on custom CNN", "Journal of Electrical Systems and Information Technology", "2024", "10.1186/s43067-024-00137-1"), ("Comparative Performance Evaluation of Classical Machine Learning and Quantum SVM for Heart Disease Prediction using a Quantum-Featured Dataset", "Sonargaon University Journal", "2025", "https://su.edu.bd/web_assets/journal/journal_five/journal3.pdf")]
@@ -649,6 +722,7 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_header(s, styles, theme, "Software Engineer | Web, App, Backend, ML/AI")
         pdf_section(s, styles, "Professional Summary")
         pdf_text(s, styles, "Software engineer, full-stack developer, and applied AI researcher who turns technical ideas into production-ready products and reproducible experiments. Professional experience since 2021 across TypeScript, Python, React, Next.js, Node.js, backend services, data systems, and machine learning. Builds client applications, open-source developer tools, AI agents, and research software; author or co-author of ten source-backed research works.")
+        pdf_competition_highlights(s, styles)
         pdf_section(s, styles, "Core Skills")
         for t in ["<b>Languages:</b> TypeScript, JavaScript, Python, SQL, Go, Zig", "<b>Product Engineering:</b> React, Next.js, Node.js, Django, FastAPI, REST APIs, React Native, Tailwind CSS", "<b>Data and Infrastructure:</b> PostgreSQL, MongoDB, Redis, SQLite, Prisma, Convex, Docker, Git, AWS, Vercel", "<b>AI and Research:</b> scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM, computer vision, agent evaluation, reproducible experiments"]:
             s.append(Paragraph(t, styles["body"]))
@@ -660,11 +734,7 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_role(s, styles, "Freelance Developer", "Self-employed", "Remote", "Mar 2021-2025")
         pdf_bullets(s, styles, ["Delivered web applications from requirements and interface design through backend implementation, deployment, and ongoing support.", "Built digital products for small businesses, nonprofit and academic organizations, and event teams using modern JavaScript and Python stacks."])
         pdf_section(s, styles, "Selected Projects")
-        pdf_project(s, styles, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired machine-learning library with native Zig acceleration, tests and benchmark gates, 209 tracked runtime exports, and documented APIs across preprocessing, model selection, ensembles, clustering, and metrics.", "https://github.com/Seyamalam/bun-scikit")
-        pdf_project(s, styles, "RoboFusion", "Python, FastAPI, WebSockets, ESP32", "Developed a multi-hazard campus response platform with device integration, authentication, persistence, incident-lifecycle management, real-time dashboards, automated tests, and load-testing tools.", "https://github.com/Seyamalam/Robofusion")
-        pdf_project(s, styles, "Huntrix Delta", "Expo, Go, gRPC, Offline-first", "Built the solo HackFusion champion with CRDT inventory sync, signed proof of delivery, offline maps, mesh handoff, routing, and chaos testing.", "https://github.com/Seyamalam/hackfusion_huntrix")
-        pdf_project(s, styles, "ASRRO Portal", "Next.js, TypeScript, Convex, Better Auth", "Developed a public website and role-aware organization-management system covering membership approvals, events, attendance, content, reports, notifications, and restricted finance workflows.", "https://github.com/Seyamalam/asrro")
-        pdf_project(s, styles, "Kaggriculture Autonomous Agent", "Python, Simulation, Evaluation", "Engineered a deterministic farming agent and evaluation harness with seeded seat-swapped tournaments, frozen replay corpora, manifest hashing, and regression gates.", "https://github.com/Seyamalam/Kaggriculture")
+        pdf_project_set(s, styles, "universal")
         pdf_section(s, styles, "Education")
         pdf_role(s, styles, "B.Sc. (Hons.) in Computer Science and Engineering", "BGC Trust University Bangladesh", "Chattogram, Bangladesh", "Expected Dec 2026")
         pdf_text(s, styles, "Currently in the 8th semester. Focus: software engineering, machine learning, computer vision, applied AI, and research-driven product development.")
@@ -679,6 +749,7 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_header(s, styles, theme, "Web, App and Backend Developer | AI Systems")
         pdf_section(s, styles, "Summary")
         pdf_text(s, styles, "Software engineer and 8th-semester CSE student building web and mobile applications, backend services, Python/TypeScript developer tools, and applied ML systems. Currently at Agentic Institute and Hello World Communications Ltd.")
+        pdf_competition_highlights(s, styles, compact=True)
         pdf_section(s, styles, "Core Skills")
         pdf_text(s, styles, "TypeScript, JavaScript, Python, SQL, React, Next.js, Node.js, Django, FastAPI, Tailwind CSS, PostgreSQL, MongoDB, Redis, Prisma, Convex, Docker, Git, Vercel, TensorFlow, PyTorch, scikit-learn")
         pdf_section(s, styles, "Experience")
@@ -689,14 +760,11 @@ def build_pdf(theme: Theme, kind: str, path: Path) -> None:
         pdf_role(s, styles, "Freelance Developer", "Self-employed", "Remote", "Mar 2021-2025")
         pdf_bullets(s, styles, ["Deliver web applications for business, nonprofit, academic, and event use - from requirements and interface work through backend development and deployment."])
         pdf_section(s, styles, "Selected Projects")
-        pdf_project(s, styles, "bun-scikit", "TypeScript, Bun, Zig", "Built a scikit-learn-inspired ML library with native acceleration, CI/benchmark gates, and 209 tracked runtime exports.", "https://github.com/Seyamalam/bun-scikit")
-        pdf_project(s, styles, "ASRRO Portal", "Next.js, Convex", "Built public pages and role-aware operations for membership, events, attendance, content, reports, notifications, and finance access.", "https://github.com/Seyamalam/asrro")
-        pdf_project(s, styles, "Zodic", "Python, PyPI", "Published a zero-dependency, Zod-inspired Python validation package with typed parsing and nested errors.", "https://pypi.org/project/zodic/")
-        pdf_project(s, styles, "ML Competition Pipelines", "Python, LightGBM, XGBoost", "Created leakage-safe cross-validation, nested target encoding, schema checks, and rank-blending pipelines.", "https://github.com/Seyamalam/playground-series-s6e8")
+        pdf_project_set(s, styles, "fullstack")
         pdf_section(s, styles, "Education and Research")
         pdf_text(s, styles, "B.Sc. (Hons.) Computer Science and Engineering, BGC Trust University Bangladesh - 8th semester; expected Dec 2026")
         pdf_text(s, styles, "Ten source-backed research works, including IEEE COMPAS papers, SpringerOpen journal articles, and a 2026 Springer conference chapter. ORCID: 0009-0007-7512-1893")
-        pdf_leadership_and_honors(s, styles, compact=True)
+        pdf_leadership_and_honors(s, styles)
     doc.build(s)
 
 

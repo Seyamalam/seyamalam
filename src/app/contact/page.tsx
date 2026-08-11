@@ -43,20 +43,20 @@ export default function ContactPage() {
               <p className="eyebrow">ATS-ready resume library</p>
               <h2 id="resumes-title">Choose the version that fits the role.</h2>
             </div>
-            <p>Four focused, single-column editions with matching PDF and editable DOCX files in the complete pack.</p>
+            <p>Four distinct, single-column designs with role-specific projects, visible competition results, and matching editable DOCX files in the complete pack.</p>
           </div>
           <div className="resume-grid">
             <a href="/resume/software-engineer-ats.pdf" download>
-              <span>01 · PDF</span><strong>Software engineer</strong><b aria-hidden="true">↓</b>
+              <span>01 · Editorial</span><strong>Software engineer</strong><b aria-hidden="true">↓</b>
             </a>
             <a href="/resume/ml-research-ats.pdf" download>
-              <span>02 · PDF</span><strong>ML, AI &amp; agents</strong><b aria-hidden="true">↓</b>
+              <span>02 · Blueprint</span><strong>ML, AI &amp; agents</strong><b aria-hidden="true">↓</b>
             </a>
             <a href="/resume/full-stack-compact-ats.pdf" download>
-              <span>03 · PDF</span><strong>Full-stack compact</strong><b aria-hidden="true">↓</b>
+              <span>03 · Product sheet</span><strong>Full-stack compact</strong><b aria-hidden="true">↓</b>
             </a>
             <a href="/resume/universal-ats.pdf" download>
-              <span>04 · PDF</span><strong>Universal</strong><b aria-hidden="true">↓</b>
+              <span>04 · Navy</span><strong>Universal</strong><b aria-hidden="true">↓</b>
             </a>
           </div>
           <a className="text-link resume-pack-link" href="/resume/ats-resume-pack.zip" download>
