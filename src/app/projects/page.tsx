@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
 import { PageTransition } from "@/components/page-transition";
-import { ProjectCard } from "@/components/project-card";
+import { ProjectExplorer } from "@/components/project-explorer";
 import { projects } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -19,9 +19,7 @@ export default function ProjectsPage() {
         description="Dedicated case studies combining real interfaces, working code, architecture decisions, benchmarks, and reproducible evidence."
       />
       <section className="shell page-section">
-        <div className="project-list project-list-full">
-          {projects.map((project, index) => <ProjectCard key={project.title} project={project} index={index} />)}
-        </div>
+        <ProjectExplorer projects={projects} />
       </section>
       <section className="shell page-callout deferred-section">
         <p className="eyebrow">Older web work</p>

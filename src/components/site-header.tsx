@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/brand-mark";
+import { HeaderTools } from "@/components/site-tools";
 
 const navigation = [
   ["Work", "/projects"],
@@ -31,10 +32,7 @@ export function SiteHeader() {
         </Link>
         <NavigationLinks />
         <p className="header-status"><i />Dhaka time · open to remote</p>
-        <details className="mobile-nav">
-          <summary aria-label="Open navigation"><span>Menu</span><b aria-hidden="true">+</b></summary>
-          <NavigationLinks mobile />
-        </details>
+        <HeaderTools />
       </div>
     </header>
   );

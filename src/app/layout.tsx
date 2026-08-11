@@ -3,6 +3,7 @@ import { Archivo, Geist } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { NavigationTransitions } from "@/components/navigation-transitions";
+import { SiteTools } from "@/components/site-tools";
 import { siteConfig } from "@/config/site.config";
 import { profile } from "@/data/site";
 import "@/styles/globals.css";
@@ -23,7 +24,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: "#e7e9e6",
-  colorScheme: "light",
+  colorScheme: "light dark",
 };
 
 export const metadata: Metadata = {
@@ -112,9 +113,13 @@ const personSchema = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${bodyFont.variable} ${displayFont.variable}`} data-scroll-behavior="smooth">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('seyam-theme');document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}})()` }} />
+      </head>
       <body className="site-v3">
         <a className="skip-link" href="#main-content">Skip to content</a>
         <NavigationTransitions />
+        <SiteTools />
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProjectArtifact } from "@/components/project-artifact";
+import { ProjectEvidence } from "@/components/project-evidence";
 import { PageTransition } from "@/components/page-transition";
 import { siteConfig } from "@/config/site.config";
 import { projectDetails } from "@/data/project-details";
@@ -93,6 +94,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           ))}
         </div>
       </section>
+
+      <ProjectEvidence project={project} detail={detail} />
 
       {detail.recognition && (
         <section className="shell recognition-card">

@@ -14,15 +14,15 @@ const proofPoints = [
 export default function HomePage() {
   return (
     <PageTransition>
-      <section className="studio-hero shell">
+      <section className="studio-hero shell" id="overview">
         <div className="studio-hero-meta">
           <p><span className="status-dot" /> {profile.location}</p>
           <p>Software engineer · Agentic systems · Applied ML</p>
         </div>
 
         <div className="hero-name" aria-label="Seyam Alam">
-          <span>SEYAM</span>
-          <span>ALAM<BrandMark className="hero-mark" /></span>
+          <span className="hero-word"><i>S</i><i>E</i><i>Y</i><i>A</i><i>M</i></span>
+          <span className="hero-word"><i>A</i><i>L</i><i>A</i><i>M</i><BrandMark className="hero-mark" /></span>
         </div>
 
         <div className="hero-dossier">
@@ -52,6 +52,17 @@ export default function HomePage() {
           </aside>
         </div>
 
+        <div className="resume-action-bar" aria-label="Resume downloads">
+          <span className="resume-action-label"><b>RESUME</b><small>Choose an edition</small></span>
+          <div className="resume-actions">
+            <a href="/resume/software-engineer-ats.pdf" download><i>01</i><span>Software</span><b>↓</b></a>
+            <a href="/resume/ml-research-ats.pdf" download><i>02</i><span>ML + agents</span><b>↓</b></a>
+            <a href="/resume/full-stack-compact-ats.pdf" download><i>03</i><span>Full-stack</span><b>↓</b></a>
+            <a href="/resume/universal-ats.pdf" download><i>04</i><span>Universal</span><b>↓</b></a>
+          </div>
+          <a className="resume-all" href="/resume/ats-resume-pack.zip" download data-tooltip="PDF + editable DOCX files">All files <b>↓</b></a>
+        </div>
+
         <div className="hero-command-line" aria-hidden="true">
           <span>web</span><i>/</i><span>backend</span><i>/</i><span>agents</span><i>/</i><span>ml</span><b>↓</b>
         </div>
@@ -69,7 +80,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section shell selected-work deferred-section">
+      <section className="section shell selected-work deferred-section" id="work">
         <div className="section-heading">
           <div>
             <p className="eyebrow">Selected fieldwork</p>
@@ -87,7 +98,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section research-band deferred-section">
+      <section className="capability-marquee" aria-label="Technical capabilities">
+        <div>{Array.from({ length: 2 }, (_, copy) => <p key={copy} aria-hidden={copy === 1}><span>BUN + TYPESCRIPT</span><i>◆</i><span>AGENT EVALUATION</span><i>◆</i><span>NEXT.JS 16</span><i>◆</i><span>GO + GRPC</span><i>◆</i><span>APPLIED ML</span><i>◆</i><span>OFFLINE SYSTEMS</span><i>◆</i></p>)}</div>
+      </section>
+
+      <section className="section research-band deferred-section" id="research">
         <div className="shell research-feature">
           <div>
             <p className="eyebrow eyebrow-light">Latest published work</p>
@@ -101,7 +116,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section shell split-section deferred-section">
+      <section className="section shell split-section deferred-section" id="method">
         <div>
           <p className="eyebrow">Operating method</p>
           <h2>Make it legible. Then make it fast.</h2>
