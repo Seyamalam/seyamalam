@@ -23,10 +23,12 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             </ul>
             <div className="project-card-actions">
               <Link className="text-link" href={`/projects/${project.slug}`}>View case study <span aria-hidden="true">→</span></Link>
-              <a className="source-link" href={project.href}>Source <span aria-hidden="true">↗</span></a>
+              <a className="source-link" href={project.href}>{project.href.includes("github.com") ? "Source" : "Live project"} <span aria-hidden="true">↗</span></a>
             </div>
           </div>
-          <ProjectTeaser slug={project.slug} />
+          <Link className="project-preview-link" href={`/projects/${project.slug}`} aria-label={`View ${project.title} case study`}>
+            <ProjectTeaser slug={project.slug} />
+          </Link>
         </div>
       </div>
     </article>

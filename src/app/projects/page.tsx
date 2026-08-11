@@ -15,7 +15,7 @@ export default function ProjectsPage() {
       <PageIntro
         eyebrow="Selected work · 2025—2026"
         title="Open the systems."
-        description="Six dedicated case studies combining real interfaces, working code, architecture decisions, benchmarks, and reproducible evidence."
+        description="Dedicated case studies combining real interfaces, working code, architecture decisions, benchmarks, and reproducible evidence."
       />
       <section className="shell page-section">
         <div className="project-list project-list-full">
