@@ -16,8 +16,8 @@ export function SiteFooter() {
           <a href={profile.linkedin}>LinkedIn <span aria-hidden="true">↗</span></a>
           <a href={profile.orcid}>ORCID <span aria-hidden="true">↗</span></a>
           <a href={profile.scholar}>Scholar <span aria-hidden="true">↗</span></a>
-          <Link href="/contact#resumes">Resumes <span aria-hidden="true">↓</span></Link>
-          <Link href="/contact">Contact <span aria-hidden="true">→</span></Link>
+          <Link href="/contact#resumes" data-transition="nav-swap">Resumes <span aria-hidden="true">↓</span></Link>
+          <Link href="/contact" data-transition="nav-swap">Contact <span aria-hidden="true">↗</span></Link>
         </div>
         <p className="footer-meta">© {new Date().getFullYear()} Touhidul Alam Seyam</p>
       </div>

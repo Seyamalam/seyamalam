@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
+import { PageTransition } from "@/components/page-transition";
 import { profile, publications } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ResearchPage() {
   return (
-    <>
+    <PageTransition>
       <PageIntro
         eyebrow="Research record · 10 works"
         title="Applied questions. Reproducible answers."
@@ -53,6 +54,6 @@ export default function ResearchPage() {
           <a className="text-link" href={profile.scholar}>Google Scholar <span aria-hidden="true">↗</span></a>
         </div>
       </section>
-    </>
+    </PageTransition>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/page-intro";
+import { PageTransition } from "@/components/page-transition";
 import { achievements, experience, leadership } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function ExperiencePage() {
   return (
-    <>
+    <PageTransition>
       <PageIntro
         eyebrow="Experience · 2021—Present"
         title="Build, compete, ship, repeat."
@@ -85,6 +86,6 @@ export default function ExperiencePage() {
           </div>
         </div>
       </section>
-    </>
+    </PageTransition>
   );
 }

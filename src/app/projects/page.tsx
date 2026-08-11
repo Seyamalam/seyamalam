@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
+import { PageTransition } from "@/components/page-transition";
 import { ProjectCard } from "@/components/project-card";
 import { projects } from "@/data/site";
 
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <>
+    <PageTransition>
       <PageIntro
         eyebrow="Selected work · 2025—2026"
         title="Open the systems."
@@ -30,6 +31,6 @@ export default function ProjectsPage() {
         </p>
         <a className="text-link" href="https://github.com/Seyamalam?tab=repositories">Browse the repository archive <span aria-hidden="true">↗</span></a>
       </section>
-    </>
+    </PageTransition>
   );
 }

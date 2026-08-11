@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
+import { PageTransition } from "@/components/page-transition";
 import { profile } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <>
+    <PageTransition>
       <PageIntro
         eyebrow="Contact · Open to focused conversations"
         title="Bring a real problem."
@@ -70,6 +71,6 @@ export default function ContactPage() {
         <a href={profile.scholar}><span>Citations</span><strong>Google Scholar</strong><b aria-hidden="true">↗</b></a>
         <a href={profile.linkedin}><span>Professional profile</span><strong>LinkedIn</strong><b aria-hidden="true">↗</b></a>
       </section>
-    </>
+    </PageTransition>
   );
 }

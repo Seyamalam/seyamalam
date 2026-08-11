@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Archivo, Geist } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { NavigationTransitions } from "@/components/navigation-transitions";
 import { siteConfig } from "@/config/site.config";
 import { profile } from "@/data/site";
 import "@/styles/globals.css";
@@ -21,7 +22,7 @@ const displayFont = Archivo({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#f4f7fa",
+  themeColor: "#e7e9e6",
   colorScheme: "light",
 };
 
@@ -64,7 +65,10 @@ export const metadata: Metadata = {
     images: ["/opengraph-image"],
   },
   icons: {
-    icon: "/favicon/favicon.ico",
+    icon: [
+      { url: "/favicon/mark.svg", type: "image/svg+xml" },
+      { url: "/favicon/favicon.ico", sizes: "32x32" },
+    ],
     apple: "/favicon/apple-touch-icon.png",
   },
   manifest: "/favicon/site.webmanifest",
@@ -108,8 +112,9 @@ const personSchema = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${bodyFont.variable} ${displayFont.variable}`} data-scroll-behavior="smooth">
-      <body>
+      <body className="site-v3">
         <a className="skip-link" href="#main-content">Skip to content</a>
+        <NavigationTransitions />
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />

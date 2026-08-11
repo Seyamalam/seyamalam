@@ -12,7 +12,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             <p className="project-status">{project.status}</p>
             <h2>{project.title}</h2>
           </div>
-          <Link className="icon-link" href={`/projects/${project.slug}`} aria-label={`Read the ${project.title} case study`}>→</Link>
+          <Link className="icon-link" href={`/projects/${project.slug}`} aria-label={`Read the ${project.title} case study`} data-transition="nav-forward">↗</Link>
         </div>
         <div className="project-card-grid">
           <div>
@@ -22,12 +22,14 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
               {project.stack.map((technology) => <li key={technology}>{technology}</li>)}
             </ul>
             <div className="project-card-actions">
-              <Link className="text-link" href={`/projects/${project.slug}`}>View case study <span aria-hidden="true">→</span></Link>
+              <Link className="text-link" href={`/projects/${project.slug}`} data-transition="nav-forward">Open system <span aria-hidden="true">↗</span></Link>
               <a className="source-link" href={project.href}>{project.href.includes("github.com") ? "Source" : "Live project"} <span aria-hidden="true">↗</span></a>
             </div>
           </div>
-          <Link className="project-preview-link" href={`/projects/${project.slug}`} aria-label={`View ${project.title} case study`}>
-            <ProjectTeaser slug={project.slug} />
+          <Link className="project-preview-link" href={`/projects/${project.slug}`} aria-label={`View ${project.title} case study`} data-transition="nav-forward">
+            <div className="project-transition-shell" style={{ viewTransitionName: `project-${project.slug}` }}>
+              <ProjectTeaser slug={project.slug} />
+            </div>
           </Link>
         </div>
       </div>

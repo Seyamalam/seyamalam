@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProjectArtifact } from "@/components/project-artifact";
+import { PageTransition } from "@/components/page-transition";
 import { siteConfig } from "@/config/site.config";
 import { projectDetails } from "@/data/project-details";
 import { profile, projects } from "@/data/site";
@@ -55,10 +56,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   };
 
   return (
+    <PageTransition>
     <article className={`case-study case-study-${detail.visual}`}>
       <header className="shell case-hero">
         <nav className="case-breadcrumb" aria-label="Breadcrumb">
-          <Link href="/projects">Projects</Link><span aria-hidden="true">/</span><span>{project.title}</span>
+          <Link href="/projects" data-transition="nav-back">Projects</Link><span aria-hidden="true">/</span><span>{project.title}</span>
         </nav>
         <div className="case-title-grid">
           <div>
@@ -79,7 +81,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </header>
 
       <section className="shell case-artifact-wrap" aria-label={`${project.title} visual demonstration`}>
-        <ProjectArtifact project={project} detail={detail} />
+        <div className="project-transition-shell" style={{ viewTransitionName: `project-${project.slug}` }}>
+          <ProjectArtifact project={project} detail={detail} />
+        </div>
       </section>
 
       <section className="case-proof" aria-label="Project evidence">
@@ -162,10 +166,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       <footer className="shell next-project">
         <p className="eyebrow">Next case study</p>
-        <Link href={`/projects/${nextProject.slug}`}><span>{nextProject.status}</span><strong>{nextProject.title}</strong><b aria-hidden="true">→</b></Link>
+        <Link href={`/projects/${nextProject.slug}`} data-transition="nav-forward"><span>{nextProject.status}</span><strong>{nextProject.title}</strong><b aria-hidden="true">↗</b></Link>
       </footer>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
     </article>
+    </PageTransition>
   );
 }
