@@ -20,10 +20,10 @@ export default function HomePage() {
           <p>Software engineer · Agentic systems · Applied ML</p>
         </div>
 
-        <div className="hero-name" aria-label="Seyam Alam">
+        <h1 className="hero-name" aria-label="Seyam Alam">
           <span className="hero-word"><i>S</i><i>E</i><i>Y</i><i>A</i><i>M</i></span>
           <span className="hero-word"><i>A</i><i>L</i><i>A</i><i>M</i><BrandMark className="hero-mark" /></span>
-        </div>
+        </h1>
 
         <div className="hero-dossier">
           <figure className="hero-portrait">

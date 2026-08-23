@@ -74,8 +74,8 @@ export const metadata: Metadata = {
 };
 
 const personSchema = {
-  "@context": "https://schema.org",
   "@type": "Person",
+  "@id": `${siteConfig.origin}/#person`,
   name: profile.name,
   url: siteConfig.origin,
   image: `${siteConfig.origin}/profile.jpg`,
@@ -108,6 +108,33 @@ const personSchema = {
   ],
 };
 
+const practiceSchema = {
+  "@type": "ProfessionalService",
+  "@id": `${siteConfig.origin}/#professional-service`,
+  name: "Seyam Alam Software Engineering",
+  url: siteConfig.origin,
+  founder: { "@id": `${siteConfig.origin}/#person` },
+  email: profile.email,
+  telephone: profile.phone,
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "project and research inquiries",
+    email: profile.email,
+    telephone: profile.phone,
+    availableLanguage: ["English", "Bengali"],
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Chattogram",
+    addressCountry: "BD",
+  },
+};
+
+const identitySchema = {
+  "@context": "https://schema.org",
+  "@graph": [personSchema, practiceSchema],
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${bodyFont.variable} ${displayFont.variable}`} data-scroll-behavior="smooth">
@@ -123,7 +150,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <SiteFooter />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema).replace(/</g, "\\u003c") }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(identitySchema).replace(/</g, "\\u003c") }}
         />
       </body>
     </html>
