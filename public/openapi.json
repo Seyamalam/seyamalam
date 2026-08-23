@@ -3,7 +3,8 @@
   "info": {
     "title": "Touhidul Alam Seyam Portfolio API",
     "version": "1.0.0",
-    "description": "Read-only access to published professional profile, software project, and research data. The API has no authentication, writes, pagination, background jobs, or webhooks because each endpoint returns one small public dataset.",
+    "description": "Read-only access to published professional profile, software project, and research data. The API has no authentication, writes, background jobs, or webhooks. Collection endpoints support optional cursor pagination.",
+    "x-deprecation-policy": "https://seyamalam.vercel.app/api-lifecycle.md",
     "contact": {
       "name": "Touhidul Alam Seyam",
       "email": "seyamalam41@gmail.com",
@@ -36,12 +37,28 @@
         "summary": "List published software projects",
         "description": "Returns published projects with contribution summaries, stacks, statuses, and primary artifact URLs. Use the returned nextCursor value to retrieve another page.",
         "parameters": [
-          { "$ref": "#/components/parameters/Limit" },
-          { "$ref": "#/components/parameters/Cursor" }
+          { "name": "limit", "in": "query", "required": false, "description": "Maximum records to return, from 1 through 50.", "schema": { "type": "integer", "minimum": 1, "maximum": 50 } },
+          { "name": "cursor", "in": "query", "required": false, "description": "Continuation value from the preceding response's nextCursor field.", "schema": { "type": "string", "pattern": "^[0-9]+$" } }
         ],
         "responses": {
-          "200": { "description": "Published project collection", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ProjectsResponse" } } } },
-          "400": { "$ref": "#/components/responses/InvalidPagination" },
+          "200": {
+            "description": "Published project collection",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data", "count", "total", "nextCursor"],
+                  "properties": {
+                    "data": { "type": "array", "items": { "$ref": "#/components/schemas/Project" } },
+                    "count": { "type": "integer", "minimum": 0 },
+                    "total": { "type": "integer", "minimum": 0 },
+                    "nextCursor": { "type": ["string", "null"], "description": "Pass this value as cursor to retrieve the next page; null means the collection is complete." }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid pagination parameter", "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/Problem" } } } },
           "405": { "$ref": "#/components/responses/MethodNotAllowed" },
           "default": { "$ref": "#/components/responses/Error" }
         }
@@ -53,12 +70,28 @@
         "summary": "List published research",
         "description": "Returns published research with year, title, venue, publication type, and DOI or primary-record URL. Use the returned nextCursor value to retrieve another page.",
         "parameters": [
-          { "$ref": "#/components/parameters/Limit" },
-          { "$ref": "#/components/parameters/Cursor" }
+          { "name": "limit", "in": "query", "required": false, "description": "Maximum records to return, from 1 through 50.", "schema": { "type": "integer", "minimum": 1, "maximum": 50 } },
+          { "name": "cursor", "in": "query", "required": false, "description": "Continuation value from the preceding response's nextCursor field.", "schema": { "type": "string", "pattern": "^[0-9]+$" } }
         ],
         "responses": {
-          "200": { "description": "Published research collection", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ResearchResponse" } } } },
-          "400": { "$ref": "#/components/responses/InvalidPagination" },
+          "200": {
+            "description": "Published research collection",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data", "count", "total", "nextCursor"],
+                  "properties": {
+                    "data": { "type": "array", "items": { "$ref": "#/components/schemas/Publication" } },
+                    "count": { "type": "integer", "minimum": 0 },
+                    "total": { "type": "integer", "minimum": 0 },
+                    "nextCursor": { "type": ["string", "null"], "description": "Pass this value as cursor to retrieve the next page; null means the collection is complete." }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid pagination parameter", "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/Problem" } } } },
           "405": { "$ref": "#/components/responses/MethodNotAllowed" },
           "default": { "$ref": "#/components/responses/Error" }
         }
