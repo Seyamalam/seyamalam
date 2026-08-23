@@ -20,6 +20,7 @@ export function SiteFooter() {
           <Link href="/contact" data-transition="nav-swap">Contact <span aria-hidden="true">↗</span></Link>
           <Link href="/privacy" data-transition="nav-swap">Privacy <span aria-hidden="true">↗</span></Link>
           <Link href="/developers" data-transition="nav-swap">For agents <span aria-hidden="true">↗</span></Link>
+          <a href="/.well-known/mcp">MCP <span aria-hidden="true">↗</span></a>
         </div>
         <p className="footer-meta">© {new Date().getFullYear()} Touhidul Alam Seyam</p>
       </div>
