@@ -1,0 +1,101 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Touhidul Alam Seyam Portfolio API",
+    "version": "1.0.0",
+    "description": "Read-only access to published professional profile, software project, and research data. The API has no authentication, writes, pagination, background jobs, or webhooks because each endpoint returns one small public dataset.",
+    "contact": {
+      "name": "Touhidul Alam Seyam",
+      "email": "seyamalam41@gmail.com",
+      "url": "https://seyamalam.vercel.app/contact"
+    },
+    "license": {
+      "name": "Portfolio content copyright Touhidul Alam Seyam",
+      "url": "https://seyamalam.vercel.app/privacy"
+    }
+  },
+  "servers": [{ "url": "https://seyamalam.vercel.app", "description": "Production" }],
+  "externalDocs": { "description": "Developer and agent resources", "url": "https://seyamalam.vercel.app/developers" },
+  "paths": {
+    "/api/v1/profile": {
+      "get": {
+        "operationId": "getPortfolioProfile",
+        "summary": "Get the published professional profile",
+        "description": "Returns Touhidul Alam Seyam's published role, location, contact details, and verified profile links.",
+        "responses": {
+          "200": { "description": "Published profile", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ProfileResponse" } } } },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" }
+        }
+      }
+    },
+    "/api/v1/projects": {
+      "get": {
+        "operationId": "listPortfolioProjects",
+        "summary": "List published software projects",
+        "description": "Returns the complete small project collection with contribution summaries, stacks, statuses, and primary artifact URLs. The response is not paginated.",
+        "responses": {
+          "200": { "description": "Published project collection", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ProjectsResponse" } } } },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" }
+        }
+      }
+    },
+    "/api/v1/research": {
+      "get": {
+        "operationId": "listPortfolioResearch",
+        "summary": "List published research",
+        "description": "Returns the complete small publication collection with year, title, venue, publication type, and DOI or primary-record URL. The response is not paginated.",
+        "responses": {
+          "200": { "description": "Published research collection", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ResearchResponse" } } } },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Profile": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "shortName", "role", "location", "email", "phone", "github", "orcid", "scholar", "linkedin", "x"],
+        "properties": {
+          "name": { "type": "string" }, "shortName": { "type": "string" }, "role": { "type": "string" }, "location": { "type": "string" },
+          "email": { "type": "string", "format": "email" }, "phone": { "type": "string" },
+          "github": { "type": "string", "format": "uri" }, "orcid": { "type": "string", "format": "uri" }, "scholar": { "type": "string", "format": "uri" },
+          "linkedin": { "type": "string", "format": "uri" }, "x": { "type": "string", "format": "uri" }
+        }
+      },
+      "Project": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slug", "title", "summary", "contribution", "stack", "href", "status"],
+        "properties": {
+          "slug": { "type": "string" }, "title": { "type": "string" }, "summary": { "type": "string" }, "contribution": { "type": "string" },
+          "stack": { "type": "array", "items": { "type": "string" } }, "href": { "type": "string", "format": "uri" }, "status": { "type": "string" }
+        }
+      },
+      "Publication": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["year", "title", "venue", "href", "kind"],
+        "properties": {
+          "year": { "type": "integer" }, "title": { "type": "string" }, "venue": { "type": "string" }, "href": { "type": "string", "format": "uri" },
+          "kind": { "type": "string", "enum": ["Journal", "Conference", "Chapter", "Preprint"] }
+        }
+      },
+      "Problem": {
+        "type": "object",
+        "required": ["type", "title", "status", "code", "detail", "resolution"],
+        "properties": {
+          "type": { "type": "string", "format": "uri" }, "title": { "type": "string" }, "status": { "type": "integer" },
+          "code": { "type": "string" }, "detail": { "type": "string" }, "resolution": { "type": "string" }
+        }
+      },
+      "ProfileResponse": { "type": "object", "required": ["data"], "properties": { "data": { "$ref": "#/components/schemas/Profile" } } },
+      "ProjectsResponse": { "type": "object", "required": ["data", "count"], "properties": { "data": { "type": "array", "items": { "$ref": "#/components/schemas/Project" } }, "count": { "type": "integer" } } },
+      "ResearchResponse": { "type": "object", "required": ["data", "count"], "properties": { "data": { "type": "array", "items": { "$ref": "#/components/schemas/Publication" } }, "count": { "type": "integer" } } }
+    },
+    "responses": {
+      "MethodNotAllowed": { "description": "The API is read-only", "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/Problem" } } } }
+    }
+  }
+}

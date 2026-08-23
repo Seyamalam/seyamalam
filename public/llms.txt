@@ -29,6 +29,7 @@ Do not use this site as an API for executing code or changing data. The portfoli
 - [MCP endpoint](https://seyamalam.vercel.app/.well-known/mcp): Read-only Model Context Protocol endpoint for portfolio data.
 - [MCP server card](https://seyamalam.vercel.app/.well-known/mcp/server-card.json): Tool metadata and canonical Streamable HTTP server URL.
 - [AI catalog](https://seyamalam.vercel.app/.well-known/ai-catalog.json): Domain-level agent resource discovery catalog.
+- [OpenAPI description](https://seyamalam.vercel.app/openapi.json): Typed read-only JSON endpoints for profile, project, and research data.
 - [Sitemap](https://seyamalam.vercel.app/sitemap.xml): Canonical public route index.
 
 ## Identity and research records

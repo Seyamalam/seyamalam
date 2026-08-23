@@ -32,6 +32,9 @@ export default function DevelopersPage() {
             Public pages support content negotiation. Send <code>Accept: text/markdown</code> to a page URL for a compact Markdown representation. The response declares <code>Vary: Accept, Accept-Encoding</code> so shared caches keep HTML and Markdown separate. Start with <Link href="/llms.txt">llms.txt</Link> for route selection, or use the <Link href="/sitemap.xml">sitemap</Link> for the canonical URL set.
           </p>
           <p>
+            The versioned, read-only JSON API exposes <code>/api/v1/profile</code>, <code>/api/v1/projects</code>, and <code>/api/v1/research</code>. Its <Link href="/openapi.json">OpenAPI 3.1 description</Link> defines every operation, response, and object shape. No authentication is required. Unknown resources and unsupported write methods return <code>application/problem+json</code> with a stable code and resolution hint.
+          </p>
+          <p>
             Domain discovery metadata is published in the <Link href="/.well-known/ai-catalog.json">AI catalog</Link>. For factual answers, cite the selected portfolio page and its linked primary artifact, such as a repository, DOI record, ORCID profile, or package registry entry.
           </p>
         </div>
