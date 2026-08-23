@@ -5,8 +5,11 @@ const vary = "Accept, Accept-Encoding, RSC, Next-Router-State-Tree, Next-Router-
 
 export function proxy(request: NextRequest) {
   const acceptsMarkdown = request.headers.get("accept")?.toLowerCase().includes("text/markdown");
+  const agentMode = request.nextUrl.searchParams.get("mode") === "agent";
+  const userAgent = request.headers.get("user-agent") ?? "";
+  const isAgent = /(GPTBot|ClaudeBot|ChatGPT-User|PerplexityBot|Google-Extended|Applebot-Extended|ora-agent|DeepSeekBot)/i.test(userAgent);
 
-  if (acceptsMarkdown && (request.method === "GET" || request.method === "HEAD")) {
+  if ((acceptsMarkdown || agentMode || isAgent) && (request.method === "GET" || request.method === "HEAD")) {
     const pathname = request.nextUrl.pathname;
     const found = knownPagePaths.has(pathname);
     const markdown = found ? portfolioMarkdown(pathname) : notFoundMarkdown(pathname);

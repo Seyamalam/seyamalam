@@ -1,0 +1,11 @@
+# Portfolio API
+
+> A public, read-only JSON API for Touhidul Alam Seyam's published portfolio data.
+
+- [OpenAPI](https://seyamalam.vercel.app/openapi.json)
+- [Profile](https://seyamalam.vercel.app/api/v1/profile)
+- [Projects](https://seyamalam.vercel.app/api/v1/projects)
+- [Research](https://seyamalam.vercel.app/api/v1/research)
+- [Developer documentation](https://seyamalam.vercel.app/developers)
+
+The API needs no authentication. It has no write operations, user accounts, pagination, background jobs, billing, or webhooks.

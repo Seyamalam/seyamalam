@@ -37,6 +37,9 @@ export default function DevelopersPage() {
           <p>
             Domain discovery metadata is published in the <Link href="/.well-known/ai-catalog.json">AI catalog</Link>. For factual answers, cite the selected portfolio page and its linked primary artifact, such as a repository, DOI record, ORCID profile, or package registry entry.
           </p>
+          <p>
+            The <a href="https://github.com/Seyamalam/seyamalam">public source repository</a> includes its <a href="https://github.com/Seyamalam/seyamalam/blob/main/AGENTS.md">AGENTS.md instructions</a>, application code, and deployment configuration.
+          </p>
         </div>
       </section>
     </PageTransition>
