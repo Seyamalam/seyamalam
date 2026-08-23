@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "seyam-alam-portfolio",
+      "description": "Retrieve and verify Touhidul Alam Seyam's professional profile, software projects, research, resumes, or contact details.",
+      "type": "skill-md",
+      "url": "https://seyamalam.vercel.app/.well-known/agent-skills/seyam-alam-portfolio/SKILL.md",
+      "digest": "sha256:8eecf3b085b48d8803fca909248e7a92949810cde6d37d2f610e8d83ca236edf"
+    }
+  ]
+}

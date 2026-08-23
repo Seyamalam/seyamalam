@@ -30,6 +30,8 @@ Do not use this site as an API for executing code or changing data. The portfoli
 - [MCP server card](https://seyamalam.vercel.app/.well-known/mcp/server-card.json): Tool metadata and canonical Streamable HTTP server URL.
 - [AI catalog](https://seyamalam.vercel.app/.well-known/ai-catalog.json): Domain-level agent resource discovery catalog.
 - [OpenAPI description](https://seyamalam.vercel.app/openapi.json): Typed read-only JSON endpoints for profile, project, and research data.
+- [Agent skill](https://seyamalam.vercel.app/.well-known/agent-skills/seyam-alam-portfolio/SKILL.md): Retrieval and verification workflow for agents.
+- [Source repository](https://github.com/Seyamalam/seyamalam): Public Next.js source with AGENTS.md instructions.
 - [Sitemap](https://seyamalam.vercel.app/sitemap.xml): Canonical public route index.
 
 ## Identity and research records

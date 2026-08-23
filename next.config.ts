@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Link",
-            value: '</sitemap.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="describedby"; type="text/markdown", </openapi.json>; rel="service-desc"; type="application/openapi+json", </.well-known/ai-catalog.json>; rel="ai-catalog"; type="application/ai-catalog+json", </.well-known/mcp>; rel="mcp", </.well-known/mcp/server-card.json>; rel="service-desc"; type="application/mcp-server-card+json"',
+            value: '</sitemap.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="describedby"; type="text/markdown", </index.md>; rel="alternate"; type="text/markdown", </openapi.json>; rel="service-desc"; type="application/openapi+json", </.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json", </.well-known/ai-catalog.json>; rel="ai-catalog"; type="application/ai-catalog+json", </.well-known/mcp>; rel="mcp", </.well-known/mcp/server-card.json>; rel="service-desc"; type="application/mcp-server-card+json"',
           },
         ],
       },

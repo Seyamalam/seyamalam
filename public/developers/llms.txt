@@ -1,0 +1,9 @@
+# Developer and agent resources
+
+> Machine-readable interfaces for Touhidul Alam Seyam's public portfolio data.
+
+- [OpenAPI](https://seyamalam.vercel.app/openapi.json): Typed read-only profile, project, and research endpoints.
+- [MCP](https://seyamalam.vercel.app/.well-known/mcp): Streamable HTTP transport with three read-only tools.
+- [MCP server card](https://seyamalam.vercel.app/.well-known/mcp/server-card.json): Server and tool metadata.
+- [AI catalog](https://seyamalam.vercel.app/.well-known/ai-catalog.json): Domain-level resource catalog.
+- [Agent skill index](https://seyamalam.vercel.app/.well-known/agent-skills/index.json): Discoverable skill metadata.
