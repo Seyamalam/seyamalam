@@ -1,8 +1,8 @@
 import { projects } from "@/data/site";
-import { apiJson, apiOptions, rejectWrites } from "@/lib/portfolio-api";
+import { apiOptions, paginate, rejectWrites } from "@/lib/portfolio-api";
 
-export function GET() {
-  return apiJson({ data: projects, count: projects.length });
+export function GET(request: Request) {
+  return paginate(request, projects);
 }
 
 export const OPTIONS = apiOptions;

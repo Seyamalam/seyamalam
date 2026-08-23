@@ -9,6 +9,46 @@ export function apiJson(data: unknown) {
   return Response.json(data, { headers: apiHeaders });
 }
 
+export function apiProblem(status: number, code: string, detail: string, resolution: string) {
+  return Response.json({
+    type: `https://seyamalam.vercel.app/developers#${code.replaceAll("_", "-")}`,
+    title: status === 400 ? "Invalid request" : "API error",
+    status,
+    code,
+    detail,
+    resolution,
+  }, {
+    status,
+    headers: { ...apiHeaders, "Content-Type": "application/problem+json" },
+  });
+}
+
+export function paginate<T>(request: Request, items: readonly T[]) {
+  const { searchParams } = new URL(request.url);
+  const limitValue = searchParams.get("limit");
+  const cursorValue = searchParams.get("cursor");
+  const limit = limitValue === null ? items.length : Number(limitValue);
+  const offset = cursorValue === null ? 0 : Number(cursorValue);
+
+  if (!Number.isInteger(limit) || limit < 1 || limit > 50) {
+    return apiProblem(400, "invalid_limit", "The limit query parameter must be an integer from 1 through 50.", "Remove limit to retrieve the complete collection, or provide an integer from 1 through 50.");
+  }
+
+  if (!Number.isInteger(offset) || offset < 0 || offset > items.length) {
+    return apiProblem(400, "invalid_cursor", "The cursor query parameter is not a valid collection offset.", "Use the nextCursor value returned by a previous response, or omit cursor to start at the beginning.");
+  }
+
+  const data = items.slice(offset, offset + limit);
+  const nextOffset = offset + data.length;
+
+  return apiJson({
+    data,
+    count: data.length,
+    total: items.length,
+    nextCursor: nextOffset < items.length ? String(nextOffset) : null,
+  });
+}
+
 export function apiOptions() {
   return new Response(null, { status: 204, headers: apiHeaders });
 }

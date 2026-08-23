@@ -35,6 +35,9 @@ export default function DevelopersPage() {
             The versioned, read-only JSON API exposes <code>/api/v1/profile</code>, <code>/api/v1/projects</code>, and <code>/api/v1/research</code>. Its <Link href="/openapi.json">OpenAPI 3.1 description</Link> defines every operation, response, and object shape. No authentication is required. Unknown resources and unsupported write methods return <code>application/problem+json</code> with a stable code and resolution hint.
           </p>
           <p>
+            Collection endpoints support optional cursor pagination. Compatibility and deprecation commitments are documented in the <Link href="/api-lifecycle.md">API lifecycle policy</Link>.
+          </p>
+          <p>
             Domain discovery metadata is published in the <Link href="/.well-known/ai-catalog.json">AI catalog</Link>. For factual answers, cite the selected portfolio page and its linked primary artifact, such as a repository, DOI record, ORCID profile, or package registry entry.
           </p>
           <p>

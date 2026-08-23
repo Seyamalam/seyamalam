@@ -16,6 +16,7 @@
   },
   "servers": [{ "url": "https://seyamalam.vercel.app", "description": "Production" }],
   "externalDocs": { "description": "Developer and agent resources", "url": "https://seyamalam.vercel.app/developers" },
+  "x-api-lifecycle": "https://seyamalam.vercel.app/api-lifecycle.md",
   "paths": {
     "/api/v1/profile": {
       "get": {
@@ -24,7 +25,8 @@
         "description": "Returns Touhidul Alam Seyam's published role, location, contact details, and verified profile links.",
         "responses": {
           "200": { "description": "Published profile", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ProfileResponse" } } } },
-          "405": { "$ref": "#/components/responses/MethodNotAllowed" }
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "default": { "$ref": "#/components/responses/Error" }
         }
       }
     },
@@ -32,10 +34,16 @@
       "get": {
         "operationId": "listPortfolioProjects",
         "summary": "List published software projects",
-        "description": "Returns the complete small project collection with contribution summaries, stacks, statuses, and primary artifact URLs. The response is not paginated.",
+        "description": "Returns published projects with contribution summaries, stacks, statuses, and primary artifact URLs. Use the returned nextCursor value to retrieve another page.",
+        "parameters": [
+          { "$ref": "#/components/parameters/Limit" },
+          { "$ref": "#/components/parameters/Cursor" }
+        ],
         "responses": {
           "200": { "description": "Published project collection", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ProjectsResponse" } } } },
-          "405": { "$ref": "#/components/responses/MethodNotAllowed" }
+          "400": { "$ref": "#/components/responses/InvalidPagination" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "default": { "$ref": "#/components/responses/Error" }
         }
       }
     },
@@ -43,10 +51,16 @@
       "get": {
         "operationId": "listPortfolioResearch",
         "summary": "List published research",
-        "description": "Returns the complete small publication collection with year, title, venue, publication type, and DOI or primary-record URL. The response is not paginated.",
+        "description": "Returns published research with year, title, venue, publication type, and DOI or primary-record URL. Use the returned nextCursor value to retrieve another page.",
+        "parameters": [
+          { "$ref": "#/components/parameters/Limit" },
+          { "$ref": "#/components/parameters/Cursor" }
+        ],
         "responses": {
           "200": { "description": "Published research collection", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ResearchResponse" } } } },
-          "405": { "$ref": "#/components/responses/MethodNotAllowed" }
+          "400": { "$ref": "#/components/responses/InvalidPagination" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "default": { "$ref": "#/components/responses/Error" }
         }
       }
     }
@@ -91,11 +105,17 @@
         }
       },
       "ProfileResponse": { "type": "object", "required": ["data"], "properties": { "data": { "$ref": "#/components/schemas/Profile" } } },
-      "ProjectsResponse": { "type": "object", "required": ["data", "count"], "properties": { "data": { "type": "array", "items": { "$ref": "#/components/schemas/Project" } }, "count": { "type": "integer" } } },
-      "ResearchResponse": { "type": "object", "required": ["data", "count"], "properties": { "data": { "type": "array", "items": { "$ref": "#/components/schemas/Publication" } }, "count": { "type": "integer" } } }
+      "ProjectsResponse": { "type": "object", "required": ["data", "count", "total", "nextCursor"], "properties": { "data": { "type": "array", "items": { "$ref": "#/components/schemas/Project" } }, "count": { "type": "integer", "minimum": 0 }, "total": { "type": "integer", "minimum": 0 }, "nextCursor": { "type": ["string", "null"] } } },
+      "ResearchResponse": { "type": "object", "required": ["data", "count", "total", "nextCursor"], "properties": { "data": { "type": "array", "items": { "$ref": "#/components/schemas/Publication" } }, "count": { "type": "integer", "minimum": 0 }, "total": { "type": "integer", "minimum": 0 }, "nextCursor": { "type": ["string", "null"] } } }
+    },
+    "parameters": {
+      "Limit": { "name": "limit", "in": "query", "required": false, "description": "Maximum records to return. Omit to retrieve this small collection in one response.", "schema": { "type": "integer", "minimum": 1, "maximum": 50 } },
+      "Cursor": { "name": "cursor", "in": "query", "required": false, "description": "Opaque continuation value from the preceding response's nextCursor field.", "schema": { "type": "string", "pattern": "^[0-9]+$" } }
     },
     "responses": {
-      "MethodNotAllowed": { "description": "The API is read-only", "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/Problem" } } } }
+      "InvalidPagination": { "description": "A pagination query parameter is invalid", "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/Problem" } } } },
+      "MethodNotAllowed": { "description": "The API is read-only", "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/Problem" } } } },
+      "Error": { "description": "Structured API error", "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/Problem" } } } }
     }
   }
 }
