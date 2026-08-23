@@ -11,7 +11,7 @@
       "identifier": "urn:air:seyamalam.vercel.app:mcp:portfolio",
       "displayName": "Touhidul Alam Seyam Portfolio MCP",
       "type": "application/mcp-server-card+json",
-      "url": "https://seyamalam.vercel.app/.well-known/mcp/server-card.json",
+      "url": "https://seyamalam.vercel.app/.well-known/mcp",
       "version": "1.0.0",
       "description": "Read-only tools for published profile, project, research, and contact information.",
       "tags": ["portfolio", "software-engineering", "research", "read-only"],
