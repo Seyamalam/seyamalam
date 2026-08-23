@@ -4,6 +4,7 @@
   "description": "Read-only access to Touhidul Alam Seyam's published profile, software projects, research, and contact links.",
   "version": "1.0.0",
   "serverUrl": "https://seyamalam.vercel.app/.well-known/mcp",
+  "endpoint": "https://seyamalam.vercel.app/.well-known/mcp",
   "transport": "streamable-http",
   "icon": "https://seyamalam.vercel.app/favicon/mark.svg",
   "tools": [
