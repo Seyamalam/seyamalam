@@ -1,4 +1,3 @@
-import { handleMcpPost, mcpDiscovery } from "@/lib/portfolio-mcp";
+import { portfolioMcpHandler } from "@/lib/portfolio-mcp";
 
-export const GET = mcpDiscovery;
-export const POST = handleMcpPost;
+export { portfolioMcpHandler as GET, portfolioMcpHandler as POST };

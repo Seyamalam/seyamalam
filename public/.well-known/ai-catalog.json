@@ -1,0 +1,26 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Touhidul Alam Seyam",
+    "identifier": "https://seyamalam.vercel.app/",
+    "documentationUrl": "https://seyamalam.vercel.app/developers",
+    "logoUrl": "https://seyamalam.vercel.app/favicon/mark.svg"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:seyamalam.vercel.app:mcp:portfolio",
+      "displayName": "Touhidul Alam Seyam Portfolio MCP",
+      "type": "application/mcp-server-card+json",
+      "url": "https://seyamalam.vercel.app/.well-known/mcp/server-card.json",
+      "version": "1.0.0",
+      "description": "Read-only tools for published profile, project, research, and contact information.",
+      "tags": ["portfolio", "software-engineering", "research", "read-only"],
+      "publisher": {
+        "identifier": "https://seyamalam.vercel.app/",
+        "displayName": "Touhidul Alam Seyam",
+        "identityType": "https"
+      },
+      "updatedAt": "2026-08-23T00:00:00Z"
+    }
+  ]
+}
