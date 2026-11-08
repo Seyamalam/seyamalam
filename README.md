@@ -76,12 +76,7 @@ I'm a software engineer and applied AI researcher working across the full stack 
 
 <div align="center">
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=Seyamalam&show_icons=true&theme=tokyonight&hide_border=false&count_private=true" alt="GitHub Stats" />
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Seyamalam&layout=compact&theme=tokyonight&hide_border=false" alt="Top Languages" />
-
-<img src="https://streak-stats.demolab.com?user=Seyamalam&theme=tokyonight&hide_border=false" alt="GitHub Streak" />
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=Seyamalam&theme=tokyo-night&hide_border=false" alt="Activity Graph" />
+  <img src="https://streak-stats.demolab.com?user=Seyamalam&theme=tokyonight&hide_border=false" alt="GitHub Streak" />
 
 </div>
 
