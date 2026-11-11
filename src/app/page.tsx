@@ -1,70 +1,47 @@
-import Image from "next/image";
 import Link from "next/link";
-import { BrandMark } from "@/components/brand-mark";
+import { ApiTerminal } from "@/components/api-terminal";
+import { LiquidType } from "@/components/liquid-type";
 import { PageTransition } from "@/components/page-transition";
+import { PinnedChapters } from "@/components/pinned-chapters";
 import { ProjectCard } from "@/components/project-card";
 import { profile, projects, publications } from "@/data/site";
 
 const proofPoints = [
+  { value: String(projects.length), label: "systems with case studies" },
   { value: "10", label: "published research works" },
-  { value: "209", label: "bun-scikit runtime exports" },
+  { value: "87/87", label: "fasterapi byte-parity tests" },
   { value: "04", label: "hackathon podium results" },
 ] as const;
 
+const labLinks = [
+  { slug: "fasterapi", note: "FastAPI drop-in · Rust Hyper host" },
+  { slug: "fulmen", note: "typed Python framework · no ASGI" },
+  { slug: "trpc-rs-py", note: "Python tRPC · live types" },
+  { slug: "wasmosaic", note: "WASM image ops · opencv parity" },
+  { slug: "bun-nltk", note: "NLTK surface · Rust core" },
+  { slug: "bun-panda", note: "pandas API · Bun runtime" },
+] as const;
+
 export default function HomePage() {
+  const featured = projects.slice(0, 4);
   return (
     <PageTransition>
-      <section className="studio-hero shell" id="overview">
-        <div className="studio-hero-meta">
-          <p><span className="status-dot" /> {profile.location}</p>
-          <p>Software engineer · Agentic systems · Applied ML</p>
-        </div>
-
-        <h1 className="hero-name" aria-label="Seyam Alam">
-          <span className="hero-word"><i>S</i><i>E</i><i>Y</i><i>A</i><i>M</i></span>
-          <span className="hero-word"><i>A</i><i>L</i><i>A</i><i>M</i><BrandMark className="hero-mark" /></span>
-        </h1>
-
-        <div className="hero-dossier">
-          <figure className="hero-portrait">
-            <Image
-              src="/profile.jpg"
-              alt="Touhidul Alam Seyam"
-              width={900}
-              height={1200}
-              sizes="(max-width: 760px) 46vw, 260px"
-              preload
-              quality={75}
-            />
-            <figcaption><span>Profile / 2026</span><b>22.3569° N<br />91.7832° E</b></figcaption>
-          </figure>
-
-          <div className="hero-thesis">
-            <p>I build software that survives contact with the real world.</p>
-            <span>Production systems, agentic workflows, reproducible experiments, and useful interfaces.</span>
+      <section className="home-hero shell" id="overview" data-enter>
+        <div className="home-hero-copy">
+          <p className="eyebrow"><span className="status-dot" />{profile.location} · open to remote</p>
+          <h1>Software with a Rust core — and receipts.</h1>
+          <p className="hero-lede">
+            I&apos;m {profile.name} — a software engineer shipping backend frameworks, developer
+            tools, and agentic systems. Everything here links to a test, a benchmark, a DOI, or a repo.
+          </p>
+          <div className="hero-actions">
+            <Link className="button button-primary" href="/projects" data-transition="nav-forward">Open the systems <span aria-hidden="true">↗</span></Link>
+            <Link className="button button-ghost" href="/contact" data-transition="nav-swap">Bring a real problem <span aria-hidden="true">→</span></Link>
           </div>
-
-          <aside className="hero-now" aria-label="Current work">
-            <p>NOW / 08.2026</p>
-            <strong>Software Engineer</strong>
-            <span>Agentic Institute · building systems around intelligent behavior.</span>
-            <Link href="/projects" data-transition="nav-forward">Enter the work <b aria-hidden="true">↗</b></Link>
-          </aside>
+          <p className="hero-proof-line">Currently: Software Engineer · Agentic Institute</p>
         </div>
-
-        <div className="resume-action-bar" aria-label="Resume downloads">
-          <span className="resume-action-label"><b>RESUME</b><small>Choose an edition</small></span>
-          <div className="resume-actions">
-            <a href="/resume/software-engineer-ats.pdf" download><i>01</i><span>Software</span><b>↓</b></a>
-            <a href="/resume/ml-research-ats.pdf" download><i>02</i><span>ML + agents</span><b>↓</b></a>
-            <a href="/resume/full-stack-compact-ats.pdf" download><i>03</i><span>Full-stack</span><b>↓</b></a>
-            <a href="/resume/universal-ats.pdf" download><i>04</i><span>Universal</span><b>↓</b></a>
-          </div>
-          <a className="resume-all" href="/resume/ats-resume-pack.zip" download data-tooltip="PDF + editable DOCX files">All files <b>↓</b></a>
-        </div>
-
-        <div className="hero-command-line" aria-hidden="true">
-          <span>web</span><i>/</i><span>backend</span><i>/</i><span>agents</span><i>/</i><span>ml</span><b>↓</b>
+        <div className="home-hero-art">
+          <ApiTerminal />
         </div>
       </section>
 
@@ -80,7 +57,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section shell selected-work deferred-section" id="work">
+      <section className="section shell selected-work" id="work">
         <div className="section-heading">
           <div>
             <p className="eyebrow">Selected fieldwork</p>
@@ -89,20 +66,65 @@ export default function HomePage() {
           <p>Open the interface, the architecture, the code, and the constraint behind it.</p>
         </div>
         <div className="project-list">
-          {projects.slice(0, 3).map((project, index) => (
+          {featured.map((project, index) => (
             <ProjectCard key={project.title} project={project} index={index} />
           ))}
         </div>
         <div className="section-action">
-          <Link className="text-link" href="/projects" data-transition="nav-forward">All eleven systems <span aria-hidden="true">↗</span></Link>
+          <Link className="text-link" href="/projects" data-transition="nav-forward">All {projects.length} systems <span aria-hidden="true">↗</span></Link>
         </div>
       </section>
 
       <section className="capability-marquee" aria-label="Technical capabilities">
-        <div>{Array.from({ length: 2 }, (_, copy) => <p key={copy} aria-hidden={copy === 1}><span>BUN + TYPESCRIPT</span><i>◆</i><span>AGENT EVALUATION</span><i>◆</i><span>NEXT.JS 16</span><i>◆</i><span>GO + GRPC</span><i>◆</i><span>APPLIED ML</span><i>◆</i><span>OFFLINE SYSTEMS</span><i>◆</i></p>)}</div>
+        <div>{Array.from({ length: 2 }, (_, copy) => <p key={copy} aria-hidden={copy === 1}><span>RUST CORES</span><i>◆</i><span>PYTHON + TYPESCRIPT SURFACES</span><i>◆</i><span>WASM</span><i>◆</i><span>AGENT EVALUATION</span><i>◆</i><span>NEXT.JS 16</span><i>◆</i><span>OFFLINE SYSTEMS</span><i>◆</i></p>)}</div>
       </section>
 
-      <section className="section research-band deferred-section" id="research">
+      <section className="section lab-band" aria-label="Current focus">
+        <div className="shell lab-grid">
+          <div className="lab-copy">
+            <p className="eyebrow">Current direction · 2026</p>
+            <h2>One idea, shipped six ways: typed surfaces, Rust underneath.</h2>
+            <p>
+              The newest work in the index shares one bet — Python and TypeScript keep the
+              ergonomics people already know, while Rust, PyO3, and WebAssembly take the hot
+              path. Each project ships with parity tests and honest gap lists.
+            </p>
+            <ul className="lab-links" aria-label="Rust-core projects">
+              {labLinks.map((item) => (
+                <li key={item.slug}>
+                  <Link href={`/projects/${item.slug}`} data-transition="nav-forward">
+                    <b>{projects.find((p) => p.slug === item.slug)?.title}</b>
+                    <span>{item.note}</span>
+                    <i aria-hidden="true">↗</i>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="lab-diagram" aria-hidden="true">
+            <div className="lab-lane lab-lane-surface">
+              <span>surface</span>
+              <b>Python · TypeScript</b>
+              <i>the API people already know</i>
+            </div>
+            <div className="lab-beam"><em>pyo3 · napi · wasm</em><u /></div>
+            <div className="lab-lane lab-lane-core">
+              <span>core</span>
+              <b>Rust</b>
+              <i>routing · pixels · tokenizers · frames</i>
+            </div>
+            <div className="lab-outcomes">
+              <p><b>6</b><span>packages</span></p>
+              <p><b>1.3k+</b><span>passing checks</span></p>
+              <p><b>0</b><span>silent gaps</span></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <PinnedChapters />
+
+      <section className="section research-band" id="research">
         <div className="shell research-feature">
           <div>
             <p className="eyebrow eyebrow-light">Latest published work</p>
@@ -116,16 +138,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section shell split-section deferred-section" id="method">
-        <div>
-          <p className="eyebrow">Operating method</p>
-          <h2>Make it legible. Then make it fast.</h2>
+      <section className="liquid-wrap" aria-label="Statement">
+        <LiquidType text="RECEIPTS, NOT ADJECTIVES." />
+      </section>
+
+      <section className="section shell home-cta">
+        <div className="home-cta-inner">
+          <p className="eyebrow">Contact</p>
+          <h2>Bring a real problem.</h2>
+          <p>Web, backend, agents, applied ML — or a system that should be faster than it is.</p>
+          <div className="hero-actions">
+            <a className="button button-primary" href={`mailto:${profile.email}?subject=Project%20inquiry`}>Start an email <span aria-hidden="true">↗</span></a>
+            <Link className="button button-ghost" href="/contact" data-transition="nav-swap">Resumes + profiles <span aria-hidden="true">→</span></Link>
+          </div>
         </div>
-        <ol className="method-list">
-          <li><span>Contract</span><div><strong>Define what must be true</strong><p>Name the user, the boundary, and the evidence that counts as success.</p></div></li>
-          <li><span>Path</span><div><strong>Build one complete route</strong><p>Prefer visible system behavior over framework ceremony.</p></div></li>
-          <li><span>Proof</span><div><strong>Measure before promotion</strong><p>Use tests, benchmarks, replays, and production checks.</p></div></li>
-        </ol>
       </section>
     </PageTransition>
   );

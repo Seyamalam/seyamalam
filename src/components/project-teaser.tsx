@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 
 type ProjectTeaserProps = { slug: string };
 type MediaPreviewProps = {
@@ -128,6 +129,101 @@ function ZodicPreview() {
   );
 }
 
+function FasterApiPreview() {
+  return (
+    <div className="project-preview project-preview-code preview-rust" role="img" aria-label="fasterapi Rust host serving a FastAPI app with byte-parity tests">
+      <div className="preview-code-header"><span>serve.py</span><strong>rust host</strong></div>
+      <pre><code><span className="code-muted">01</span> <b>from</b> fasterapi <b>import</b> FastAPI{"\n"}<span className="code-muted">02</span> app = FastAPI(){"\n"}<span className="code-muted">03</span> app.serve() <em># hyper/tokio</em></code></pre>
+      <div className="preview-proof-row"><span><i />87/87 byte-parity</span><strong>~15µs</strong></div>
+    </div>
+  );
+}
+
+function FulmenPreview() {
+  return (
+    <div className="project-preview project-preview-code preview-layers" role="img" aria-label="Fulmen layered architecture from Python handlers to Rust transport">
+      <div className="preview-code-header"><span>layers</span><strong>no asgi</strong></div>
+      <div className="preview-layers-list">
+        <div><span>handlers</span><b>def · async def</b></div>
+        <div><span>fulmen core</span><b>rust</b></div>
+        <div><span>transport</span><b>hyper+tokio</b></div>
+      </div>
+      <div className="preview-proof-row"><span><i />type hints = contract</span><strong>3.12+</strong></div>
+    </div>
+  );
+}
+
+function WasmosaicPreview() {
+  return (
+    <div className="project-preview project-preview-code preview-wasm" role="img" aria-label="WASMosaic pixel buffer transform through WebAssembly">
+      <div className="preview-code-header"><span>pixels</span><strong>wasm</strong></div>
+      <div className="preview-pixel-strip" aria-hidden="true">
+        {[214, 96, 34, 240, 180, 61, 22, 130].map((v, i) => <i key={i} style={{ "--px": v } as CSSProperties} />)}
+        <em>→</em>
+        {[214, 96, 34, 240, 180, 61, 22, 130].map((v, i) => <i key={`g${i}`} className="px-gray" style={{ "--px": Math.round(v * 0.35 + 30) } as CSSProperties} />)}
+      </div>
+      <div className="preview-proof-row"><span><i />cv.grayscale</span><strong>0.1.0</strong></div>
+    </div>
+  );
+}
+
+function BunNltkPreview() {
+  return (
+    <div className="project-preview project-preview-code preview-nlp" role="img" aria-label="bun_nltk module surface checklist">
+      <div className="preview-code-header"><span>nltk.*</span><strong>241/241</strong></div>
+      <div className="preview-nlp-list">
+        <p><span>tokenize</span><b>✓</b></p><p><span>stem</span><b>✓</b></p>
+        <p><span>tag</span><b>✓</b></p><p><span>corpus</span><b className="nlp-gap">doc’d gap</b></p>
+      </div>
+      <div className="preview-proof-row"><span><i />1,251 bun checks</span><strong>PASS</strong></div>
+    </div>
+  );
+}
+
+function BunPandaPreview() {
+  return (
+    <div className="project-preview project-preview-code preview-df" role="img" aria-label="bun_panda groupby aggregation code">
+      <div className="preview-code-header"><span>frame.ts</span><strong>pandas-api</strong></div>
+      <pre><code>df.<b>groupby</b>(<em>&quot;region&quot;</em>){"\n"}{"  "}.agg({"{"} revenue: <em>&quot;sum&quot;</em> {"}"}){"\n"}{"  "}.sort_values(<em>&quot;revenue&quot;</em>)</code></pre>
+      <div className="preview-proof-row"><span><i />read_csv → to_excel</span><strong>40+ ops</strong></div>
+    </div>
+  );
+}
+
+function TrpcPyPreview() {
+  return (
+    <div className="project-preview project-preview-code preview-rpc" role="img" aria-label="Python procedure called through a typed TypeScript client">
+      <div className="preview-code-header"><span>py → ts</span><strong>0.2.0</strong></div>
+      <pre><code>@router.query{"\n"}<b>def</b> greeting(name: <em>str</em>):{"\n"}<span className="code-muted"># trpc.greeting.query() → string</span></code></pre>
+      <div className="preview-proof-row"><span><i />live type sync</span><strong>SSE ✓</strong></div>
+    </div>
+  );
+}
+
+function PaperAmigoPreview() {
+  return (
+    <div className="project-preview project-preview-code preview-paper" role="img" aria-label="Paper Amigo labeled share link flow">
+      <div className="preview-code-header"><span>share</span><strong>live</strong></div>
+      <div className="preview-paper-flow">
+        <span>draft.pdf</span><em>→</em><span>/s/committee</span><em>→</em><span>critique ✓</span>
+      </div>
+      <div className="preview-proof-row"><span><i />no recipient accounts</span><strong>vercel</strong></div>
+    </div>
+  );
+}
+
+function WorkbenchPreview() {
+  return (
+    <div className="project-preview project-preview-code preview-bench" role="img" aria-label="Vision workbench tool grid">
+      <div className="preview-code-header"><span>workbench</span><strong>gpui</strong></div>
+      <div className="preview-bench-grid">
+        <b>audit</b><b>eval</b><b>xai</b><b>agent</b>
+      </div>
+      <div className="preview-proof-row"><span><i />native window</span><strong>rust</strong></div>
+    </div>
+  );
+}
+
 export function ProjectTeaser({ slug }: ProjectTeaserProps) {
   const media = mediaPreviews[slug];
   if (media) return <MediaPreview {...media} />;
@@ -136,5 +232,13 @@ export function ProjectTeaser({ slug }: ProjectTeaserProps) {
   if (slug === "kaggriculture-agent") return <KaggriculturePreview />;
   if (slug === "fold-safe-ml-pipelines") return <FoldSafePreview />;
   if (slug === "zodic") return <ZodicPreview />;
+  if (slug === "fasterapi") return <FasterApiPreview />;
+  if (slug === "fulmen") return <FulmenPreview />;
+  if (slug === "wasmosaic") return <WasmosaicPreview />;
+  if (slug === "bun-nltk") return <BunNltkPreview />;
+  if (slug === "bun-panda") return <BunPandaPreview />;
+  if (slug === "trpc-rs-py") return <TrpcPyPreview />;
+  if (slug === "paper-amigo") return <PaperAmigoPreview />;
+  if (slug === "vision-workbench") return <WorkbenchPreview />;
   return null;
 }

@@ -187,6 +187,160 @@ model.fit(XTrain, yTrain);`}</code></pre>
     );
   }
 
+  if (detail.visual === "rust-bridge") {
+    return (
+      <div className="artifact artifact-rust" aria-label="fasterapi request path crossing once from Python into the Rust host">
+        <div className="artifact-window-bar"><span /><span /><span /><b>ONE GIL CROSSING</b></div>
+        <div className="rust-lanes" aria-hidden="true">
+          <div className="rust-lane rust-lane-py">
+            <span>python</span>
+            <b>@app.get</b>
+            <i>your handler</i>
+          </div>
+          <div className="rust-beam">
+            <em>~15µs</em>
+            <u />
+            <em>req → res</em>
+          </div>
+          <div className="rust-lane rust-lane-rs">
+            <span>rust host</span>
+            <b>hyper · tokio</b>
+            <i>matchit · json · validate</i>
+          </div>
+        </div>
+        <div className="rust-foot" aria-hidden="true"><p><span>diff suite</span><b>87/87</b></p><p><span>loopback</span><b>13k req/s</b></p><p><span>uvicorn fallback</span><b>ENV=1</b></p></div>
+      </div>
+    );
+  }
+
+  if (detail.visual === "framework-core") {
+    return (
+      <div className="artifact artifact-core" aria-label="Fulmen layered architecture with a Rust spine">
+        <div className="artifact-window-bar"><span /><span /><span /><b>NO ASGI LAYER</b></div>
+        <div className="core-stack" aria-hidden="true">
+          <div className="core-layer core-py"><span>your code</span><b>def / async def handlers</b><i>type hints = contract</i></div>
+          <div className="core-seam"><em>pyo3</em></div>
+          <div className="core-layer core-rs"><span>fulmen core · rust</span><b>router · validate · serialize</b><i>security headers · CORS deny-by-default</i></div>
+          <div className="core-layer core-io"><span>transport</span><b>hyper + tokio</b><i>limits · timeouts</i></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (detail.visual === "wasm-pixels") {
+    const before = [214, 96, 34, 240, 180, 61, 22, 130, 255, 88, 156, 43];
+    const after = before.map((v) => Math.round(v * 0.299 + 30 * 0.587 + 20 * 0.114));
+    return (
+      <div className="artifact artifact-wasm" aria-label="WASMosaic grayscale transform on pixel buffers inside WASM memory">
+        <div className="artifact-window-bar"><span /><span /><span /><b>RUST OWNS THE LOOPS</b></div>
+        <div className="wasm-grid-wrap" aria-hidden="true">
+          <div className="wasm-grid">
+            <span className="wasm-grid-label">ImageData.in</span>
+            {before.map((v, i) => <i key={i} style={{ "--px": v } as CSSProperties} />)}
+          </div>
+          <div className="wasm-op"><b>cv.grayscale</b><em>wasm · memcpy 1×</em></div>
+          <div className="wasm-grid">
+            <span className="wasm-grid-label">ImageData.out</span>
+            {after.map((v, i) => <i key={i} style={{ "--px": v } as CSSProperties} />)}
+          </div>
+        </div>
+        <div className="rust-foot" aria-hidden="true"><p><span>npm</span><b>0.1.0</b></p><p><span>parity target</span><b>opencv.js 4.13</b></p><p><span>api</span><b>typed</b></p></div>
+      </div>
+    );
+  }
+
+  if (detail.visual === "nlp-surface") {
+    const rows = [
+      ["tokenize", "complete"], ["stem", "complete"], ["tag", "complete"],
+      ["parse", "gated"], ["chunk", "complete"], ["corpus", "documented gap"],
+    ];
+    return (
+      <div className="artifact artifact-nlp" aria-label="bun_nltk module surface checklist and fidelity counts">
+        <div className="artifact-window-bar"><span /><span /><span /><b>241/241 SURFACES</b></div>
+        <div className="nlp-board" aria-hidden="true">
+          {rows.map(([name, state]) => (
+            <div className="nlp-row" key={name} data-state={state === "documented gap" ? "gap" : state === "gated" ? "part" : "ok"}>
+              <span>nltk.{name}</span><b>{state}</b>
+            </div>
+          ))}
+        </div>
+        <div className="rust-foot" aria-hidden="true"><p><span>mappings</span><b>2,983</b></p><p><span>bun tests</span><b>1,251</b></p><p><span>wasm</span><b>1.09 MB</b></p></div>
+      </div>
+    );
+  }
+
+  if (detail.visual === "dataframe-ops") {
+    const rows = [["Dhaka", "12"], ["Sylhet", "7"], ["Rajshahi", "4"], ["Dhaka", "9"]];
+    const totals = [["Dhaka", "21"], ["Sylhet", "7"], ["Rajshahi", "4"]];
+    return (
+      <div className="artifact artifact-df" aria-label="bun_panda dataframe groupby aggregation">
+        <div className="artifact-window-bar"><span /><span /><span /><b>PANDAS-NAMED</b></div>
+        <div className="df-wrap" aria-hidden="true">
+          <table className="df-table">
+            <thead><tr><th>region</th><th>orders</th></tr></thead>
+            <tbody>{rows.map(([r, o], i) => <tr key={i}><td>{r}</td><td>{o}</td></tr>)}</tbody>
+          </table>
+          <div className="df-arrow"><code>.groupby(&quot;region&quot;).agg()</code><em>→</em></div>
+          <table className="df-table df-out">
+            <thead><tr><th>region</th><th>Σ orders</th></tr></thead>
+            <tbody>{totals.map(([r, o]) => <tr key={r}><td>{r}</td><td>{o}</td></tr>)}</tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
+
+  if (detail.visual === "typed-rpc") {
+    return (
+      <div className="artifact artifact-rpc" aria-label="Python tRPC procedure producing a typed TypeScript client call">
+        <div className="artifact-window-bar"><span /><span /><span /><b>LIVE TYPE SYNC</b></div>
+        <div className="rpc-panes" aria-hidden="true">
+          <div className="rpc-pane rpc-py">
+            <span>server.py</span>
+            <pre>{`@router.query\ndef greeting(name: str) -> str:\n    return f"Hello {name}!"`}</pre>
+          </div>
+          <div className="rpc-link"><em>trpc-py dev</em><u /></div>
+          <div className="rpc-pane rpc-ts">
+            <span>client.ts</span>
+            <pre>{`const r = await trpc.greeting\n  .query({ name: "Ada" });`}</pre>
+            <div className="rpc-hover">const r: <b>string</b></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (detail.visual === "paper-share") {
+    return (
+      <div className="artifact artifact-paper" aria-label="Paper Amigo flow from project to labeled link to critique">
+        <div className="artifact-window-bar"><span /><span /><span /><b>NO ACCOUNT WALLS</b></div>
+        <div className="paper-flow" aria-hidden="true">
+          <div className="paper-card"><span>project</span><b>swnet-v2.pdf</b><i>+ supplement</i></div>
+          <em>→</em>
+          <div className="paper-card paper-card-link"><span>labeled link</span><b>/s/committee-review</b><i>opens without signup</i></div>
+          <em>→</em>
+          <div className="paper-card"><span>critique</span><b>“table 2 n=?”</b><i>anchored to the file</i></div>
+        </div>
+        <div className="rust-foot" aria-hidden="true"><p><span>stack</span><b>next 16 · convex</b></p><p><span>uploads</span><b>uploadthing</b></p><p><span>live</span><b>vercel</b></p></div>
+      </div>
+    );
+  }
+
+  if (detail.visual === "workbench") {
+    const tools = [["audit", "datasets"], ["eval", "runs"], ["xai", "inspect"], ["agent", "json out"]];
+    return (
+      <div className="artifact artifact-bench" aria-label="Vision Research Workbench tool grid in a native GPUI window">
+        <div className="artifact-window-bar"><span /><span /><span /><b>GPUI · NATIVE</b></div>
+        <div className="bench-grid" aria-hidden="true">
+          {tools.map(([name, sub]) => (
+            <div className="bench-cell" key={name}><span>{sub}</span><b>{name}</b></div>
+          ))}
+        </div>
+        <p className="bench-foot" aria-hidden="true">one window · reproducible runs · agent-ready output</p>
+      </div>
+    );
+  }
+
   return (
     <div className="artifact artifact-validation" aria-label="Zodic validation flow from payload to typed result">
       <div className="validation-input">

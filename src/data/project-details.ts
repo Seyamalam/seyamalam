@@ -9,7 +9,15 @@ export type ProjectVisual =
   | "concept-production"
   | "agent-replay"
   | "fold-pipeline"
-  | "validation-flow";
+  | "validation-flow"
+  | "rust-bridge"
+  | "framework-core"
+  | "wasm-pixels"
+  | "nlp-surface"
+  | "dataframe-ops"
+  | "typed-rpc"
+  | "paper-share"
+  | "workbench";
 
 export type ProjectMedia = {
   src: string;
@@ -524,6 +532,223 @@ gate.require_non_negative_mean_delta()`,
 
     model.fit(X_train, y.iloc[outer_train])
     oof[valid] = model.predict_proba(X_valid)[:, 1]`,
+  },
+  fasterapi: {
+    visual: "rust-bridge",
+    thesis: "Your FastAPI file stops changing; the server underneath becomes Rust.",
+    challenge: "Python web teams pay for convenience with interpreter-bound request paths — ASGI dispatch, routing, JSON, and validation all execute in Python before the handler runs.",
+    response: "I built a FastAPI-compatible surface — decorators, Path/Query/Body/Form, Pydantic v2 validation, Depends() DI, exception handlers, lifespan, middleware, TestClient, and OpenAPI — then moved the hot path into a PyO3 extension: a native Hyper/Tokio host, matchit routing, JSON helpers, scalar validators, token-bucket rate limiting, and a compiled dependency DAG.",
+    outcome: "When the extension is built, app.serve() runs on the Rust host: one GIL crossing per request, ~15µs of bridge overhead, ~13k req/s serial keep-alive on loopback — roughly 2× the Python-driven path — verified by an 87-test byte-parity differential suite.",
+    proof: [
+      { value: "87/87", label: "byte-parity differential tests" },
+      { value: "~15µs", label: "bridge overhead per request" },
+      { value: "13k", label: "req/s on loopback" },
+      { value: "1", label: "GIL crossing per request" },
+    ],
+    decisions: [
+      { title: "Parity is measured in bytes", description: "Status, headers, and bodies are diffed against real FastAPI responses — compatibility is a test result, not a claim." },
+      { title: "The fallback stays real", description: "FASTERAPI_UVICORN=1 returns the app to a Python-driven path, so the Rust host is an acceleration, not a trap." },
+      { title: "Rust takes the primitives first", description: "Routing, JSON, scalar validation, rate limiting, and dependency graphs compile in Rust before the serving layer commits to them." },
+    ],
+    codeTitle: "Change the import, keep the file",
+    code: `from fasterapi import FastAPI, Depends, Query
+
+app = FastAPI()
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: int, q: str | None = Query(None)):
+    return {"item_id": item_id, "q": q}
+
+# Runs on the native Rust Hyper/Tokio host
+# when the compiled extension is present.
+app.serve()`,
+  },
+  fulmen: {
+    visual: "framework-core",
+    thesis: "A Python framework where the interpreter only meets your handler — Rust owns everything around it.",
+    challenge: "Python frameworks inherit layers that each request must cross before business logic runs: ASGI plumbing, Python routing, Python validation, Python serialization.",
+    response: "I designed Fulmen around a Rust spine: tokio + hyper for transport, type hints as the single contract for validation, OpenAPI, and typed clients, deny-by-default CORS and security headers, plugin features, swappable adapters, and a CLI that checks, diagnoses, and fixes projects.",
+    outcome: "The project is pre-alpha by design: the skeleton, guardrails, local CI, and architecture decisions are published and tested while the framework core is built — honest about what exists rather than aspirational about what might.",
+    proof: [
+      { value: "0", label: "ASGI layers in the design" },
+      { value: "3.12+", label: "Python target incl. free-threaded" },
+      { value: "Local", label: "CI as the only CI/CD" },
+      { value: "2", label: "handler shapes: def + async def" },
+    ],
+    decisions: [
+      { title: "Type hints are the contract", description: "Validation, OpenAPI schemas, and generated clients all derive from one annotated signature instead of parallel definitions." },
+      { title: "Secure by default", description: "Limits, timeouts, security headers, and deny-by-default CORS are the starting posture — looseness must be chosen, not inherited." },
+      { title: "Small core, explicit seams", description: "Features arrive as plugins and infrastructure as adapters, keeping the core explainable and replaceable." },
+    ],
+    codeTitle: "Typed handlers, Rust underneath",
+    code: `from fulmen import Fulmen
+
+app = Fulmen()
+
+@app.get("/health")
+def health() -> dict:
+    return {"status": "ok"}
+
+@app.post("/items")
+async def create_item(item: Item) -> Item:
+    # Validation, serialization, and routing
+    # happen in Rust — this runs once.
+    return await store.save(item)`,
+  },
+  wasmosaic: {
+    visual: "wasm-pixels",
+    thesis: "Pixel loops belong in Rust; the browser just needs a typed door into them.",
+    challenge: "Browser image processing usually means either slow JavaScript loops or shipping OpenCV.js wholesale — megabytes of runtime for a few operations.",
+    response: "I wrote the pixel operations in Rust, compiled them to WebAssembly, and wrapped the module in strict TypeScript that validates inputs and speaks ImageData — with Rust-owned typed matrices for pipelines that should stay inside WASM memory.",
+    outcome: "The published 0.1.0 provides four RGBA operations through a small typed API; current development adds core matrix operations and the first OpenCV.js-compatible cvtColor slice on the road to pinned 4.13.0 parity.",
+    proof: [
+      { value: "0.1.0", label: "published on npm" },
+      { value: "4", label: "RGBA operations shipped" },
+      { value: "4.13.0", label: "OpenCV.js parity target" },
+      { value: "1 call", label: "initOpenCv() per client" },
+    ],
+    decisions: [
+      { title: "Rust owns the loops", description: "Per-pixel work never leaves WASM linear memory — TypeScript marshals ImageData in and out at the boundary." },
+      { title: "Matrices stay inside", description: "Rust-owned typed matrices let multi-step pipelines avoid repeated buffer copies until a shared-memory API arrives." },
+      { title: "Parity is pinned", description: "The OpenCV.js 4.13.0 binding set is the measured target, followed by typed adapters OpenCV.js does not provide." },
+    ],
+    codeTitle: "ImageData in, ImageData out",
+    code: `import { imageDataFromRgbaImage, initOpenCv, rgbaImageFromImageData } from "wasmosaic";
+
+const cv = await initOpenCv();
+const source = context.getImageData(0, 0, canvas.width, canvas.height);
+const result = cv.grayscale(rgbaImageFromImageData(source));
+context.putImageData(imageDataFromRgbaImage(result), 0, 0);`,
+  },
+  "bun-nltk": {
+    visual: "nlp-surface",
+    thesis: "The whole NLTK surface, typed for Bun — with a Rust core and a fidelity gate that reports gaps instead of hiding them.",
+    challenge: "JavaScript has no equivalent of NLTK's breadth: tokenizers, taggers, chunkers, parsers, corpora, and model formats accumulated over two decades of Python.",
+    response: "I ported the public surface family by family — migrated algorithms run in Rust behind a shared native/WASM core while TypeScript provides the typed API, marshaling, and remaining kernels — and built a compatibility inventory that resolves every discovered nltk.* name.",
+    outcome: "All 241 public module surfaces across 46 families import, 2,983 reviewed mappings are tracked to evidence, the Rust crate passes 117 tests, the Bun suite passes 1,251, and the fidelity gate reports 43 of 46 groups green with the unsupported ones named.",
+    proof: [
+      { value: "241/241", label: "public nltk.* surfaces" },
+      { value: "2,983", label: "reviewed compatibility mappings" },
+      { value: "1,251", label: "passing Bun checks" },
+      { value: "1.09 MB", label: "shipped WASM budget" },
+    ],
+    decisions: [
+      { title: "A surface is not a behavior", description: "Importable shims and partial implementations are explicitly not counted as parity — the checklist diffs names and evidence separately." },
+      { title: "Gaps are documented, not dropped", description: "Pickle-bound demos, external binaries, Tkinter GUIs, and unprovisioned corpora are recorded as explicit gaps in the inventory." },
+      { title: "Budgets are owner decisions", description: "The WASM byte budget was raised by documented decisions when exact float round-tripping and recovered kernels exceeded the old limit." },
+    ],
+    codeTitle: "NLTK vocabulary, Bun runtime",
+    code: `import { tokenize, tag, stem } from "bun_nltk";
+
+const tokens = tokenize.word("Faster pipelines ship sooner.");
+const tagged = tag.pos_tag(tokens);
+const roots = tokens.map((t) => stem.porter(t));`,
+  },
+  "bun-panda": {
+    visual: "dataframe-ops",
+    thesis: "Dataframes for JavaScript that think like pandas — because the mental model is the hard part.",
+    challenge: "JS developers who know pandas must relearn a foreign API shape for every data task, and most TS dataframe tools rename the concepts people already have.",
+    response: "I built DataFrame and Series with pandas naming throughout — read_csv/json/parquet/excel, head/tail, iloc/loc, groupby/agg, merge, pivot_table, fillna, sort_values — plus pandas-style option objects like groupby({ dropna, sort }) and value_counts({ sort, ascending }).",
+    outcome: "bun_panda gives Bun/JS runtimes a lightweight in-memory dataframe workflow where the code reads like the pandas people already write — familiarity first, then performance work.",
+    proof: [
+      { value: "40+", label: "pandas-named methods" },
+      { value: "4", label: "file readers: csv, json, parquet, excel" },
+      { value: "0", label: "new concepts to memorize" },
+      { value: "Bun", label: "primary runtime target" },
+    ],
+    decisions: [
+      { title: "Naming is the feature", description: "API familiarity is treated as a first-class requirement — a developer should port a pandas notebook without a translation table." },
+      { title: "Options follow pandas", description: "Keyword-style option objects mirror pandas signatures where practical, including groupby({ as_index }) and sort flags." },
+      { title: "Lightweight stays honest", description: "The library is in-memory and small by design rather than pretending to be a columnar engine." },
+    ],
+    codeTitle: "A groupby that needs no translation",
+    code: `import { read_csv } from "bun_panda";
+
+const df = read_csv("sales.csv");
+
+const totals = df
+  .groupby("region", { dropna: true, sort: true })
+  .agg({ revenue: "sum", orders: "count" })
+  .sort_values("revenue", { ascending: false });`,
+  },
+  "trpc-rs-py": {
+    visual: "typed-rpc",
+    thesis: "Python writes the procedures; TypeScript gets the types live — no codegen step in the inner loop.",
+    challenge: "Teams that want a Python backend behind a tRPC frontend normally hand-maintain REST contracts or generate types as a separate build step that drifts.",
+    response: "I built a tRPC server for Python frameworks — queries, mutations, batching, and SSE subscriptions with resumable tracked ids — plus trpc-py dev for live type sync into the TypeScript client, REST + OpenAPI output, and trpc-py init starter templates.",
+    outcome: "Released at 0.2.0: a FastAPI-first server where the official @trpc/client calls Python procedures with full end-to-end types that update as the Python file is edited; 0.3.0 adds AI streaming helpers.",
+    proof: [
+      { value: "0.2.0", label: "released version" },
+      { value: "3", label: "procedure kinds: query, mutation, subscription" },
+      { value: "Live", label: "type sync, no codegen step" },
+      { value: "SSE", label: "resumable tracked events" },
+    ],
+    decisions: [
+      { title: "The client stays official", description: "Python procedures answer to the stock @trpc/client protocol — no forked client, no adapter library in the app." },
+      { title: "Types follow edits", description: "trpc-py dev watches the Python surface and syncs client types continuously instead of regenerating at build time." },
+      { title: "Subscriptions resume", description: "tracked() attaches resumable ids to SSE events so dropped connections pick up where they left off." },
+    ],
+    codeTitle: "Python procedure, TypeScript call",
+    code: `@router.query
+def greeting(name: str) -> str:
+    return f"Hello {name}!"
+
+# const greeting = await trpc.greeting
+#   .query({ name: "Ada" });
+#     ^? string`,
+  },
+  "vision-workbench": {
+    visual: "workbench",
+    thesis: "Image-AI research deserves a native surface, not a folder of scripts and a notebook tab.",
+    challenge: "Dataset audits, evaluation runs, and explainability checks live in disconnected scripts, so results are hard to compare and harder to hand to an agent.",
+    response: "I built a native Rust workbench on GPUI: dataset auditing, evaluation runs, XAI inspection, and structured agent-ready outputs inside one desktop-grade window.",
+    outcome: "Research operations that used to be a pile of scripts share a fast native interface — reproducible, inspectable, and shaped for both human review and agent consumption.",
+    proof: [
+      { value: "1", label: "native window, no browser" },
+      { value: "GPUI", label: "Rust UI framework" },
+      { value: "4", label: "research ops in one surface" },
+      { value: "Agents", label: "structured output target" },
+    ],
+    decisions: [
+      { title: "Native beats scripted", description: "A GPUI surface keeps large image datasets and evaluation runs interactive without a browser layer." },
+      { title: "Agents are a first-class reader", description: "Outputs are structured so agent workflows can consume audit and evaluation results directly." },
+      { title: "Inspection sits beside metrics", description: "XAI views live next to the numbers that produced them rather than in a separate tool." },
+    ],
+    codeTitle: "One command, an auditable run",
+    code: `workbench eval \\
+  --dataset audits/crops-v4 \\
+  --model swin-tiny-ft \\
+  --xai gradcam \\
+  --report agent-json`,
+  },
+  "paper-amigo": {
+    visual: "paper-share",
+    thesis: "Share a draft like you mean it: a labeled link, a private critique thread, no account walls.",
+    challenge: "Circulating research drafts means email attachments with unlabeled feedback and no record of which file a comment actually meant.",
+    response: "I built a private library on Next.js 16, React 19, Convex, and UploadThing: PDFs grouped into projects, each project shared through labeled links that recipients open without signing up, with critiques collected beside the file.",
+    outcome: "Paper Amigo runs live at paper-amigo.vercel.app — a marketing surface at / and an owner workspace at /library with real upload, share, and critique flows.",
+    proof: [
+      { value: "0", label: "accounts needed to critique" },
+      { value: "1 link", label: "per labeled project share" },
+      { value: "Next.js 16", label: "with React 19 + Convex" },
+      { value: "Live", label: "paper-amigo.vercel.app" },
+    ],
+    decisions: [
+      { title: "Recipients never register", description: "A labeled link is the entire credential — critique friction is the enemy of critique volume." },
+      { title: "Comments anchor to files", description: "Feedback attaches to the project file it refers to instead of a detached thread." },
+      { title: "Private by default", description: "The library is for authors sharing drafts, not a public repository — nothing is discoverable without a link." },
+    ],
+    codeTitle: "Group, label, share, collect",
+    code: `const project = await createProject({
+  title: "SWNet v2 draft",
+  files: ["manuscript.pdf", "supplement.pdf"],
+});
+
+const link = await shareLinks.create(project.id, {
+  label: "committee-review",
+});
+
+// Recipients open link.url and critique beside the PDF — no signup.`,
   },
   zodic: {
     visual: "validation-flow",

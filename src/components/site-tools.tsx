@@ -7,7 +7,7 @@ import { achievements, profile, projects, publications, skillGroups } from "@/da
 
 const routes = [
   { title: "Home", detail: "Overview and selected work", href: "/", kind: "Route" },
-  { title: "Projects", detail: "Eleven complete engineering case studies", href: "/projects", kind: "Route" },
+  { title: "Projects", detail: `${projects.length} engineering case studies`, href: "/projects", kind: "Route" },
   { title: "Research", detail: "Ten published research works", href: "/research", kind: "Route" },
   { title: "Experience", detail: "Roles, hackathon results, and leadership", href: "/experience", kind: "Route" },
   { title: "About", detail: "Background, principles, and technical range", href: "/about", kind: "Route" },

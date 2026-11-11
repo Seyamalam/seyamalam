@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Geist } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { NavigationTransitions } from "@/components/navigation-transitions";
@@ -14,17 +14,17 @@ const bodyFont = Geist({
   display: "swap",
 });
 
-const displayFont = Archivo({
+const monoFont = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-display",
+  variable: "--font-mono",
   display: "swap",
 });
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#e7e9e6",
-  colorScheme: "light dark",
+  themeColor: "#161718",
+  colorScheme: "dark light",
 };
 
 export const metadata: Metadata = {
@@ -129,7 +129,7 @@ const identitySchema = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable}`} data-scroll-behavior="smooth">
+    <html lang="en" className={`${bodyFont.variable} ${monoFont.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('seyam-theme');document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}})()` }} />
       </head>
