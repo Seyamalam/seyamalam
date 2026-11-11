@@ -127,7 +127,7 @@ export default function HomePage() {
       <section className="section research-band" id="research">
         <div className="shell research-feature">
           <div>
-            <p className="eyebrow eyebrow-light">Latest published work</p>
+            <p className="eyebrow">Latest published work</p>
             <p className="research-year">{publications[0].year}</p>
           </div>
           <div>

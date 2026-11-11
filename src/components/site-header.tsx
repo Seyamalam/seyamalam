@@ -26,7 +26,7 @@ export function SiteHeader() {
   return (
     <header className="site-header" style={{ viewTransitionName: "site-header" }}>
       <div className="shell header-inner">
-        <Link href="/" className="wordmark" aria-label="Touhidul Alam Seyam, home" data-transition="nav-back">
+        <Link href="/" className="wordmark" data-transition="nav-back">
           <BrandMark className="wordmark-mark" />
           <span className="wordmark-copy"><strong>Seyam Alam</strong><small>systems / intelligence</small></span>
         </Link>

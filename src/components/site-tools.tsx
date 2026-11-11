@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import { achievements, profile, projects, publications, skillGroups } from "@/data/site";
 
 const routes = [
@@ -65,6 +66,7 @@ function useTheme() {
 
 export function HeaderTools() {
   const [sidebar, setSidebar] = useState(false);
+  const mounted = useSyncExternalStore(() => () => {}, () => true, () => false);
   const { theme, toggle } = useTheme();
 
   useEffect(() => {
@@ -81,29 +83,34 @@ export function HeaderTools() {
   return (
     <div className="header-tools">
       <button className="tool-button tool-search" type="button" onClick={openCommandPalette} data-tooltip="Search the entire site">
-        <span>Search</span><kbd>⌘K</kbd>
+        <span aria-hidden="true">Search</span><kbd aria-hidden="true">⌘K</kbd><span className="sr-only">Search the entire site</span>
       </button>
       <button className="tool-button theme-button" type="button" onClick={toggle} data-tooltip={`Use ${theme === "dark" ? "light" : "dark"} theme`} aria-label={`Use ${theme === "dark" ? "light" : "dark"} theme`}>
         <span aria-hidden="true">{theme === "dark" ? "☼" : "◐"}</span>
       </button>
-      <button className="tool-button sidebar-trigger" type="button" onClick={() => setSidebar(true)} aria-label="Open navigation">
-        <span>Menu</span><b aria-hidden="true">+</b>
+      <button className="tool-button sidebar-trigger" type="button" onClick={() => setSidebar(true)}>
+        <span aria-hidden="true">Menu</span><b aria-hidden="true">+</b><span className="sr-only">Open navigation</span>
       </button>
-      <div className="sidebar-scrim" data-open={sidebar} onClick={() => setSidebar(false)} />
-      <aside className="animated-sidebar" data-open={sidebar} aria-hidden={!sidebar} aria-label="Site navigation">
-        <div className="sidebar-top"><span>INDEX / 06</span><button type="button" onClick={() => setSidebar(false)} aria-label="Close navigation">×</button></div>
-        <nav>
-          {routes.map((route, index) => (
-            <Link key={route.href} href={route.href} onClick={() => setSidebar(false)} data-transition="nav-swap">
-              <span>{String(index + 1).padStart(2, "0")}</span><strong>{route.title}</strong><b>↗</b>
-            </Link>
-          ))}
-        </nav>
-        <div className="sidebar-actions">
-          <button type="button" onClick={() => { setSidebar(false); openCommandPalette(); }}>Search everything <kbd>⌘K</kbd></button>
-          <a href="/resume/universal-ats.pdf" download>Universal resume <span>↓</span></a>
-        </div>
-      </aside>
+      {mounted && createPortal(
+        <>
+          <div className="sidebar-scrim" data-open={sidebar} onClick={() => setSidebar(false)} />
+          <aside className="animated-sidebar" data-open={sidebar} aria-hidden={!sidebar} aria-label="Site navigation">
+            <div className="sidebar-top"><span>INDEX / 06</span><button type="button" onClick={() => setSidebar(false)} aria-label="Close navigation">×</button></div>
+            <nav>
+              {routes.map((route, index) => (
+                <Link key={route.href} href={route.href} onClick={() => setSidebar(false)} data-transition="nav-swap">
+                  <span>{String(index + 1).padStart(2, "0")}</span><strong>{route.title}</strong><b>↗</b>
+                </Link>
+              ))}
+            </nav>
+            <div className="sidebar-actions">
+              <button type="button" onClick={() => { setSidebar(false); openCommandPalette(); }}>Search everything <kbd>⌘K</kbd></button>
+              <a href="/resume/universal-ats.pdf" download>Universal resume <span>↓</span></a>
+            </div>
+          </aside>
+        </>,
+        document.body,
+      )}
     </div>
   );
 }
@@ -197,7 +204,7 @@ export function SiteTools() {
       </section>
 
       <nav className="preview-rail" aria-label="Quick route preview">
-        {routes.map((route) => <Link key={route.href} href={route.href} className={pathname === route.href ? "is-active" : ""} data-label={route.title} data-transition="nav-swap"><i /></Link>)}
+        {routes.map((route) => <Link key={route.href} href={route.href} className={pathname === route.href ? "is-active" : ""} data-label={route.title} data-transition="nav-swap" aria-label={route.title}><i /></Link>)}
       </nav>
 
       <nav className="mobile-dock" aria-label="Mobile navigation">

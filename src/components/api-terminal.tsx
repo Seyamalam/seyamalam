@@ -73,10 +73,10 @@ export function ApiTerminal() {
   }, [state, typed]);
 
   return (
-    <div className="api-term" role="img" aria-label="Terminal calling the site's public portfolio API and printing the JSON profile response">
-      <div className="api-term-bar" aria-hidden="true">
-        <span /><span /><span />
-        <b>seyamalam — live api</b>
+    <div className="api-term">
+      <div className="api-term-bar">
+        <span aria-hidden="true" /><span aria-hidden="true" /><span aria-hidden="true" />
+        <b aria-hidden="true">seyamalam — live api</b>
         <button type="button" onClick={() => setRunId((v) => v + 1)} aria-label="Replay the API request">⟳</button>
       </div>
       <div className="api-term-body">

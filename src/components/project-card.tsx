@@ -26,7 +26,8 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
               <a className="source-link" href={project.href}>{project.href.includes("github.com") ? "Source" : "Live project"} <span aria-hidden="true">↗</span></a>
             </div>
           </div>
-          <Link className="project-preview-link" href={`/projects/${project.slug}`} aria-label={`View ${project.title} case study`} data-transition="nav-forward">
+          <Link className="project-preview-link" href={`/projects/${project.slug}`} data-transition="nav-forward">
+            <span className="sr-only">View the {project.title} case study</span>
             <div className="project-transition-shell" style={{ viewTransitionName: `project-${project.slug}` }}>
               <ProjectTeaser slug={project.slug} />
             </div>

@@ -71,6 +71,7 @@ export const metadata: Metadata = {
     apple: "/favicon/apple-touch-icon.png",
   },
   manifest: "/favicon/site.webmanifest",
+  other: { "is-agentic-site-type": "content" },
 };
 
 const personSchema = {
