@@ -1608,6 +1608,8 @@ html[data-transition="nav-swap"]::view-transition-new(route-frame) { animation: 
 
 @media (max-width: 640px) {
   .wordmark-copy small { display: none; }
+  .morphing-tabs { display: flex; width: 100%; }
+  .morphing-tabs button { flex: 1; padding: 6px 6px; font-size: 11.5px; }
   .tool-button span:not(.sr-only) { display: none; }
   .tool-search kbd { display: none; }
   .home-hero-copy h1 { font-size: clamp(2.3rem, 10vw, 3rem); }
