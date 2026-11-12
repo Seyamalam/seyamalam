@@ -51,7 +51,7 @@ export default function AboutPage() {
           <Image
             src="/profile.jpg"
             alt="Touhidul Alam Seyam"
-            width={900}
+            width={1048}
             height={1200}
             sizes="(max-width: 760px) 92vw, 36vw"
             quality={75}
