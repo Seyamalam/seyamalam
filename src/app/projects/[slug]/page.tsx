@@ -6,6 +6,7 @@ import { ProjectArtifact } from "@/components/project-artifact";
 import { ProjectEvidence } from "@/components/project-evidence";
 import { PageTransition } from "@/components/page-transition";
 import { siteConfig } from "@/config/site.config";
+import { breadcrumbSchema, JsonLd } from "@/lib/seo";
 import { projectDetails } from "@/data/project-details";
 import { profile, projects } from "@/data/site";
 
@@ -23,15 +24,26 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
   if (!project) return {};
 
+  const description = `${project.summary} ${project.contribution}`;
   return {
     title: `${project.title} case study`,
-    description: `${project.summary} ${project.contribution}`,
+    description,
+    keywords: [...project.stack, `${project.title} case study`, "engineering case study", project.title],
+    authors: [{ name: profile.name, url: siteConfig.origin }],
     alternates: { canonical: `/projects/${project.slug}` },
     openGraph: {
       title: `${project.title} — engineering case study`,
       description: project.summary,
       url: `/projects/${project.slug}`,
       type: "article",
+      authors: [profile.name],
+      section: "Engineering case studies",
+      tags: project.stack,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — engineering case study`,
+      description: project.summary,
     },
   };
 }
@@ -47,13 +59,25 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const nextProject = projects[(projectIndex + 1) % projects.length];
   const schema = {
     "@context": "https://schema.org",
-    "@type": "SoftwareSourceCode",
-    name: project.title,
-    description: project.summary,
-    url: `${siteConfig.origin}/projects/${project.slug}`,
-    ...(project.href.includes("github.com") ? { codeRepository: project.href } : {}),
-    author: { "@type": "Person", name: profile.name, url: siteConfig.origin },
-    programmingLanguage: project.stack,
+    "@graph": [
+      {
+        "@type": "SoftwareSourceCode",
+        name: project.title,
+        description: project.summary,
+        url: `${siteConfig.origin}/projects/${project.slug}`,
+        ...(project.href.includes("github.com") ? { codeRepository: project.href } : {}),
+        author: { "@id": `${siteConfig.origin}/#person` },
+        creator: { "@id": `${siteConfig.origin}/#person` },
+        programmingLanguage: project.stack,
+        keywords: project.stack.join(", "),
+        isPartOf: { "@id": `${siteConfig.origin}/projects#webpage` },
+      },
+      breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Projects", path: "/projects" },
+        { name: project.title, path: `/projects/${project.slug}` },
+      ]),
+    ],
   };
 
   return (
@@ -172,7 +196,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <Link href={`/projects/${nextProject.slug}`} data-transition="nav-forward"><span>{nextProject.status}</span><strong>{nextProject.title}</strong><b aria-hidden="true">↗</b></Link>
       </footer>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
+      <JsonLd data={schema} />
     </article>
     </PageTransition>
   );

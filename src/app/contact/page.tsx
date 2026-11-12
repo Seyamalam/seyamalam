@@ -1,17 +1,43 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
 import { PageTransition } from "@/components/page-transition";
+import { breadcrumbSchema, JsonLd, pageMeta, webPageSchema } from "@/lib/seo";
 import { profile } from "@/data/site";
 
-export const metadata: Metadata = {
+const description = "Contact Touhidul Alam Seyam about software engineering, applied AI, open-source, or research collaboration.";
+
+export const metadata: Metadata = pageMeta({
   title: "Contact",
-  description: "Contact Touhidul Alam Seyam about software engineering, applied AI, open-source, or research collaboration.",
-  alternates: { canonical: "/contact" },
+  description,
+  path: "/contact",
+  keywords: ["hire software engineer", "contact developer Bangladesh", "research collaboration"],
+});
+
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      ...webPageSchema({ name: "Contact — Touhidul Alam Seyam", path: "/contact", description }),
+      "@type": "ContactPage",
+      mainEntity: {
+        "@type": "ContactPoint",
+        contactType: "project and research inquiries",
+        email: `mailto:${profile.email}`,
+        telephone: profile.phone,
+        availableLanguage: ["English", "Bengali"],
+      },
+    },
+    breadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Contact", path: "/contact" },
+    ]),
+  ],
 };
 
 export default function ContactPage() {
   return (
     <PageTransition>
+      <JsonLd data={contactSchema} />
       <PageIntro
         eyebrow="Contact · Open to focused conversations"
         title="Bring a real problem."

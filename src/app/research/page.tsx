@@ -1,17 +1,52 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/page-intro";
 import { PageTransition } from "@/components/page-transition";
+import { breadcrumbSchema, JsonLd, pageMeta, webPageSchema } from "@/lib/seo";
 import { profile, publications } from "@/data/site";
 
-export const metadata: Metadata = {
+const description = "Published work by Touhidul Alam Seyam across applied AI, computer vision, healthcare, agriculture, cybersecurity, and systems.";
+
+export const metadata: Metadata = pageMeta({
   title: "Research",
-  description: "Published work by Touhidul Alam Seyam across applied AI, computer vision, healthcare, agriculture, cybersecurity, and systems.",
-  alternates: { canonical: "/research" },
+  description,
+  path: "/research",
+  keywords: ["published research", "applied AI research", "computer vision papers", "ORCID researcher"],
+});
+
+const researchSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      ...webPageSchema({ name: "Research — Touhidul Alam Seyam", path: "/research", description }),
+      "@type": "CollectionPage",
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: publications.length,
+        itemListElement: publications.map((publication, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "ScholarlyArticle",
+            headline: publication.title,
+            datePublished: String(publication.year),
+            isPartOf: { "@type": "Periodical", name: publication.venue },
+            url: publication.href,
+            author: { "@id": "https://seyamalam.vercel.app/#person" },
+          },
+        })),
+      },
+    },
+    breadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Research", path: "/research" },
+    ]),
+  ],
 };
 
 export default function ResearchPage() {
   return (
     <PageTransition>
+      <JsonLd data={researchSchema} />
       <PageIntro
         eyebrow="Research record · 10 works"
         title="Applied questions. Reproducible answers."

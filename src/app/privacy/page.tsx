@@ -2,17 +2,32 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/page-intro";
 import { PageTransition } from "@/components/page-transition";
+import { breadcrumbSchema, JsonLd, pageMeta, webPageSchema } from "@/lib/seo";
 import { profile } from "@/data/site";
 
-export const metadata: Metadata = {
+const description = "Privacy information for the Touhidul Alam Seyam portfolio website.";
+
+export const metadata: Metadata = pageMeta({
   title: "Privacy",
-  description: "Privacy information for the Touhidul Alam Seyam portfolio website.",
-  alternates: { canonical: "/privacy" },
+  description,
+  path: "/privacy",
+});
+
+const privacySchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    webPageSchema({ name: "Privacy — Touhidul Alam Seyam", path: "/privacy", description }),
+    breadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Privacy", path: "/privacy" },
+    ]),
+  ],
 };
 
 export default function PrivacyPage() {
   return (
     <PageTransition>
+      <JsonLd data={privacySchema} />
       <PageIntro
         eyebrow="Privacy · Last reviewed August 23, 2026"
         title="A small site with a small data footprint."

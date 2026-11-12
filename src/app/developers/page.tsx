@@ -2,16 +2,35 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/page-intro";
 import { PageTransition } from "@/components/page-transition";
+import { breadcrumbSchema, JsonLd, pageMeta, webPageSchema } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const description = "Machine-readable resources for agents retrieving Touhidul Alam Seyam's published portfolio data.";
+
+export const metadata: Metadata = pageMeta({
   title: "Developer and agent resources",
-  description: "Machine-readable resources for agents retrieving Touhidul Alam Seyam's published portfolio data.",
-  alternates: { canonical: "/developers" },
+  description,
+  path: "/developers",
+  keywords: ["MCP server", "portfolio API", "OpenAPI", "llms.txt", "agent-readable"],
+});
+
+const developersSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      ...webPageSchema({ name: "Developer and agent resources — Touhidul Alam Seyam", path: "/developers", description }),
+      "@type": "APIReference",
+    },
+    breadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Developers", path: "/developers" },
+    ]),
+  ],
 };
 
 export default function DevelopersPage() {
   return (
     <PageTransition>
+      <JsonLd data={developersSchema} />
       <PageIntro
         eyebrow="Developer resources · Read-only"
         title="Portfolio data for agents."

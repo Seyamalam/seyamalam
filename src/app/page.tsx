@@ -4,7 +4,20 @@ import { LiquidType } from "@/components/liquid-type";
 import { PageTransition } from "@/components/page-transition";
 import { PinnedChapters } from "@/components/pinned-chapters";
 import { ProjectCard } from "@/components/project-card";
+import { siteConfig } from "@/config/site.config";
+import { JsonLd, webPageSchema } from "@/lib/seo";
 import { profile, projects, publications } from "@/data/site";
+
+const homeSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      ...webPageSchema({ name: siteConfig.title, path: "/", description: siteConfig.description }),
+      "@type": "ProfilePage",
+      mainEntity: { "@id": `${siteConfig.origin}/#person` },
+    },
+  ],
+};
 
 const proofPoints = [
   { value: String(projects.length), label: "systems with case studies" },
@@ -26,6 +39,7 @@ export default function HomePage() {
   const featured = projects.slice(0, 4);
   return (
     <PageTransition>
+      <JsonLd data={homeSchema} />
       <section className="home-hero shell" id="overview" data-enter>
         <div className="home-hero-copy">
           <p className="eyebrow"><span className="status-dot" />{profile.location} · open to remote</p>

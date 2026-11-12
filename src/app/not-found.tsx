@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Page not found",
+  description: "The requested page does not exist on seyamalam.vercel.app.",
+  robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
   return (

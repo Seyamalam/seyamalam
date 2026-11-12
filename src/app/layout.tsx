@@ -37,10 +37,20 @@ export const metadata: Metadata = {
   keywords: [...siteConfig.keywords],
   authors: [{ name: siteConfig.name, url: siteConfig.origin }],
   creator: siteConfig.name,
-  alternates: { canonical: "/" },
+  publisher: siteConfig.name,
+  applicationName: siteConfig.name,
+  category: "technology",
+  classification: "Portfolio",
+  alternates: {
+    canonical: "/",
+    types: {
+      "text/markdown": "/index.md",
+    },
+  },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
@@ -50,6 +60,8 @@ export const metadata: Metadata = {
     },
   },
   verification: { google: "google63894ecf69747bfd" },
+  referrer: "origin-when-cross-origin",
+  formatDetection: { telephone: false, email: false, address: false },
   openGraph: {
     type: "profile",
     locale: "en_US",
@@ -57,18 +69,31 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: siteConfig.title,
     description: siteConfig.description,
+    firstName: "Touhidul Alam",
+    lastName: "Seyam",
+    username: "Seyamalam",
   },
   twitter: {
     card: "summary_large_image",
+    site: "@seyamalam1",
+    creator: "@seyamalam1",
     title: siteConfig.title,
     description: siteConfig.description,
+  },
+  appleWebApp: {
+    capable: true,
+    title: "Seyam Alam",
+    statusBarStyle: "black-translucent",
   },
   icons: {
     icon: [
       { url: "/favicon/mark.svg", type: "image/svg+xml" },
       { url: "/favicon/favicon.ico", sizes: "32x32" },
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
     apple: "/favicon/apple-touch-icon.png",
+    other: [{ rel: "mask-icon", url: "/favicon/mark.svg" }],
   },
   manifest: "/favicon/site.webmanifest",
   other: { "is-agentic-site-type": "content" },
@@ -101,6 +126,17 @@ const personSchema = {
   ],
 };
 
+const websiteSchema = {
+  "@type": "WebSite",
+  "@id": `${siteConfig.origin}/#website`,
+  url: siteConfig.origin,
+  name: siteConfig.name,
+  alternateName: "seyamalam",
+  description: siteConfig.description,
+  publisher: { "@id": `${siteConfig.origin}/#person` },
+  inLanguage: "en",
+};
+
 const practiceSchema = {
   "@type": "ProfessionalService",
   "@id": `${siteConfig.origin}/#professional-service`,
@@ -125,7 +161,7 @@ const practiceSchema = {
 
 const identitySchema = {
   "@context": "https://schema.org",
-  "@graph": [personSchema, practiceSchema],
+  "@graph": [personSchema, practiceSchema, websiteSchema],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

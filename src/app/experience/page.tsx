@@ -2,17 +2,50 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/page-intro";
 import { PageTransition } from "@/components/page-transition";
+import { breadcrumbSchema, JsonLd, pageMeta, webPageSchema } from "@/lib/seo";
 import { achievements, experience, leadership } from "@/data/site";
 
-export const metadata: Metadata = {
+const description = "Software engineering experience, hackathon results, leadership, and education of Touhidul Alam Seyam.";
+
+export const metadata: Metadata = pageMeta({
   title: "Experience",
-  description: "Software engineering experience, hackathon results, leadership, and education of Touhidul Alam Seyam.",
-  alternates: { canonical: "/experience" },
+  description,
+  path: "/experience",
+  keywords: ["software engineering experience", "hackathon winner", "developer resume"],
+});
+
+const experienceSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      ...webPageSchema({ name: "Experience — Touhidul Alam Seyam", path: "/experience", description }),
+      "@type": "ItemPage",
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: experience.length,
+        itemListElement: experience.map((item, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "OrganizationRole",
+            roleName: item.role,
+            worksFor: { "@type": "Organization", name: item.organization },
+            description: item.points.join(" "),
+          },
+        })),
+      },
+    },
+    breadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Experience", path: "/experience" },
+    ]),
+  ],
 };
 
 export default function ExperiencePage() {
   return (
     <PageTransition>
+      <JsonLd data={experienceSchema} />
       <PageIntro
         eyebrow="Experience · 2021—Present"
         title="Build, compete, ship, repeat."

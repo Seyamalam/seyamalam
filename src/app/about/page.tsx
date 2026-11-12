@@ -2,12 +2,33 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { PageIntro } from "@/components/page-intro";
 import { PageTransition } from "@/components/page-transition";
+import { siteConfig } from "@/config/site.config";
+import { breadcrumbSchema, JsonLd, pageMeta, webPageSchema } from "@/lib/seo";
 import { skillGroups } from "@/data/site";
 
-export const metadata: Metadata = {
+const description = "About Touhidul Alam Seyam: software engineer, CSE student, open-source builder, and applied AI researcher in Chattogram, Bangladesh.";
+
+export const metadata: Metadata = pageMeta({
   title: "About",
-  description: "About Touhidul Alam Seyam: software engineer, CSE student, open-source builder, and applied AI researcher in Chattogram, Bangladesh.",
-  alternates: { canonical: "/about" },
+  description,
+  path: "/about",
+  keywords: ["about Touhidul Alam Seyam", "software engineer Chattogram", "CSE Bangladesh", "open source developer"],
+  type: "profile",
+});
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      ...webPageSchema({ name: "About — Touhidul Alam Seyam", path: "/about", description }),
+      "@type": "ProfilePage",
+      mainEntity: { "@id": `${siteConfig.origin}/#person` },
+    },
+    breadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "About", path: "/about" },
+    ]),
+  ],
 };
 
 const principles = [
@@ -19,6 +40,7 @@ const principles = [
 export default function AboutPage() {
   return (
     <PageTransition>
+      <JsonLd data={aboutSchema} />
       <PageIntro
         eyebrow="About · Chattogram, Bangladesh"
         title="Engineering practice, research discipline."
