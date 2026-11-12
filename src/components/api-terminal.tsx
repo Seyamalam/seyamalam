@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type TermState = "idle" | "typing" | "fetching" | "done" | "error";
 
@@ -13,6 +13,33 @@ const FALLBACK = `{
 }`;
 
 const CARD_STEPS = ["resolve", "fetch", "parse"] as const;
+const MAX_LINES = 14;
+const JSON_TOKEN = /("(?:\\.|[^"\\])*")(\s*:)?|(-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?|true|false|null)/g;
+
+function formatJson(raw: string) {
+  let lines: string[];
+  try {
+    lines = JSON.stringify(JSON.parse(raw), null, 2).split("\n");
+  } catch {
+    lines = raw.split("\n");
+  }
+  return { lines: lines.slice(0, MAX_LINES), truncated: lines.length > MAX_LINES };
+}
+
+function JsonLine({ line }: { line: string }) {
+  const parts: React.ReactNode[] = [];
+  let last = 0, i = 0;
+  for (const m of line.matchAll(JSON_TOKEN)) {
+    if (m.index > last) parts.push(line.slice(last, m.index));
+    if (m[1] !== undefined) {
+      if (m[2]) parts.push(<span key={i++} className="tj-key">{m[1]}</span>, m[2]);
+      else parts.push(<span key={i++} className="tj-str">{m[1]}</span>);
+    } else parts.push(<span key={i++} className="tj-num">{m[0]}</span>);
+    last = m.index + m[0].length;
+  }
+  parts.push(line.slice(last));
+  return <span className="tj-line">{parts}</span>;
+}
 
 export function ApiTerminal() {
   const [state, setState] = useState<TermState>("idle");
@@ -22,6 +49,7 @@ export function ApiTerminal() {
   const [runId, setRunId] = useState(0);
   const [cardStep, setCardStep] = useState(-1);
   const timers = useRef<number[]>([]);
+  const formatted = useMemo(() => formatJson(body), [body]);
 
   const run = useCallback(() => {
     setState("typing");
@@ -37,7 +65,7 @@ export function ApiTerminal() {
     fetch("/api/v1/profile", { headers: { Accept: "application/json" } })
       .then(async (res) => {
         const text = await res.text();
-        setBody(text.length > 720 ? `${text.slice(0, 720)}\n  …` : text);
+        setBody(text);
         setElapsed(Math.max(1, Math.round(performance.now() - started)));
         setState("done");
         CARD_STEPS.forEach((_, i) => {
@@ -86,7 +114,10 @@ export function ApiTerminal() {
         </p>
         {state === "fetching" && <p className="term-line term-note"><i>→</i> negotiating application/json …</p>}
         {(state === "done" || state === "error") && (
-          <pre className="term-out"><code>{body}</code></pre>
+          <pre className="term-out"><code>
+            {formatted.lines.map((line, i) => <JsonLine key={i} line={line} />)}
+            {formatted.truncated && <span className="tj-line term-ellipsis">  …</span>}
+          </code></pre>
         )}
       </div>
       <div className="api-term-foot">
