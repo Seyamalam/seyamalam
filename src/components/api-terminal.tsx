@@ -67,6 +67,7 @@ export function ApiTerminal() {
         const text = await res.text();
         setBody(text);
         setElapsed(Math.max(1, Math.round(performance.now() - started)));
+        setTyped(COMMAND.length);
         setState("done");
         CARD_STEPS.forEach((_, i) => {
           timers.current.push(window.setTimeout(() => setCardStep(i), 500 + i * 700));
@@ -75,6 +76,7 @@ export function ApiTerminal() {
       .catch(() => {
         setBody(FALLBACK);
         setElapsed(null);
+        setTyped(COMMAND.length);
         setState("error");
         CARD_STEPS.forEach((_, i) => {
           timers.current.push(window.setTimeout(() => setCardStep(i), 500 + i * 700));

@@ -470,6 +470,7 @@ html[data-theme="light"] .api-term { color-scheme: dark; }
 .api-term-bar {
   display: flex; align-items: center; gap: 6px;
   padding: 11px 14px;
+  padding-right: 42px;
   border-bottom: 1px solid #272b30;
 }
 .api-term-bar span { width: 8px; height: 8px; border-radius: 50%; background: #ff5f56; }
