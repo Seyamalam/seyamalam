@@ -187,7 +187,7 @@ h1, h2, h3 {
 }
 .text-link:hover::after { transform: scaleX(1); }
 
-.source-link { color: var(--muted); font-size: 13px; font-weight: 500; }
+.source-link { padding-block: 5px; color: var(--muted); font-size: 13px; font-weight: 500; }
 .source-link:hover { color: var(--accent-text); }
 
 /* ── header ───────────────────────────────────────────────────── */
@@ -297,6 +297,7 @@ h1, h2, h3 {
 }
 .tool-button:hover { color: var(--ink); border-color: var(--line-strong); }
 .tool-button:active { transform: scale(0.97); }
+.tool-button .tool-glyph { display: none; }
 .tool-button kbd {
   padding: 2px 5px;
   border: 1px solid var(--line);
@@ -484,7 +485,7 @@ html[data-theme="light"] .api-term { color-scheme: dark; }
   margin-left: 12px;
   border: 1px solid #2c3138; border-radius: 4px;
   background: #1a1d21; color: #8b96a1;
-  font-size: 11px; line-height: 1; padding: 4px 7px; cursor: pointer;
+  font-size: 12px; line-height: 1; padding: 8px 11px; cursor: pointer;
   transition: color 140ms ease, border-color 140ms ease;
 }
 .api-term-bar button:hover { color: var(--accent-hi); border-color: var(--accent); }
@@ -995,7 +996,8 @@ html[data-theme="light"] .api-term { color-scheme: dark; }
 
 .case-study { overflow: clip; }
 .case-hero { padding-top: clamp(52px, 7vw, 88px); padding-bottom: 30px; }
-.case-breadcrumb { display: flex; gap: 10px; color: var(--muted); font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+.case-breadcrumb { display: flex; gap: 10px; align-items: center; color: var(--muted); font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+.case-breadcrumb a { padding-block: 6px; }
 .case-breadcrumb a:hover { color: var(--accent-text); }
 .case-title-grid {
   display: grid;
@@ -1278,7 +1280,7 @@ html[data-theme="light"] .artifact { color-scheme: dark; }
 .case-gallery-grid figcaption span { color: var(--accent-text); font-family: var(--mono); font-size: 9.5px; }
 
 .next-project { display: grid; gap: 14px; padding-block: clamp(50px, 7vw, 90px); }
-.next-project > a { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line-strong); }
+.next-project > a { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line-strong); }
 .next-project > a span { color: var(--accent-text); font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; }
 .next-project > a strong { font-family: var(--font-display), var(--font-body), sans-serif; font-size: clamp(2rem, 5.4vw, 4.6rem); font-weight: 500; letter-spacing: -0.05em; line-height: 0.95; }
 .next-project > a b { font-size: 30px; font-weight: 400; color: var(--muted); transition: transform 200ms var(--ease-out), color 160ms ease; }
@@ -1456,7 +1458,7 @@ html[data-theme-animating="true"] .theme-blinds i { animation: blind-slat 680ms 
   display: grid; gap: 10px;
   transform: translateY(-50%);
 }
-.preview-rail a { position: relative; display: grid; place-items: center; width: 18px; height: 18px; }
+.preview-rail a { position: relative; display: grid; place-items: center; width: 26px; height: 26px; }
 .preview-rail a i { width: 5px; height: 5px; border-radius: 50%; background: var(--line-strong); transition: background 160ms ease, transform 160ms var(--ease-out); }
 .preview-rail a.is-active i { background: var(--accent); transform: scale(1.6); }
 .preview-rail a::after {
@@ -1610,11 +1612,12 @@ html[data-transition="nav-swap"]::view-transition-new(route-frame) { animation: 
   .wordmark-copy small { display: none; }
   .morphing-tabs { display: flex; width: 100%; }
   .morphing-tabs button { flex: 1; padding: 6px 6px; font-size: 11.5px; }
-  .tool-button span:not(.sr-only) { display: none; }
+  .tool-button .tool-label { display: none; }
+  .tool-button .tool-glyph { display: inline; }
   .tool-search kbd { display: none; }
   .home-hero-copy h1 { font-size: clamp(2.3rem, 10vw, 3rem); }
   .hero-signal { display: none; }
-  .api-term { left: 14px; right: -40px; }
+  .api-term { left: 14px; right: -12px; }
   .api-term-body { font-size: 10.5px; }
   .proof-grid { grid-template-columns: 1fr 1fr; }
   .principle-grid, .resume-grid, .profile-links, .nlp-board, .bench-grid, .case-proof-grid { grid-template-columns: 1fr; }

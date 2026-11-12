@@ -83,13 +83,13 @@ export function HeaderTools() {
   return (
     <div className="header-tools">
       <button className="tool-button tool-search" type="button" onClick={openCommandPalette} data-tooltip="Search the entire site">
-        <span aria-hidden="true">Search</span><kbd aria-hidden="true">⌘K</kbd><span className="sr-only">Search the entire site</span>
+        <span className="tool-label" aria-hidden="true">Search</span><kbd aria-hidden="true">⌘K</kbd><span className="tool-glyph" aria-hidden="true">⌕</span><span className="sr-only">Search the entire site</span>
       </button>
       <button className="tool-button theme-button" type="button" onClick={toggle} data-tooltip={`Use ${theme === "dark" ? "light" : "dark"} theme`} aria-label={`Use ${theme === "dark" ? "light" : "dark"} theme`}>
         <span aria-hidden="true">{theme === "dark" ? "☼" : "◐"}</span>
       </button>
       <button className="tool-button sidebar-trigger" type="button" onClick={() => setSidebar(true)}>
-        <span aria-hidden="true">Menu</span><b aria-hidden="true">+</b><span className="sr-only">Open navigation</span>
+        <span className="tool-label" aria-hidden="true">Menu</span><b aria-hidden="true">+</b><span className="sr-only">Open navigation</span>
       </button>
       {mounted && createPortal(
         <>

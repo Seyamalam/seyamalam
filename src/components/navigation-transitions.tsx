@@ -44,7 +44,6 @@ export function NavigationTransitions() {
       if (target.pathname === window.location.pathname && target.search === window.location.search) return;
 
       event.preventDefault();
-      event.stopPropagation();
       if (navigating.current) return;
 
       const type = anchor.dataset.transition ?? "nav-swap";
